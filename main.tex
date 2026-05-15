@@ -1,0 +1,21 @@
+\PassOptionsToPackage{quiet}{fontspec}
+\documentclass[12pt,a4paper,twoside]{book}
+\input{preamble.tex}
+
+\begin{document}
+\frontmatter
+\maketitle
+\setcounter{page}{0}
+\thispagestyle{empty}
+\tableofcontents %目录
+
+\newpage
+\pagenumbering{arabic}
+
+\mainmatter
+\include{chpt01.tex}
+\include{chpt02.tex}
+
+\backmatter
+
+\end{document}
