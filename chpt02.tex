@@ -2,10 +2,454 @@
 
 默认读者具有较好的狭义相对论基础。实际上，只需要查阅笔者《引力》第 1.1 节内容即可。
 
+
+本章讲述标量场 (scalar field) 的正则量子化 (canonical quantization) 方法。标量场的量子化可以看作简谐振子量子化的推广
+
+
 \section{简谐振子的正则量子化}
 
-本章讲述标量场 (scalar field) 的正则量子化 (canonical quantization) 方法。标量场的量子
-化可以看作简谐振子量子化的推广，因此先回顾一下量子力学中简谐振子的正则量子化程序。
+简谐振子是量子场论中最重要的量子力学模型。原因不只是它可以精确求解，而是任意自由场做 Fourier 展开后，每个动量模式都像一个独立简谐振子。因此，理解简谐振子的正则量子化，等价于提前理解自由量子场中“一个模式如何变成一个粒子数自由度”。
+
+先从经典一维简谐振子开始。设广义坐标为 $q(t)$，质量为 $m$，角频率为 $\omega$，Lagrangian 为
+\eq{
+    L=\frac{1}{2}m\dot q^2-\frac{1}{2}m\omega^2q^2.
+}
+由此得到共轭动量
+\eq{
+    p:=\pdv{L}{\dot q}=m\dot q.
+}
+Hamiltonian 定义为 Legendre 变换
+\eq{
+    H=p\dot q-L.
+}
+代入 $\dot q=p/m$，得
+\eq{
+    H=\frac{p^2}{2m}+\frac{1}{2}m\omega^2q^2.
+}
+经典运动方程可以由 Hamilton 方程给出：
+\eq{
+    \dot q=\pdv{H}{p}=\frac{p}{m},\quad
+    \dot p=-\pdv{H}{q}=-m\omega^2q.
+}
+于是
+\eq{
+    \ddot q+\omega^2q=0.
+}
+这说明经典简谐振子只是一个以频率 $\omega$ 振动的自由度。后文场论中，场的每个 Fourier 模式也会满足同样形式的方程，只是频率变成 $E_{\bm p}$ 或 $\omega_{\bm p}$。
+
+正则量子化的规则是：把经典正则变量 $q,p$ 提升为算符 $\hat q,\hat p$，并把经典 Poisson 括号
+\eq{
+    \{q,p\}=1
+}
+替换为正则对易关系
+\eq{
+    [\hat q,\hat p]=\i\hbar.
+}
+同时 Hamiltonian 变成 Hamiltonian 算符
+\eq{
+    \hat H=\frac{\hat p^2}{2m}+\frac{1}{2}m\omega^2\hat q^2.
+}
+这一步就是“正则”二字的含义：先找出一对正则共轭变量，再规定它们的对易关系。它没有直接求解 Schr\"odinger 方程，而是从代数关系出发求解谱。
+
+直接处理 $\hat q,\hat p$ 当然可以，但更方便的是构造无量纲的升降算符：
+\eq{
+    \hat a
+    :=
+    \sqrt{\frac{m\omega}{2\hbar}}\hat q
+    +
+    \frac{\i}{\sqrt{2m\hbar\omega}}\hat p,
+    \quad
+    \hat a^\dagger
+    :=
+    \sqrt{\frac{m\omega}{2\hbar}}\hat q
+    -
+    \frac{\i}{\sqrt{2m\hbar\omega}}\hat p.
+}
+由于 $\hat q,\hat p$ 是自伴算符，所以第二式确为第一式的 Hermite 共轭。反解可得
+\eq{
+    \hat q
+    =
+    \sqrt{\frac{\hbar}{2m\omega}}
+    (\hat a+\hat a^\dagger),
+    \quad
+    \hat p
+    =
+    -\i\sqrt{\frac{m\hbar\omega}{2}}
+    (\hat a-\hat a^\dagger).
+}
+现在验证 $\hat a,\hat a^\dagger$ 的对易关系。记
+\eq{
+    \alpha=\sqrt{\frac{m\omega}{2\hbar}},\quad
+    \beta=\frac{1}{\sqrt{2m\hbar\omega}},
+}
+则 $\hat a=\alpha\hat q+\i\beta\hat p$，$\hat a^\dagger=\alpha\hat q-\i\beta\hat p$，所以
+\begin{align*}
+    [\hat a,\hat a^\dagger]
+    &=
+    [\alpha\hat q+\i\beta\hat p,\alpha\hat q-\i\beta\hat p] \\
+    &=
+    -\i\alpha\beta[\hat q,\hat p]
+    +\i\alpha\beta[\hat p,\hat q] \\
+    &=
+    -\i\alpha\beta(\i\hbar)
+    +\i\alpha\beta(-\i\hbar)
+    =
+    2\alpha\beta\hbar=1.
+\end{align*}
+即
+\eq{
+    [\hat a,\hat a^\dagger]=1.
+}
+这条关系将取代 $[\hat q,\hat p]=\i\hbar$，成为求解简谐振子的核心。
+
+下面把 Hamiltonian 写成升降算符形式。由定义直接计算
+\begin{align*}
+    \hat a^\dagger\hat a
+    &=
+    \left(
+        \alpha\hat q-\i\beta\hat p
+    \right)
+    \left(
+        \alpha\hat q+\i\beta\hat p
+    \right)\\
+    &=
+    \alpha^2\hat q^2+\beta^2\hat p^2
+    +\i\alpha\beta(\hat q\hat p-\hat p\hat q)\\
+    &=
+    \frac{m\omega}{2\hbar}\hat q^2
+    +\frac{1}{2m\hbar\omega}\hat p^2
+    -\frac{1}{2}.
+\end{align*}
+其中最后一步用了 $[\hat q,\hat p]=\i\hbar$。两边乘以 $\hbar\omega$，得到
+\eq{
+    \hbar\omega\left(\hat a^\dagger\hat a+\frac{1}{2}\right)
+    =
+    \frac{\hat p^2}{2m}
+    +
+    \frac{1}{2}m\omega^2\hat q^2.
+}
+因此
+\eq{
+    \hat H
+    =
+    \hbar\omega
+    \left(
+        \hat a^\dagger\hat a+\frac{1}{2}
+    \right).
+}
+定义
+\eq{
+    \hat N:=\hat a^\dagger\hat a,
+}
+称为\textbf{数算符}(number operator)。于是
+\eq{
+    \hat H=\hbar\omega\left(\hat N+\frac{1}{2}\right).
+}
+只要求出 $\hat N$ 的本征值，就求出了能谱。
+
+先看 $\hat N$ 的基本性质。由 $[\hat a,\hat a^\dagger]=1$ 可得
+\eq{
+    [\hat N,\hat a]
+    =
+    [\hat a^\dagger\hat a,\hat a]
+    =
+    \hat a^\dagger[\hat a,\hat a]+[\hat a^\dagger,\hat a]\hat a
+    =
+    -\hat a,
+}
+以及
+\eq{
+    [\hat N,\hat a^\dagger]
+    =
+    [\hat a^\dagger\hat a,\hat a^\dagger]
+    =
+    \hat a^\dagger[\hat a,\hat a^\dagger]
+    +
+    [\hat a^\dagger,\hat a^\dagger]\hat a
+    =
+    \hat a^\dagger.
+}
+若 $\ket n$ 是 $\hat N$ 的本征态，
+\eq{
+    \hat N\ket n=n\ket n,
+}
+则
+\begin{align*}
+    \hat N(\hat a\ket n)
+    &=
+    (\hat a\hat N-\hat a)\ket n
+    =
+    (n-1)\hat a\ket n,\\
+    \hat N(\hat a^\dagger\ket n)
+    &=
+    (\hat a^\dagger\hat N+\hat a^\dagger)\ket n
+    =
+    (n+1)\hat a^\dagger\ket n.
+\end{align*}
+所以 $\hat a$ 会把数算符本征值降低 $1$，$\hat a^\dagger$ 会把本征值升高 $1$。这就是它们被称为\textbf{湮灭算符}和\textbf{产生算符}的原因。
+
+还需说明本征值不能无限向下。对任意归一化态 $\ket\psi$，
+\eq{
+    \ev{\hat N}{\psi}
+    =
+    \mel{\psi}{\hat a^\dagger\hat a}{\psi}
+    =
+    \ip{\hat a\psi}{\hat a\psi}
+    \geq 0.
+}
+因此 $\hat N$ 的本征值非负。若从某个本征态不断作用 $\hat a$，本征值每次减 $1$，最终必须停在最低态 $\ket0$，满足
+\eq{
+    \hat a\ket0=0.
+}
+否则会得到负本征值，矛盾。这个最低态称为\textbf{基态}或\textbf{真空态}(vacuum)。由 $\hat N=\hat a^\dagger\hat a$ 可知
+\eq{
+    \hat N\ket0=0.
+}
+更细地说，若最低态本征值为 $\lambda$，即 $\hat N\ket{\lambda}=\lambda\ket{\lambda}$，则最低性要求 $\hat a\ket{\lambda}=0$；否则 $\hat a\ket{\lambda}$ 会给出本征值 $\lambda-1$ 的态。于是
+\eq{
+    0=\norm{\hat a\ket{\lambda}}^2
+    =
+    \mel{\lambda}{\hat a^\dagger\hat a}{\lambda}
+    =
+    \lambda,
+}
+故最低本征值只能是 $0$。所有其他态由反复作用 $\hat a^\dagger$ 得到，所以 $\hat N$ 的谱为非负整数。
+反复作用产生算符即可得到所有激发态：
+\eq{
+    \ket n
+    =
+    \frac{1}{\sqrt{n!}}
+    (\hat a^\dagger)^n\ket0,
+    \quad n=0,1,2,\cdots.
+}
+归一化因子来自
+\eq{
+    \norm{\hat a^\dagger\ket n}^2
+    =
+    \mel{n}{\hat a\hat a^\dagger}{n}
+    =
+    \mel{n}{\hat N+1}{n}
+    =
+    n+1,
+}
+以及
+\eq{
+    \norm{\hat a\ket n}^2
+    =
+    \mel{n}{\hat a^\dagger\hat a}{n}
+    =
+    n.
+}
+于是可取相位约定
+\eq{
+    \hat a\ket n=\sqrt n\ket{n-1},
+    \quad
+    \hat a^\dagger\ket n=\sqrt{n+1}\ket{n+1}.
+}
+能量本征值因此为
+\eq{
+    \hat H\ket n
+    =
+    \hbar\omega
+    \left(n+\frac{1}{2}\right)\ket n,
+    \quad
+    E_n=\hbar\omega\left(n+\frac{1}{2}\right).
+}
+这就是简谐振子的离散能谱。最低能量不是零，而是
+\eq{
+    E_0=\frac{1}{2}\hbar\omega.
+}
+这个零点能并非人为添加，而是由 $\hat q,\hat p$ 的非对易性导致的。若企图让 $q,p$ 同时为零，就会违反 $[\hat q,\hat p]=\i\hbar$ 所表达的不确定性。
+
+在坐标表象中还可以直接看出真空态的形状。令
+\eq{
+    \psi_0(q):=\ip{q}{0},
+}
+并采用 $\hat q\to q,\hat p\to-\i\hbar\dv{q}$。真空条件 $\hat a\ket0=0$ 变成
+\eq{
+    \left(
+        \sqrt{\frac{m\omega}{2\hbar}}q
+        +
+        \sqrt{\frac{\hbar}{2m\omega}}\dv{q}
+    \right)\psi_0(q)=0.
+}
+两边同乘 $\sqrt{2m\omega/\hbar}$，得
+\eq{
+    \dv{\psi_0}{q}
+    =
+    -\frac{m\omega}{\hbar}q\psi_0.
+}
+因此
+\eq{
+    \psi_0(q)
+    =
+    C\e^{-\frac{m\omega}{2\hbar}q^2}.
+}
+由归一化条件 $\int\d{q}\abs{\psi_0(q)}^2=1$ 可得
+\eq{
+    C=\left(\frac{m\omega}{\pi\hbar}\right)^{1/4}.
+}
+所以真空态不是位于 $q=0$ 的尖峰，而是有宽度的 Gaussian 波包。相应地，
+\eq{
+    \ev{\hat q^2}{0}=\frac{\hbar}{2m\omega},\quad
+    \ev{\hat p^2}{0}=\frac{m\hbar\omega}{2}.
+}
+这正是零点能的另一种表现。后文场论中的真空也不是“什么都没有”的状态，而是每个场模式都保留类似的零点涨落。
+
+这种写法还给出一个重要解释：能量是一份一份增加的。相邻能级差为
+\eq{
+    E_{n+1}-E_n=\hbar\omega.
+}
+因此可把 $\ket n$ 理解为含有 $n$ 个频率为 $\omega$ 的能量量子，每个量子的能量为 $\hbar\omega$。在普通量子力学中，这只是求解简谐振子的方便语言；在量子场论中，这种语言会变成物理图像本身：一个场模式的激发数就是对应动量粒子的粒子数。所谓“二次量子化”通常指的就是引入产生、湮灭算符来描述粒子数可变的 Fock 空间；为了避免误解，本节更准确地称为简谐振子的正则量子化。
+
+下面看 Heisenberg 绘景中的时间演化。由于
+\eq{
+    \hat H=\hbar\omega\left(\hat N+\frac{1}{2}\right),
+}
+并且 $[\hat N,\hat a]=-\hat a$，故
+\eq{
+    [\hat H,\hat a]
+    =
+    -\hbar\omega\hat a,
+    \quad
+    [\hat H,\hat a^\dagger]
+    =
+    \hbar\omega\hat a^\dagger.
+}
+Heisenberg 方程给出
+\eq{
+    \dv{\hat a(t)}{t}
+    =
+    \frac{\i}{\hbar}[\hat H,\hat a(t)]
+    =
+    -\i\omega\hat a(t),
+}
+所以
+\eq{
+    \hat a(t)=\hat a(0)\e^{-\i\omega t},
+    \quad
+    \hat a^\dagger(t)=\hat a^\dagger(0)\e^{\i\omega t}.
+}
+从而
+\eq{
+    \hat q(t)
+    =
+    \sqrt{\frac{\hbar}{2m\omega}}
+    \left(
+        \hat a(0)\e^{-\i\omega t}
+        +
+        \hat a^\dagger(0)\e^{\i\omega t}
+    \right),
+}
+\eq{
+    \hat p(t)
+    =
+    -\i\sqrt{\frac{m\hbar\omega}{2}}
+    \left(
+        \hat a(0)\e^{-\i\omega t}
+        -
+        \hat a^\dagger(0)\e^{\i\omega t}
+    \right).
+}
+这正是经典解 $q(t)=A\e^{-\i\omega t}+A^*\e^{\i\omega t}$ 的算符版本：经典振幅 $A,A^*$ 被提升为 $\hat a,\hat a^\dagger$。
+
+为了看出它如何通向场论，考虑许多互不耦合的简谐振子，坐标和动量记为 $q_r,p_r$，频率为 $\omega_r$。经典 Hamiltonian 为
+\eq{
+    H=\sum_r\left(
+        \frac{p_r^2}{2}
+        +
+        \frac{1}{2}\omega_r^2q_r^2
+    \right),
+}
+这里为简洁起见已把每个振子的质量取为 $1$。正则量子化规则变成
+\eq{
+    [\hat q_r,\hat p_s]=\i\hbar\delta_{rs},
+    \quad
+    [\hat q_r,\hat q_s]=[\hat p_r,\hat p_s]=0.
+}
+对每个模式分别定义
+\eq{
+    \hat a_r
+    =
+    \sqrt{\frac{\omega_r}{2\hbar}}\hat q_r
+    +
+    \frac{\i}{\sqrt{2\hbar\omega_r}}\hat p_r,
+    \quad
+    \hat a_r^\dagger
+    =
+    \sqrt{\frac{\omega_r}{2\hbar}}\hat q_r
+    -
+    \frac{\i}{\sqrt{2\hbar\omega_r}}\hat p_r.
+}
+完全类似地可得
+\eq{
+    [\hat a_r,\hat a_s^\dagger]=\delta_{rs},
+    \quad
+    [\hat a_r,\hat a_s]=[\hat a_r^\dagger,\hat a_s^\dagger]=0,
+}
+以及
+\eq{
+    \hat H
+    =
+    \sum_r
+    \hbar\omega_r
+    \left(
+        \hat a_r^\dagger\hat a_r+\frac{1}{2}
+    \right).
+}
+定义所有模式共同的真空态 $\ket0$：
+\eq{
+    \hat a_r\ket0=0,\quad \forall r.
+}
+则一般激发态可写成
+\eq{
+    \ket{n_1,n_2,\cdots}
+    =
+    \prod_r
+    \frac{(\hat a_r^\dagger)^{n_r}}{\sqrt{n_r!}}
+    \ket0.
+}
+它的能量为
+\eq{
+    E_{\{n_r\}}
+    =
+    \sum_r
+    \hbar\omega_r
+    \left(
+        n_r+\frac{1}{2}
+    \right).
+}
+这里 $n_r$ 表示第 $r$ 个模式被激发了多少次。这正是 Fock 空间的基本结构：不再固定单个粒子的波函数，而是记录每个模式的占有数。
+
+量子场论只是在此基础上再走一步。经典场 $\phi(\bm x,t)$ 有无穷多个自由度；做 Fourier 展开后，每个动量 $\bm p$ 对应一个模式。自由场的 Hamiltonian 会化为无穷多个独立简谐振子的和，形式上类似
+\eq{
+    \hat H
+    =
+    \int\frac{\d[3]{p}}{(2\pi)^3}
+    \hbar\omega_{\bm p}
+    \left(
+        \hat a_{\bm p}^\dagger\hat a_{\bm p}
+        +\frac{1}{2}
+    \right),
+}
+其中 $\omega_{\bm p}$ 由场的运动方程决定。产生算符 $\hat a_{\bm p}^\dagger$ 产生一个动量为 $\bm p$ 的量子，湮灭算符 $\hat a_{\bm p}$ 湮灭一个这样的量子。于是，“粒子”不再作为基本点状对象预先放入理论，而是作为场的某个模式的激发出现。
+离散指标 $r$ 连续化为动量 $\bm p$ 时，Kronecker 符号也相应变成 Dirac 函数。例如常见归一化下有
+\eq{
+    [\hat a_{\bm p},\hat a_{\bm q}^\dagger]
+    =
+    (2\pi)^3\delta^3(\bm p-\bm q).
+}
+同时，零点能项 $\frac{1}{2}\sum_r\hbar\omega_r$ 会变成发散的积分。这不是本节要解决的问题；在自由场量子化中通常先通过正规序或重整化处理这类真空能常数。
+
+这就是本节的目的：简谐振子正则量子化并不是一个孤立例题，而是自由量子场论的局部模型。只要掌握
+\eq{
+    q,p\to \hat q,\hat p,\quad
+    [\hat q,\hat p]=\i\hbar,\quad
+    \hat a^\dagger\ket n\propto \ket{n+1},
+    \quad
+    \hat a\ket n\propto \ket{n-1},
+}
+后面把 $\phi,\pi$ 量子化并解释粒子产生、湮灭时，形式上就只是把一个振子换成无穷多个振子。
 
 
 \section{实标量场的正则量子化}

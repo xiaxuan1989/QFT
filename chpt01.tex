@@ -4,96 +4,259 @@
 
 近代光学实验中，光常同时表现出粒子和波动的性质，人们逐渐形成波粒二象性的观念，物质状态笼统地称为\textbf{量子态}(quantum state)。
 量子一词起初源于黑体辐射的能量离散化，后来延伸为波粒二象性等有悖于经典状态的性质。
-经典理论中单粒子系统由位置及动量 $(\bm x,\bm p)$ 描述，系统的运动视作相空间中的轨迹；但有趣的是，在量子理论中，我们无法同时观测粒子位置及动量。
-Heisenberg 提出，经典的测量值 $\bm x,\bm p$ 是实数，但二者的不确定性意味着必须将其“提升”为一种\textbf{算符}(operator) $\hat{\bm x},\hat{\bm p}$，作用于物质的量子态上。
-考虑一维情形，他根据实验和已有研究提炼出
+
+经典理论中系统的物理可观测量是实数，比如单粒子的位置及动量 $\bm x,\bm p$。位置及动量可以同时测定，进而确定系统在相空间（由全体 $(\bm x,\bm p)$ 构成）中的运动轨迹。但有趣的是，在量子理论中，我们无法同时观测粒子位置及动量。
+Heisenberg 提出，经典测量值的不确定性意味着必须将其“提升”为一种\textbf{算符}(operator)，作用于物质的量子态上。比如 $\hat{\bm x}=(\hat x_1,\hat x_2,\hat x_3),\hat{\bm p}=(\hat p_1,\hat p_2,\hat p_3)$，他根据有关不确定性的实验和研究提炼出
 \eq{
-    [\hat x,\hat p]:=\hat x\hat p - \hat p\hat x = \i\hbar,
+    [\hat x_i,\hat p_j]:=\hat x_i\hat p_j - \hat p_i\hat x_j = \i\hbar\delta_{ij},\quad (\delta_{ij}) = \diag(1,1,1).
 }
-$\hbar=h/2\pi$ 是约化 Planck 常数。这称为 $\hat x,\hat p$ 的\textbf{对易子}，意思无非是对量子态先作用 $\hat p$ 再作用 $\hat x$，减去其相反操作，结果相当于乘上 $\i\hbar$。所以量子力学不可避免涉及复数。
+$\hbar=h/2\pi$ 是约化 Planck 常数。这称为 $\hat{\bm x},\hat{\bm p}$ 的\textbf{对易子}，意思无非是对量子态先作用 $\hat p_j$ 再作用 $\hat x_i$，减去其相反操作，结果相当于乘上 $\i\hbar\delta_{ij}$。
+这是量子力学不可避免涉及复数的一处体现。
 尽管我们仍没有说出量子态、算符的数学表示，但我们要求它们一定服从这种对易关系。
+一维情形为 $[\hat x,\hat p]:=\hat x\hat p - \hat p\hat x = \i\hbar$。
 经典力学是 $\hbar\to 0$ 的极限，意味着 $\hat x\hat p=\hat p\hat x$，作为普通实数的 $x,p$ 就满足这个可交换乘法。
 算符的非对易性可以说是量子性质的关键，因此这种“算符提升”也称为从经典力学走向量子力学的\textbf{量子化}。
 
-下面我们来猜测算符可能的数学表示。人们现已广泛清楚，矩阵的乘法是不对易的，因此矩阵是合适的数学候选。如此，量子态就是列矢量，写作 $\ket{}$。一般会在里面放一些符号，仅表标签含义，比如 $\ket{\psi}$。全体 $\ket{\psi}$ 构成线性空间。
+下面我们来考察算符可能的数学表示。人们现已广泛清楚，矩阵的乘法是不对易的，因此矩阵是合适的数学候选。如此，量子态就是列矢，写作 $\ket{}$。一般会在里面放一些符号，仅表标签含义，比如 $\ket{\psi}$。全体 $\ket{\psi}$ 构成线性空间。再补充一些条件后，这个空间成为了俗称的\textbf{Hilbert 空间}，记作 $\mathcal H$，作为量子态的数学载体。
 但在当时，矩阵并非必学知识。Heisenberg 从经典力学的 Poisson 括号绕了一圈才回到了矩阵，相当于重新发明了矩阵。可以说，今日之大学得以普及线性代数，有 Heisenberg 的功劳。
 不过这里会比我们学的线性代数复杂：因为可以证明，任意有限维度的矩阵都无法凑出对易关系。因此，算符必须是无限维空间上的矩阵。
 相较于 Heisenberg，Schr\"odinger 更关注于量子态的具体表示，方法会更简单些。
-他考虑的算符是直接的偏微分算符，比如 $\grad,\pdv{t}$。因此量子态可以表示为某种实变但复值的函数 $\psi(\bm x,t)$，称为\textbf{波函数}。
+他考虑的算符是直接的偏微分算符，比如 $\grad,\pdv{t}$。因此量子态可以表示为某种实变但复值的函数 $\psi(\bm x,t)$，称为\textbf{波函数}(wave function)。
 后面会证明两种观点等价，或者说 $\ket{\psi},\psi(\bm x,t)$ 有对应关系。
-这也解释了为什么 $\ket{\psi}$ 线性空间是无穷维的，因为 $\psi(\bm x,t)$ 需要遍历不可数的 $\bm x,t$，即函数空间是无穷维的。
+这也解释了为什么 $\ket{\psi}$ 线性空间是无穷维的，因为 $\psi(\bm x,t)$ 需要遍历不可数的 $\bm x,t$，即函数空间是无穷维的；相应地，微分算符也无法展开为有限级数的形式。
 
-由于现在提升为算符，可能的测量值只能解释为算符的某个\textbf{实数}本征值。如果 $\hat A$ 具有分立的本征值 $\{a_n\}$，称 $\hat A$ 具有\textbf{离散谱}，测量 $A$ 的结果只能是 $\{a_n\}$ 中的一个。回忆一下，本征值的定义无非是 $\hat A \ket{a_n}=a_n \ket{a_n}$，对应的 $\ket{a_n}$ 称为 $\hat A$ 的本征矢。
-Born 根据杨⽒双缝实验提出，测量结果 $a_n\in\R$ 出现的概率由态决定：若 $\ket\psi=\sum_n c_n \ket{a_n}$，则相应概率为 $|c_n|^2$。
-这可解释为 $\ket{\psi}$ 在 $\ket{a_n}$ 的投影或者说内积结果。
-由于我们现在考虑的是复线性空间，内积结果为复数，所以定义方式会区别于实线性代数，满足：
+由于现在提升为算符，可能的测量值几乎只能解释为算符的某个本征值：如果 $\hat A$ 具有一系列本征值 $\{a_n\}$，测量 $A$ 的结果只能是 $\{a_n\}$ 中的一个。一种 $a_n$ 称为一种\textbf{谱}(spectrum)。
+回忆一下，本征的定义无非是 $\hat A \ket{a_n}=a_n \ket{a_n}$，这里 $\ket{a_n}$ 是 $\hat A$ 对应谱 $a_n$ 的本征矢，所以用了标签 $a_n$，仅此而已。
+由于 $a_n$ 是仪器的测量结果，我们自然希望 $a_n\in\R$，即使 $\mathcal H$ 是涉及复数的。
+若 $\{a_n\}$ 是有限或可数的，一般来说 $\hat A$ 就可称具有\textbf{离散谱}或\textbf{分立谱}。否则称\textbf{连续谱}。当然这个说法只是简化，后面会给出严格表述。
+进一步，Born 借用杨⽒双缝实验的思想提出，测量结果出现的概率由态决定：（离散谱时）任意态可分解为形如 $\ket\psi=\sum_n c_n \ket{a_n}$，称 $\{a_n\}$ \textbf{完备}；测到 $a_n$ 的概率为 $|c_n|^2/\sum_n |c_n|^2 \in [0,1]$。
+通常也约定 $\sum_n |c_n|^2=1$，称态矢的\textbf{归一化条件}。
+这是量子力学必涉及复数的另一处体现：使 $\psi,c_n$ 涉及复数可以来源于波动理论（电磁学、光学）的复数方法。
+并且，如果做整体相位变换 $\ket\psi \to \e^{\i\alpha}\ket\psi$，概率密度分布是不变的，因此观测上无法区分，故认同 $\e^{\i\alpha}\ket\psi\sim\ket\psi$。形象的说法是称量子态实质是 Hilbert 空间中的一系列态矢，而不只是单独某个态矢。这些态矢的终点连成一条射线。
+
+已知 $\psi,\{a_n\}$ 欲求出展开系数 $\{c_n\}$。按朴素思想，我们是将系数解释为 $\ket{\psi}$ 在 $\ket{a_n}$ 的投影。
+由于我们现在考虑的是复线性空间，所以内积的定义方式会区别于实线性代数，满足：
 \begin{itemize}
-    \item $\braket{a}{b}=\bra{b}\ket{a}^*$（复共轭）。
-    \item $\braket{a}{a}\geq 0$，且 $\braket{a}{a}=0\iff \ket{a}=0$。
-    \item $\braket{a}{b+c}=\braket{a}{b}+\braket{a}{c}$。    \item $\braket{a}{\lambda b}=\lambda \braket{a}{b}$。
+    \item $\ip{A}{B}=\ip{B}{A}^*$（复共轭）。
+    \item $\ip{A}{A}\geq 0$，且 $\ip{A}{A}=0\iff \ket{A}=0$。
+    \item $\ip{A}{B+C}=\ip{A}{B}+\ip{A}{C}$。    \item $\ip{A}{\lambda b}=\lambda \ip{A}{B}$。
 \end{itemize}
-后两个条件表明对第二槽线性，但结合第一条可知对第一槽\textbf{反线性}：$\braket{\lambda a}{b}=\lambda^* \braket{a}{b}$。
-再补充一些条件后，这个空间成为了俗称的\textbf{Hilbert 空间}，是量子态的自然载体。
-由此，如果要求可观测量 $\hat A$ 是自伴的
+后两个条件表明对第二槽线性，但结合第一条可知对第一槽\textbf{反线性}：$\ip{\lambda A}{B}=\lambda^* \ip{A}{B}$。
+这里我们仍是将括号 $\ip{A}{B}$ 视作两个列矢 $\ket{A},\ket{B}$ 的内积。但注意到行矢 $\times$ 列矢也可视作内积。所以，其实可以把单独的 $\bra{A}$ 解释为 $\ket{A}$ 的转置，而成为行矢。注意内积反线性，故不仅要转置，而要\textbf{共轭转置}，用符号 $\dagger$ 表示：
 \eq{
-    \hat A = \hat A^\dagger,
-}
-其中 $\hat A^\dagger$ 是 $\hat A$ 的\textbf{共轭转置}。简单计算会发现，自伴算符的本征矢是正交归一基
-\eq{
-    \bra{a_n}\ket{a_m} = \delta_{nm}.
-}
-并且对于分立的本征值，内积定义相当于给出
-\eq{
-    \bra{\psi} := \sum_n c_n^* \bra{a_n} = {\ket{\psi}}^\dagger,\quad \braket{\psi}{\psi} = \sum_n c_n^* c_n = \sum_n |c_n|^2.
-}
-于是
-\eq{
-    \bra{a_n}\ket{\psi} = \sum_m c_m \delta_{nm} = c_n.
-}
-因此测量结果 $a_n$ 出现的概率为 $|\bra{a_n}\ket{\psi}|^2$。总和为 $\sum_n |\bra{a_n}\ket{\psi}|^2=1$，等价为归一化条件 $\braket{\psi}{\psi}=1$。
-算符 $\hat A$ 的平均值可以写作
-\eq{
-    \langle A \rangle := \sum_{n} a_n |\bra{a_n}\ket{\psi}|^2 = \bra{\psi}\hat A\ket{\psi}.
+    \bra{\psi} := {\ket{\psi}}^\dagger = \sum_n c_n^* \bra{a_n}.
 }
 
-推广到连续本征值时，称这个算符具有\textbf{连续谱}，位置算符 $\hat{\bm x}$ 就是典型例子。我们可以关注上述定义或性质中不含 $\sum_n$ 的版本。比如，如果沿用 $\hat{\bm x}\ket{\bm x}=\bm x\ket{\bm x}$，这里 $\ket{\bm x}$ 是 $\hat{\bm x}$ 的本征矢，所以用了标签 $x$，仅此而已。则 $\braket{\bm x}{\psi}$ 表示测量粒子（$t$ 时刻）发现在 $\bm x$ 的概率密度分布，因此
+$P_n := \op{a_n}$ 称为\textbf{投影算符}，这里 $\op{}$ 表示列矢 $\times$ 行矢，结果是矩阵。
+如果希望
 \eq{
-    1 = \int\d[3]{x} |\braket{\bm x}{\psi}|^2,\quad \langle \bm x \rangle = \bra{\psi}\hat{\bm x}\ket{\psi} = \int\d[3]{x} \bm x |\braket{\bm x}{\psi}|^2.
+    \sum_n \op{a_n} = 1 \im \hat A = \sum_n \hat A \op{a_n} = \sum_n a_n \op{a_n}.
 }
-现在态矢的展开就写为
+则任意态矢展开为
 \eq{
-    \ket{\psi} = \int\d[3]{x} \ket{\bm x}\braket{\bm x}{\psi}.
+    \ket\psi = \sum_n \op{a_n} \ket\psi = \sum_n \ket{a_n} \ip{a_n}{\psi}.
 }
+任二态矢的内积可写为
+\eq{
+    \ip{\phi}{\psi} = \sum_n \ip{\phi}{a_n} \ip{a_n}{\psi}.
+}
+从而
+\eq{
+    \ip{a_n}{\psi} = \sum_m \ip{a_n}{a_m} \ip{a_m}{\psi} \iff \ip{a_n}{a_m} = \delta_{nm}.
+}
+这说明 $\{a_n\}$ 是正交归一基。这也说明系数的确为 $\ip{a_n}{\psi} = \sum_m c_m \delta_{nm} = c_n$。可见基底的完备性可完全体现在 $\sum_n \op{a_n} = 1$。测量概率为 $P(a_n)=\ev{P_n}{\psi}/\ip{\psi}$。
+上述性质导致 $\hat A$ 是\textbf{自伴的}：
+\eq{
+    \hat A = \sum_n a_n \op{a_n} = \sum_n a_n^* \op{a_n} = \hat A^\dagger.
+}
+所以也是\textbf{Hermite 的}：
+\eq{
+    \mel{\phi}{\hat A}{\psi} = \ip{\hat A\phi}{\psi},\quad \text{其中}\, \ket{\hat A\phi} := \hat A\ket{\phi},\enspace \bra{\hat A\phi} = \ket{\hat A\phi}^\dagger = \bra{\phi} \hat A^\dagger.
+}
+反之给定自伴性，可得存在 $\{\ket{a_n}\}$ 对算符进行谱分解 $\hat A = \sum_n a_n \op{a_n}$，且 $\{\ket{a_n}\}$ 满足 $\hat A \ket{a_n}=a_n \ket{a_n}$、$a_n\in\R$、完备且正交归一，这称为\textbf{谱分解定理}。
+所以，我们可将若干性质简洁地统一说法：规定可观测量 $\hat A$ 自伴。
+注意 $\ip{\psi} = \sum_n \abs{\ip{a_n}{\psi}}^2$，可见归一化条件也写作 $\ip{\psi}=1$。
+根据概率论，算符 $\hat A$ 的平均值或期望值为
+\eq{
+    \ev{A} := \frac{1}{\ip{\psi}}\sum_{n} a_n \abs{\ip{a_n}{\psi}}^2 = \frac{\ev{\hat A}{\psi}}{\ip{\psi}}.
+}
+
+
+
+下面推广到连续谱，位置算符 $\hat{\bm x}$ 就是典型例子。我们沿用自伴性的相关性质
+\eq{
+    \hat{A}\ket{a}=a\ket{a},\quad 1 = \int\d a \op{a} \im \hat A = \hat A \int\d a \op{a} = \int\d{a} a \op{a}.
+}
+其中沿用离散谱命题中不含求和的版本，不得不涉及求和时则尝试替换为积分（被积函数分布在 $a$ 所属的空间上，记测度微元为 $\d a$）。当然数学上，谱分解定理保证了从自伴性导出积分形式。
+从而
+\begin{align}
+    \ket{\psi} &= \int\d a \ket{a}\ip{a}{\psi},\quad \bra{\psi} = \int\d a \ip{\psi}{a}\bra{a},\\
+    \ip{a}{\psi} &= \int\d a' \ip{a'}{\psi} \ip{a}{a'} \iff \ip{a}{a'} = \delta(a-a'),\\
+    \ip{\phi}{\psi} &= \int \d{a} \ip{\phi}{a} \ip{a}{\psi},\\
+    \ev{A} := \frac{\ev{\hat A}{\psi}}{\ip{\psi}} &= \frac{1}{\ip{\psi}}\int \d{a} \mel{\psi}{\hat A}{a} \ip{a}{\psi} = \frac{1}{\ip{\psi}}\int \d{a} \ip{\psi}{a} \mel{a}{\hat A}{\psi}\\
+    &= \frac{1}{\ip{\psi}}\int \d{a} a \abs{\ip{a}{\psi}}^2.
+\end{align}
+其中 $\delta(x)$ 就是我们熟悉的 Dirac 函数。
+于是 $\abs{\ip{a}{\psi}}^2/{\ip{\psi}}$ 现在理解为测量出 $a$ 的概率密度。
+
+取单粒子系统，坐标表象为 $\{\ket{\bm x}\}$，则态矢展开为
+\eq{
+    \ket{\psi} = \int\d[3]{x} \ket{\bm x}\ip{\bm x}{\psi}.
+}
+考虑归一化态矢，有
+\eq{
+    1 = \int\d[3]{x} \abs{\ip{\bm x}{\psi}}^2,\quad \ev{\bm x} = \int\d[3]{x} \bm x \abs{\ip{\bm x}{\psi}}^2.
+}
+说明 $\abs{\ip{\bm x}{\psi}}^2$ 可以理解为测量粒子（某时刻）发现在 $\bm x$ 的概率密度。
 可见 Schr\"odinger 表述的等价性就体现在
 \eq{
-    \psi(\bm x,t) = \braket{\bm x}{\psi}.
+    \psi(\bm x) := \ip{\bm x}{\psi},\quad \psi^*(\bm x) = \ip{\psi}{\bm x}.
 }
-即波函数是 $\ket{\psi}$ 在 $\ket{\bm x}$ 上的分量。
-波函数的内积都写作
+即波函数是 $\ket{\psi}$ 在 $\ket{\bm x}$ 上的分量。$\{\ket{\bm x}\}$ 也称为\textbf{坐标表象}或\textbf{位置表象}。
+从而波函数的内积\footnote{这不是函数卷积。如果硬要写成卷积核形式，则是 $\ip{\phi}{\psi}=
+\int\d x \d y \phi^*(x)\delta(x-y)\psi(y)$
+其中恒等算符在坐标表象下的核是 $\delta(x-y)$。}和算符平均值为
 \eq{
-    \braket{a}{b} = \int\d[3]{x} a^*(\bm x) b(\bm x).
+    \ip{\phi}{\psi} = \int\d[3]{x} \phi^*(\bm x) \psi(\bm x),\quad \ev{A} = \int\d[3]{x} \psi^*(\bm x) (\hat A \psi)(\bm x).
 }
-算符的平均值为 $\langle A \rangle = \int\d[3]{x} \psi^* \hat A \psi$。
+注意 $(\hat{\bm x} \psi)(\bm x) = \mel{\bm x}{\hat{\bm x}}{\psi} = \bm x\ip{\bm x}{\psi} = \bm x \psi(\bm x)$，这意味着在坐标表象下，位置算符 $\hat{\bm x}$ 表为单纯的乘法 $\bm x$，我们记作
+\eq{
+    \hat{\bm x} \to \bm x.
+}
+根据对易关系，由 Leibniz 乘法法则得 $\hat{\bm p} \to -\i\hbar\grad$。有时直接将箭头简记为等号。于是彻底还原了 Schr\"odinger 的微分算符理论。
 
-位置平均值为 $\langle \bm x \rangle=\int\d[3]{x} \psi^*(\bm x) \bm x\psi(\bm x)$。
-这意味着不仅 $\hat{\bm x}$ 是本征矢，实际上 $\psi$ 的每个位置分量 $\psi(\bm x)$ 都是 $\hat{\bm x}$ 的本征矢，且本征值为 $\bm x$。位置算符的平均值为位置平均值，则必须 $\hat{\bm x} = \bm x$。
-由 Leibniz 乘法法则得 $\hat p : = -\i\hbar\grad$ 满足对易关系。
-
-量子态的时间演化由哈氏算符生成，或等价地
+另一方面，$\hat{\bm p}$ 还可以解释对 $\bm x$ 平移的结果，于是自动得到自伴性和对易关系。考虑态矢的平移算符 $U(\bm a)$，它使得
 \eq{
-    \i\hbar\pdv{t}\ket{\psi(t)} = \hat H \ket{\psi(t)},\quad \hat H = \frac{\hat{\bm p}^2}{2m} + V(\hat{\bm x},t).
+    U(\bm a)\ket{\bm x} = \ket{\bm x+\bm a} \im U(\bm a)U(\bm b)=U(\bm a+\bm b),\quad U(\bm 0)=1.
 }
-位置表象下展开，说明波函数应满足方程
+我们要求空间平移保持概率：$\abs{\ip{\phi'}{\psi'}}^2=\abs{\ip{\phi}{\psi}}^2$。从而算符是\textbf{幺正的}
 \eq{
-    \i\hbar\pdv{t}\psi(\bm x,t)=\left(-\frac{\hbar^2}{2m}\Delta+V(\bm x,t)\right)\psi(\bm x,t).
+    U^\dagger U = UU^\dagger = 1,
+}
+因为根据 Wigner 定理，保持跃迁概率的变换只能由幺正或反幺正算符表示。而空间平移是连续变换，并且 $U(\bm 0)=1$，所以取幺正。或者直接推导出 $U(\bm a)^\dagger=U(-\bm a)$ 而看出。
+Stone 定理指出存在自伴算符 $\hat{\bm p}$ 满足
+\eq{
+    U(\bm a)=\exp\left(-\frac{\i}{\hbar}\bm a\vdot \hat{\bm p}\right).
+}
+小平移时（也即展开到一阶，略去$O(a^2)$）：
+\[
+U(\delta \bm a)
+\simeq
+1-\frac{\i}{\hbar}\delta\bm a\vdot \hat{\bm p}.
+\]
+故把 $\hat{\bm p}$ 称为空间平移的\textbf{无穷小生成元}(infinitesimal generator)。这里的“生成元”意思是：有限平移 $U(\bm a)$ 由 $\hat{\bm p}$ 指数化生成。当然，观察上式也可显式地写出 $\hat{\bm p}=\i\hbar\grad_{\bm a}U(\bm a)|_{\bm a=\bm 0}$。
+由 $U(\bm a)\ket{\bm x} = \ket{\bm x+\bm a}$ 易得
+\eq{
+    U(\bm a)^\dagger \hat{\bm x} U(\bm a)
+=
+\hat{\bm x}+\bm a.
+}
+代入无穷小平移就得 $\hat{x}_i+\frac{\i}{\hbar} \sum_j a_j[\hat p_j,\hat x_i]=\hat{x}_i+a_i$，则
+\eq{
+    [\hat x_i,\hat p_j]=i\hbar \delta_{ij}.
+}
+取坐标表象，$\mel{\bm x}{U(\bm a)}{\psi}=\psi(\bm x-\bm a)$，
+小平移展开：
+\[
+\psi(\bm x-\bm a)
+\simeq
+\psi(\bm x)-\bm a\vdot \grad\psi(\bm x).
+\]
+另一方面 $U(\bm a)\psi(\bm x)
+\simeq
+\left(1-\frac{i}{\hbar}\bm a\vdot \hat{\bm p}\right)\psi(\bm x)$，
+比较两边得 $\hat{\bm p}\psi(\bm x)=-i\hbar\grad\psi(\bm x)$。
+
+一旦我们尝试对 $\ket\psi$ 测量 $\hat A$ 得到某个确定结果 $a$，有趣的事情就会发生：量子态就会投影到对应本征子空间，即
+\eq{
+    \ket\psi \to \frac{\op{a}\ket\psi}{\sqrt{\ev{\op{a}}{\psi}}} = \frac{\ip{a}{\psi}}{\abs{\ip{a}{\psi}}} \ket a \sim \ket a.
+}
+在相差一个整体相位的意义下，它等同于 $\ket a$。即测量后系统状态变成了对应的本征态，这称为\textbf{坍缩}(collapse)。可见测量不只是“读取”状态，它通常会改变状态，但也不能简单认为这是测量行为与态发生“相互作用”，因为坍缩的具体原因及过程目前尚无定论，涉及一个庞大的话题，称为\textbf{诠释}。
+
+数学上，配有复内积的完备的复线性空间称为 Hilbert 空间。物理上采用的大多 $\ket{\psi}$ 也仅在这一空间内。但对它采取连续谱展开时，问题会变得微妙：
+需要注意 $\ket{\bm x}$ 其实不在 Hilbert 空间中。因为
+\eq{
+    \ip{\bm x}=\delta(\bm 0)
+}
+是发散的。换言之，坐标本征态 $\ket{\bm x_0}$ 的波函数为 Dirac 分布 $\delta(\bm x-\bm x_0)$。
+归一化条件其实说明了波函数至少是\textbf{平方可积函数}，所以单粒子 Hilbert 空间对应了 $\R^3$ 上全体的平方可积函数构成的集合 $L^2(\R^3)$。虽然 $\delta(\bm x)$ 积分为 1，但平方的积分是发散的。
+关键原因是，$\delta(\bm x)$ 并不是普通的函数，而称为\textbf{分布}(distribution)。这种连续谱的特征矢称为\textbf{广义特征矢}(generalized eigenvector)。它生活在 Hilbert 空间的“一层薄薄的表面”上。这部分“表皮”加上 Hilbert 空间称为\textbf{装备}(rigged) Hilbert 空间。
+另一个例子是 $\ket{\bm p}$。其波函数记作 $\psi_{\bm p}(\bm x):=\ip{\bm x}{\bm p}$。由 $\hat{\bm p}\ket{\bm p}=\bm p\ket{\bm p}$，左乘坐标表象得到 $-\i\hbar\grad \psi_{\bm p}(\bm x)=\bm p \psi_{\bm p}(\bm x)$，方程的通解显然为简单平面波的形式 $\psi_{\bm p}(\bm x) = C \e^{\i \bm p\vdot\bm x/\hbar}$。
+剩下只是确定常系数。直接利用归一化条件会发现 $\int\d[3]{x} 1=\infty$，因此它同样不是平方可积函数，$\ket{\bm p}$ 同样不在 Hilbert 空间。
+但可利用
+\eq{
+    \delta(\bm p-\bm p') = \ip{\bm p}{\bm p'} = \int\d[3]{x} \ip{\bm p}{\bm x} \ip{\bm x}{\bm p'} = |C|^2 \int\d[3]{x} \e^{\i (\bm p'-\bm p)\vdot\bm x/\hbar}
+}
+确定。
+现在复习一下高数知识来判断平面波和 Dirac 函数的关系。
+$[-L/2,L/2]$ 上良好的函数可展开为 Fourier 级数
+\[f(x)=\sum_{N=-\infty}^\infty \frac{F(k_N)}{L} \e^{\i k_N x},\quad F(k_N)=\int_{-L/2}^{L/2}\d{x}\e^{-\i k_N x}f(x),\]
+其中 $k_N={2\pi N}/{L}$ 称为频谱或\textbf{模式}(mode)，$F(k)$（或记作 $\mathscr F(f)(k)$）称为 $f(x)$ 的\textbf{Fourier 变换}。令 $L\to\infty$，则 $\Delta k=2\pi/L\to 0$，级数化为积分，即 $f(x)=\int \frac{\d k}{2\pi} \e^{\i k x}F(k),F(k)=\int\d{x}\e^{-\i k x}f(x)$。任意 $f(x)$ 以 $\e^{\i kx}$ 为基底。
+同理，取 $V=L^n$ 并连续化，可得
+\[f(x)=\int \frac{\d[n]k}{(2\pi)^n} \e^{\i k_\mu x^\mu}F(k),\quad F(k)=\int\d[n]{x}\e^{-\i k_\mu x^\mu}f(x).\]
+其中 $\mu$ 指标采用了求和约定。
+于是我们很容易验证（代入 $\bm p = \hbar\bm k$）
+\eq{
+     1=\e^{0}=\int \frac{\d[3]p}{(2\pi\hbar)^3} \e^{\pm\i \bm p\vdot\bm x/\hbar}(2\pi\hbar)^3\delta(\bm p)\iff (2\pi\hbar)^3\delta(\bm p) = \int\d[3]{x} \e^{\pm\i \bm p\vdot\bm x/\hbar}.
+}
+因此常函数的 Fourier 变换就是动量空间上的 Dirac 函数。固定模长 $|C|$ 带来相差相因子 $\e^{\i\alpha(\bm p)}$（这里甚至可以考虑随动量可变的相位）的自由度，不妨约定 $C\in[0,\infty)$，则 $C=1/(2\pi\hbar)^{3/2}$。
+故
+\eq{
+    \psi_{\bm p}(\bm x) = \frac{1}{(2\pi\hbar)^{3/2}} \e^{\i \bm p\vdot\bm x/\hbar},
+}
+量子态展开为
+\eq{
+    \psi(\bm x) = \int\frac{\d[3]p}{(2\pi\hbar)^{3/2}} \psi(\bm p)  \e^{\i \bm p\vdot\bm x/\hbar},\quad \psi(\bm p) = \int\frac{\d[3]x}{(2\pi\hbar)^{3/2}} \psi(\bm x)\e^{-\i \bm p\vdot\bm x/\hbar}.
+}
+这里注意 $\psi(\bm p)$ 与 Fourier 变换结果相差常数因子。
+
+
+
+下面我们考虑孤立系统（在不测量时）关于时间 $t$ 的演化。考虑态矢含时，写作 $\ket{\psi(t)}$，但可观测量不显含时间。这称为\textbf{Schr\"odinger 绘景}。时间平移对称性指出，态矢的演化由含时的幺正算符 $U$ 给出
+\eq{
+    \ket{\psi(t)} = U(t,t_0)\ket{\psi(t_0)} \xRightarrow{\text{Stone}} U(t,t_0)=\e^{-\frac{\i}{\hbar}\hat H(t-t_0)}.
+}
+其中 $\hat H$ 不显含时间，称为\textbf{哈氏算符}。这也说明哈氏算符（能量算符）代表时间平移生成元。故得到等价表述：态矢满足 Schr\"odinger 方程
+\eq{
+    i\hbar\dv{t}\ket{\psi(t)}=\hat H\ket{\psi(t)}.
+}
+写成坐标表象就是 
+\[\i\hbar\pdv{t}\psi(\bm x,t)=\hat H\psi(\bm x,t).\]
+量子化给出了从经典力学过渡到量子力学的方案：
+\eq{
+    H = \frac{{\bm p}^2}{2m} + V \to \hat H = \frac{\hat{\bm p}^2}{2m} + V(\hat{\bm x}).
+}
+代入坐标表象
+\eq{
+    \i\hbar\pdv{t}\psi(\bm x,t)=\left(-\frac{\hbar^2}{2m}\nabla^2+V(\bm x)\right)\psi(\bm x,t).
 }
 最初 Schr\"odinger 通过波动力学的一些类比方法得到。
+这里不考虑含时哈氏量，$\ket{\psi(t)} = \e^{-\frac{\i}{\hbar}\hat H(t-t_0)}\ket{\psi(t_0)}$ 说明波函数可以分解为
+\eq{
+    \psi(\bm x,t)=\Psi(\bm x)\e^{-\i Et/\hbar},
+}
+$E$ 是常数能量（无关 $\bm x,t$）。
+代入含时 Schr\"odinger 方程，从而分离变量得到\textbf{定态}(stationary state)方程
+\eq{
+    \hat H\Psi(\bm x)=E\Psi(\bm x).
+}
+所以虽然波函数仍然随时间变，但时间的变化吸收进了指数因子，因此概率密度不随时间变化。即整体相位随时间转动，可观测的概率分布不变。
+含时的哈氏量一般是引入含时势能 $V(\bm x,t)$，算符 $U$ 的写法需要改。这里暂时不讲了。
+
+考虑时变情况，无非是乘上因子
+\eq{
+    \psi_{\bm p}(\bm x,t) = \frac{\e^{-\i Et/\hbar}\e^{\i \bm p\vdot\bm x/\hbar}}{(2\pi\hbar)^{3/2}}  = \frac{\e^{\i(\bm p\vdot\bm x-Et)/\hbar}}{(2\pi\hbar)^{3/2}}  \im \psi(\bm x,t) = \int\frac{\d[3]p}{(2\pi\hbar)^{3/2}} \psi(\bm p) \e^{\i(\bm p\vdot\bm x-Et)/\hbar}.
+}
 
 
 
-可见若 $\{\psi_i\}$ 是解，则任意\textbf{线性叠加} $\sum_i c_i\psi_i$ 也是解。
-这也意味着 $\psi$ 的重标度 $c\psi$ 仍是解，故总可以对波函数归一化。
-这与 $\ket{\psi}$ 的线性空间性质相符。
+对 $-\i\hbar\grad \psi_{\bm p}(\bm x)=\bm p \psi_{\bm p}(\bm x)$ 再求一次导就会发现它相当于（定态）Schrödinger 方程的自由版本，即势能为常数（无关 $\bm x,t$）：$\hat H\psi_{\bm p}(\bm x)=E\psi_{\bm p}(\bm x)$，其中
+\eq{
+    E = \bm p^2/2m + V_0.
+}
+
+
+
 $V$ 为常数时，上式具有简单的平面波解 $\psi=A\e^{\i(\bm k\vdot\bm x - \omega t)}$。容易发现 $\bm k,\omega$ 必须满足 $\omega = \hbar \bm k^2/2m + V/\hbar$。借 Planck 黑体辐射、Einstein 光电效应，de Broglie 指出，粒子的能量、动量可与波函数的波动性质相联系：
 \eq{
     E = h\nu = \hbar\omega,\quad \bm p = \hbar\bm k.
@@ -102,6 +265,13 @@ $V$ 为常数时，上式具有简单的平面波解 $\psi=A\e^{\i(\bm k\vdot\bm
 \eq{
     E = {\bm p^2}/{2m} + V.
 }
+
+我们通常说从 Schr\"odinger 方程观察出\textbf{线性叠加}：若 $\{\psi_i(\bm x)\}$ 是解，则任意 $\sum_i c_i\psi_i(\bm x)$ 也是解。
+这也意味着 $\psi(\bm x)$ 的重标度 $c\psi(\bm x)$ 仍是解，故总可以对波函数归一化。
+
+这与 $\ket{\psi}$ 的线性空间性质相符。
+
+
 
 这里平面波之所以重要，是因为它们是动量算符的本征函数。一般波函数未必本身是平面
 波解，但可在适当条件下展开为平面波的叠加。
@@ -112,18 +282,407 @@ $V$ 为常数时，上式具有简单的平面波解 $\psi=A\e^{\i(\bm k\vdot\bm
 自由单粒子的叠加
 
 
-$[-L/2,L/2]$ 上良好的函数可展开为 Fourier 级数
-\[f(x)=\sum_{N=-\infty}^\infty \frac{F(p_N)}{L} \e^{\i p_N x},\quad F(p_N)=\int_{-L/2}^{L/2}\d{x}\e^{-\i p_N x}f(x),\]
-其中 $p_N={2\pi N}/{L}$ 称为\textbf{模式}(mode)，$F(p)$ 是 $f(x)$ 的 Fourier 变换。令 $L\to\infty$，则 $\Delta p=2\pi/L\to 0$，级数化为积分，即 $f(x)=\int \frac{\d p}{2\pi} \e^{\i p x}F(p),F(p)=\int\d{x}\e^{-\i p x}f(x)$。任意 $f(x)$ 以 $\e^{\i px}$ 为基底。
-同理，取 $V=L^n$ 并连续化，可得
-\[f(x)=\int \frac{\d[n]p}{(2\pi)^n} \e^{\i p_\mu x^\mu}F(p),\quad F(p)=\int\d[n]{x}\e^{-\i p_\mu x^\mu}f(x).\]
+
+
+但物理上显然广义特征矢仍然非常有用。
+
+考虑可观测量算符含时，而态矢不含，称为\textbf{Heisenberg 绘景}。态矢不变，算符演化满足
+\eq{
+    \ket{\psi_H}:=\ket{\psi(t_0)},\quad
+    \hat A_H(t):=U^\dagger(t,t_0)\hat A_S U(t,t_0),
+}
+其中下标 $S,H$ 分别表示 Schr\"odinger 绘景和 Heisenberg 绘景。这里先假设 $\hat A_S$ 本身不显含时间；若显含时间，只需将上式改为 $\hat A_H(t)=U^\dagger(t,t_0)\hat A_S(t)U(t,t_0)$。
+
+这一定义的动机很简单：绘景不应改变任何可观测结果。Schr\"odinger 绘景中，测量 $\hat A_S$ 的平均值为
+\eq{
+    \ev{A}_S(t)
+    =
+    \mel{\psi(t)}{\hat A_S}{\psi(t)}.
+}
+代入 $\ket{\psi(t)}=U(t,t_0)\ket{\psi(t_0)}$，并取 Hermite 共轭 $\bra{\psi(t)}=\bra{\psi(t_0)}U^\dagger(t,t_0)$
+可得
+\begin{align*}
+    \ev{A}_S(t)
+    &=
+    \mel{\psi(t_0)}{U^\dagger(t,t_0)\hat A_S U(t,t_0)}{\psi(t_0)}\\
+    &=
+    \mel{\psi_H}{\hat A_H(t)}{\psi_H}
+    =:\ev{A}_H(t).
+\end{align*}
+所以 Heisenberg 绘景不是新的物理假设，而只是把同一演化从态矢转移到算符上。Schr\"odinger 绘景中“态在动，算符不动”；Heisenberg 绘景中“态不动，算符在动”。
+
+下面求算符的运动方程。由 $U(t,t_0)=\e^{-\frac{\i}{\hbar}\hat H(t-t_0)}$
+知
+\eq{
+    \dv{U}{t}=-\frac{\i}{\hbar}\hat H U,\quad
+    \dv{U^\dagger}{t}=\frac{\i}{\hbar}U^\dagger\hat H,
+}
+其中第二式也可由 $U^\dagger U=1$ 对时间求导得到。于是
+\begin{align*}
+    \dv{\hat A_H}{t}
+    &=
+    \dv{U^\dagger}{t}\hat A_S U
+    +U^\dagger\hat A_S\dv{U}{t}=
+    \frac{\i}{\hbar}U^\dagger\hat H\hat A_S U
+    -\frac{\i}{\hbar}U^\dagger\hat A_S\hat H U\\
+    &=
+    \frac{\i}{\hbar}
+    \left(
+        U^\dagger\hat H U U^\dagger\hat A_S U
+        -
+        U^\dagger\hat A_S U U^\dagger\hat H U
+    \right)=
+    \frac{\i}{\hbar}[\hat H_H(t),\hat A_H(t)].
+\end{align*}
+如果 $\hat H$ 不显含时间，则 $\hat H_H=U^\dagger \hat H U=\hat H$，因为 $\hat H$ 与它自身的指数函数对易。于是
+\eq{
+    \dv{\hat A_H}{t}
+    =
+    \frac{\i}{\hbar}[\hat H,\hat A_H]
+    =
+    \frac{1}{\i\hbar}[\hat A_H,\hat H].
+}
+这称为\textbf{Heisenberg 方程}。若 $\hat A_S(t)$ 本身显含时间，比如外场或人为调节的测量装置带来一个显含 $t$ 的算符，则乘法求导还多出一项：
+\eq{
+    \dv{\hat A_H}{t}
+    =
+    \frac{\i}{\hbar}[\hat H_H,\hat A_H]
+    +U^\dagger\pdv{\hat A_S}{t}U.
+}
+通常将最后一项简记为
+\eq{
+    \left(\pdv{\hat A_S}{t}\right)_H
+    :=
+    U^\dagger\pdv{\hat A_S}{t}U.
+}
+
+Heisenberg 方程与经典 Hamilton 方程有直接对应。经典力学中任意相空间函数 $A(q,p,t)$ 满足
+\eq{
+    \dv{A}{t}=\{A,H\}+\pdv{A}{t},
+}
+其中 $\{A,H\}$ 是 Poisson 括号。量子理论中相应地有
+\eq{
+    \{A,H\}\quad \longrightarrow\quad \frac{1}{\i\hbar}[\hat A,\hat H].
+}
+这解释了为什么 Heisenberg 当初会从 Poisson 括号的结构走向矩阵乘法的非对易性。
+
+作为例子，仍考虑一维非相对论粒子
+\eq{
+    \hat H=\frac{\hat p^2}{2m}+V(\hat x).
+}
+在 Heisenberg 绘景中写作 $\hat x_H(t),\hat p_H(t)$，但下面为简洁省略下标 $H$。由 $[\hat x,\hat p]=\i\hbar$，先有
+\[
+    [\hat x,\hat p^2]
+    =
+    [\hat x,\hat p]\hat p+\hat p[\hat x,\hat p]=
+    2\i\hbar\hat p.
+\]
+并且 $\hat x$ 与 $V(\hat x)$ 对易，所以
+\eq{
+    \dv{\hat x}{t}
+    =
+    \frac{1}{\i\hbar}[\hat x,\hat H]
+    =
+    \frac{1}{\i\hbar}\frac{1}{2m}[\hat x,\hat p^2]
+    =
+    \frac{\hat p}{m}.
+}
+这正是经典关系 $\dot x=p/m$ 的算符版本。
+
+再看动量。由于 $\hat p$ 与 $\hat p^2$ 对易，只需计算 $[\hat p,V(\hat x)]$。在坐标表象中，$\hat p=-\i\hbar\pdv{x}$，作用在任意测试波函数 $\psi(x)$ 上：
+\[
+    [\hat p,V(\hat x)]\psi
+    =
+    -\i\hbar\pdv{x}\bigl(V(x)\psi(x)\bigr)
+    +\i\hbar V(x)\pdv{\psi}{x}=
+    -\i\hbar\pdv{V}{x}\psi(x).
+\]
+故作为算符恒等式，
+\eq{
+    [\hat p,V(\hat x)]=-\i\hbar V'(\hat x).
+}
+于是
+\eq{
+    \dv{\hat p}{t}
+    =
+    \frac{1}{\i\hbar}[\hat p,\hat H]
+    =
+    -V'(\hat x).
+}
+这正是 Newton 方程 $\dot p=-\pdv{V}{x}$ 的算符形式。若写回三维，则
+\eq{
+    \dv{\hat{\bm x}}{t}=\frac{\hat{\bm p}}{m},\quad
+    \dv{\hat{\bm p}}{t}=-\grad V(\hat{\bm x}).
+}
+可见 Heisenberg 绘景保留了经典力学中“物理量随时间演化”的直观形式，只是普通变量被非对易算符取代，Poisson 括号被对易子取代。
+
+还有一个常用推论。若某个算符 $\hat A$ 不显含时间，且与 Hamiltonian 对易，
+\eq{
+    [\hat A,\hat H]=0,
+}
+则
+\eq{
+    \dv{\hat A_H}{t}=0.
+}
+因此 $\hat A$ 对应守恒量。例如自由粒子 $V=0$ 时，$[\hat p,\hat H]=0$，动量守恒；若势能具有空间平移或旋转对称性，相应的动量或角动量也会守恒。这与经典力学中“对称性给出守恒量”的思想一致，后文场论中仍会反复使用。
+
+如果有两个系统，态空间分别为 $\mathcal H_A$、$\mathcal H_B$，则复合系统的态（称为\textbf{复合态}）属于张量积空间
+\eq{
+    \mathcal H_{AB}=\mathcal H_A\otimes \mathcal H_B.
+}
+此时，单独的一个系统的态称为\textbf{纯态}。
+如果已知两者各自纯态 $\ket{\psi_A}$、$\ket{\psi_B}$，则复合态就是张量积形式
+\eq{
+\ket{\psi_{AB}}=\ket{\psi_A,\psi_B} \in \mathcal H_{AB}.
+}
+这里做了简写 $\ket{\psi_A,\psi_B}=\ket{\psi_A}\ket{\psi_B}=\ket{\psi_A}\otimes\ket{\psi_B}$。
+但复合态不一定都能写成张量积，这时称为\textbf{纠缠}(entanglement)态。比如
+\[
+\ket{\psi_{AB}}=\frac{1}{\sqrt{2}}(\ket{0}_A\ket{0}_B+\ket{1}_A\ket{1}_B)
+\]
+不能写成单独的纯态张量积形式。
+
+考虑多粒子系统，我们把复合态矢投影到多粒子的坐标表象上：
+\eq{
+    \psi(\bm x_1,\cdots\bm x_N,t) := \ip{\bm x_1,\cdots\bm x_N}{\psi(t)},\quad \ket{\bm x_1,\cdots\bm x_N} = \ket{\bm x_1}\cdots\ket{\bm x_N}.
+}
+所以波函数不再单纯是一个时空上的函数。
+粒子数的增加导致系统的量子态空间维数呈指数级增长。
+这时 Heisenberg 态矢描述显得比波函数简洁。
+我们甚至可以说整个宇宙的量子态是一个庞大的态矢 $\ket{\psi}$。
+态矢展开为
+\eq{
+    \ket{\psi} = \int\d[3]{x_1}\cdots \d[3]{x_N} \ket{\bm x_1,\cdots,\bm x_N} \psi(\bm x_1,\cdots,\bm x_N).
+}
+归一化条件是
+\eq{
+    1 = \int\d[3]{x_1}\cdots \d[3]{x_N} \abs{\psi(\bm x_1,\cdots,\bm x_N)}^2.
+}
+如果态矢是积态，即 $\ket{\psi}=\ket{\psi_1}\cdots\ket{\psi_N}$，则波函数也写作简单的乘法形式：
+\eq{
+    \psi(\bm x_1,\cdots,\bm x_N) = \psi_1(\bm x_1)\cdots\psi_N(\bm x_N).
+}
+纠缠态则无法写成积态。
+上面写 $\ket{\bm x_1,\cdots,\bm x_N}$ 时，其实已经临时给粒子贴上了 $1,\cdots,N$ 的标签。对于电子和质子这样的不同粒子，标签有物理意义，因为质量、电荷等可观测量足以区分它们；但对于两个电子，所谓“第一个电子”和“第二个电子”只是人为编号。实验上能观测的是“有一个电子在某处，另一个电子在某处”，而不是哪一个编号的电子在某处。因此，全同粒子的量子态必须对这种人为编号的改变给出相同物理预言。
+
+先看两个全同粒子。设单粒子态空间为 $\mathcal H$，暂时仍用带标签的张量积空间 $\mathcal H\otimes\mathcal H$ 描述。定义交换算符
+\eq{
+    \hat P_{12}\ket{\alpha,\beta}=\ket{\beta,\alpha},
+}
+其中 $\alpha,\beta$ 可以代表位置、动量、自旋等完整单粒子量子数。显然
+\eq{
+    \hat P_{12}^2=1,\quad \hat P_{12}^{-1}=\hat P_{12},\quad \hat P_{12}^\dagger=\hat P_{12}.
+}
+全同粒子的可观测量不能依赖粒子编号，所以任意物理可观测量 $\hat A$ 应满足
+\eq{
+    [\hat A,\hat P_{12}]=0.
+}
+于是交换前后的态给出相同平均值：
+\eq{
+    \frac{\mel{\hat P_{12}\psi}{\hat A}{\hat P_{12}\psi}}{\ip{\hat P_{12}\psi}}
+    =
+    \frac{\mel{\psi}{\hat P_{12}^\dagger\hat A\hat P_{12}}{\psi}}{\ip{\psi}}
+    =
+    \frac{\ev{\hat A}{\psi}}{\ip{\psi}}.
+}
+若交换后仍描述同一个纯态射线，则只能相差一个整体相位：
+\eq{
+    \hat P_{12}\ket{\psi}=\e^{\i\theta}\ket{\psi}.
+}
+再作用一次交换算符，利用 $\hat P_{12}^2=1$，得到
+\eq{
+    \ket{\psi}=\hat P_{12}^2\ket{\psi}=\e^{2\i\theta}\ket{\psi}
+    \im \e^{2\i\theta}=1.
+}
+因此 $\e^{\i\theta}=\pm 1$。这就得到两种可能：
+\eq{
+    \hat P_{12}\ket{\psi}=+\ket{\psi},\quad
+    \hat P_{12}\ket{\psi}=-\ket{\psi}.
+}
+前者称为交换\textbf{对称}态，对应\textbf{玻色子}(boson)；后者称为交换\textbf{反对称}态，对应\textbf{费米子}(fermion)。
+
+在坐标表象中，这个结论写得更直观。
+由于
+\eq{
+    \bra{\bm x_1,\bm x_2}\hat P_{12}
+    =
+    \bra{\bm x_2,\bm x_1},
+}
+有
+\eq{
+    \ip{\bm x_1,\bm x_2}{\hat P_{12}\psi}
+    =
+    \ip{\bm x_2,\bm x_1}{\psi}
+    =
+    \psi(\bm x_2,\bm x_1).
+}
+所以对称、反对称条件分别变成
+\eq{
+    \psi(\bm x_2,\bm x_1)=+\psi(\bm x_1,\bm x_2),\quad
+    \psi(\bm x_2,\bm x_1)=-\psi(\bm x_1,\bm x_2).
+}
+严格地说，若粒子还带有自旋等内禀自由度，交换的不是单纯的位置变量，而是完整单粒子量子数。记 $\alpha=(\bm x,s,\cdots)$，则应写为
+\eq{
+    \psi(\alpha_2,\alpha_1)=\pm\psi(\alpha_1,\alpha_2).
+}
+也就是说，电子的费米反对称性是对“位置加自旋”等所有单粒子标签同时交换而言的。
+
+对于 $N$ 个全同粒子，交换操作推广为置换群 $S_N$ 的作用。对任意置换 $\sigma\in S_N$，设 $\hat U_\sigma$ 是相应的粒子标签置换算符。三维空间中的全同粒子只有两类一维交换表示：
+\eq{
+    \hat U_\sigma\ket{\psi_+}=\ket{\psi_+},\quad
+    \hat U_\sigma\ket{\psi_-}=\sgn(\sigma)\ket{\psi_-},
+}
+其中 $\sgn(\sigma)=+1$ 表示偶置换，$\sgn(\sigma)=-1$ 表示奇置换。坐标表象下相应地有
+\eq{
+    \psi_+(\alpha_{\sigma(1)},\cdots,\alpha_{\sigma(N)})
+    =
+    \psi_+(\alpha_1,\cdots,\alpha_N),
+}
+\eq{
+    \psi_-(\alpha_{\sigma(1)},\cdots,\alpha_{\sigma(N)})
+    =
+    \sgn(\sigma)\psi_-(\alpha_1,\cdots,\alpha_N).
+}
+所以玻色子的多粒子波函数在任意交换下不变，费米子的多粒子波函数在奇置换下变号。
+
+这也说明，并非整个张量积空间 $\mathcal H^{\otimes N}$ 都是全同粒子的物理态空间，而只能取其中的对称或反对称部分。定义投影算符
+\eq{
+    \hat S_\pm
+    :=
+    \frac{1}{N!}\sum_{\sigma\in S_N}(\pm)^\sigma \hat U_\sigma,
+}
+其中 $(+)^\sigma=1$，而 $(-)^\sigma=\sgn(\sigma)$。由于 $\sgn(\sigma\tau)=\sgn(\sigma)\sgn(\tau)$，有
+\begin{align*}
+    \hat S_\pm^2
+    &=
+    \frac{1}{(N!)^2}\sum_{\sigma,\tau\in S_N}
+    (\pm)^\sigma(\pm)^\tau \hat U_{\sigma\tau}        \\
+    &=
+    \frac{1}{(N!)^2}\sum_{\rho\in S_N}
+    \sum_{\sigma\in S_N}(\pm)^\rho \hat U_\rho
+    =
+    \frac{1}{N!}\sum_{\rho\in S_N}(\pm)^\rho \hat U_\rho
+    =
+    \hat S_\pm.
+\end{align*}
+所以 $\hat S_\pm$ 的确是投影。全同玻色子、费米子的 $N$ 粒子态空间分别为
+\eq{
+    \mathcal H^{(N)}_+ = \hat S_+\mathcal H^{\otimes N},\quad
+    \mathcal H^{(N)}_- = \hat S_-\mathcal H^{\otimes N}.
+}
+
+特别地，若两个单粒子态为 $\ket{\phi},\ket{\chi}$，则由可区分粒子的张量积态 $\ket{\phi,\chi}$ 出发，物理的全同粒子态应先投影：
+\eq{
+    \ket{\phi,\chi}_\pm
+    =
+    \frac{\ket{\phi}\ket{\chi}\pm\ket{\chi}\ket{\phi}}
+    {\sqrt{2(1\pm\abs{\ip{\phi}{\chi}}^2)}}.
+}
+分母来自归一化。事实上，若 $\ip{\phi}=\ip{\chi}=1$，则
+\begin{align*}
+    &\bigl(\bra{\phi}\bra{\chi}\pm\bra{\chi}\bra{\phi}\bigr)
+    \bigl(\ket{\phi}\ket{\chi}\pm\ket{\chi}\ket{\phi}\bigr) \\
+    &\qquad
+    =
+    2\pm 2\abs{\ip{\phi}{\chi}}^2
+    =
+    2(1\pm\abs{\ip{\phi}{\chi}}^2).
+\end{align*}
+若 $\ket{\phi}=\ket{\chi}$，则
+\eq{
+    \ket{\phi,\phi}_-=0.
+}
+这就是 Pauli 不相容原理：两个全同费米子不能处于同一个完整单粒子态。若写成波函数语言，$N$ 个费米子的反对称态可表为 Slater 行列式
+\eq{
+    \psi_-(\alpha_1,\cdots,\alpha_N)
+    =
+    \frac{1}{\sqrt{N!}}
+    \det\bigl(\phi_i(\alpha_j)\bigr),
+}
+一旦两行相同，行列式立刻为零；这正是 Pauli 原理的数学形式。玻色子则没有这个限制，多个玻色子可以处于同一单粒子态。
+
+量子统计正是从这种交换对称性来的。设有 $g$ 个单粒子模式，记第 $r$ 个模式上的占有数为 $n_r$。全同粒子没有“第几个粒子占据第几个模式”的说法，只有“每个模式中有多少粒子”的说法。固定总粒子数 $N$ 时
+\eq{
+    \sum_{r=1}^{g} n_r=N.
+}
+对玻色子，$n_r=0,1,2,\cdots$，即同一模式可放任意多个粒子。于是态数等于非负整数解的个数：
+\eq{
+    W_B(g,N)
+    =
+    \#\{(n_1,\cdots,n_g)\mid n_r\geq 0,\ \sum_r n_r=N\}
+    =
+    \binom{N+g-1}{N}.
+}
+最后一个等号可用“隔板法”理解：把 $N$ 个粒子看作 $N$ 个星号，用 $g-1$ 个隔板分成 $g$ 组，总共有 $N+g-1$ 个位置，任选 $N$ 个位置放星号即可。
+对费米子，Pauli 原理要求
+\eq{
+    n_r=0,1.
+}
+因此只需从 $g$ 个模式中选出 $N$ 个被占据的模式：
+\eq{
+    W_F(g,N)=\binom{g}{N}.
+}
+这两个计数方式分别称为 Bose--Einstein 统计和 Fermi--Dirac 统计的计数基础。
+
+若进一步考虑无相互作用粒子的热平衡，设第 $r$ 个模式能量为 $\epsilon_r$，温度 $T$ 下 $\beta=1/(k_B T)$，化学势为 $\mu$。用巨正则系综时，一个模式占有数为 $n_r$ 的权重为
+\eq{
+    \e^{-\beta(\epsilon_r-\mu)n_r}.
+}
+由于不同模式独立，配分函数按模式分解。对玻色子，
+\eq{
+    Z_r^{(B)}
+    =
+    \sum_{n=0}^{\infty}\e^{-\beta(\epsilon_r-\mu)n}
+    =
+    \frac{1}{1-\e^{-\beta(\epsilon_r-\mu)}}.
+}
+对费米子，由于 $n=0,1$，
+\eq{
+    Z_r^{(F)}
+    =
+    \sum_{n=0}^{1}\e^{-\beta(\epsilon_r-\mu)n}
+    =
+    1+\e^{-\beta(\epsilon_r-\mu)}.
+}
+记 $q_r=\e^{-\beta(\epsilon_r-\mu)}$，平均占有数为
+\eq{
+    \bar n_r
+    =
+    \frac{1}{Z_r}\sum_n n q_r^n
+    =
+    q_r\pdv{}{q_r}\ln Z_r.
+}
+于是得到
+\eq{
+    \bar n_r^{(B)}
+    =
+    \frac{1}{\e^{\beta(\epsilon_r-\mu)}-1},\quad
+    \bar n_r^{(F)}
+    =
+    \frac{1}{\e^{\beta(\epsilon_r-\mu)}+1}.
+}
+这就是常说的 Bose--Einstein 分布和 Fermi--Dirac 分布。可见两种统计并不是热力学中的人为规定，而是多粒子量子态交换性质的直接后果。
+
+这种占有数语言已经接近场论：我们不再追问每个粒子的轨道，而是追问每个模式中有多少个量子。把所有粒子数的态空间合在一起，就得到 Fock 空间
+\eq{
+    \mathcal F_\pm(\mathcal H)
+    =
+    \mathcal H^{(0)}\oplus\mathcal H_\pm^{(1)}
+    \oplus\mathcal H_\pm^{(2)}\oplus\cdots,
+}
+其中 $\mathcal H^{(0)}$ 由真空态 $\ket 0$ 张成。后文引入产生、湮灭算符时，它们的作用就是改变某个模式的占有数；而玻色子用对易关系，费米子用反对易关系，正是为了实现这里的交换对称性和量子统计。
+
+
+\section{波函数求解}
+
+
+
+
+
 这种按动量模式展开的思想将在场论中反复出现。经典场的每个Fourier 模式都可看成一个
 独立振动自由度；量子化之后，这些模式的激发就对应粒子。
 
-当有多个粒子时，比如两个粒子，系统的量子态 $\psi(\bm x_1,\bm x_2,t)$ 是两个位置变量的函数。对于 $N$ 个粒子，系统的量子态 $\psi(\bm x_1,\cdots,\bm x_N,t)$ 是 $3N$ 个位置变量的函数。因此，粒子数的增加导致系统的量子态空间维数呈指数级增长。
 
-波函数不再是单个粒子的位置的函数，而是所有粒子位置的函数。这种描述方式虽然在理论上是可行的，但在实际计算中非常复杂，尤其是当粒子数目较多时。
-引入态矢量的概念后，系统的量子态可以表示为 $\ket{\psi}$，而不是具体的波函数形式。这种抽象的表示方式使得我们能够更灵活地处理多粒子系统，尤其是在涉及到粒子交换对称性和量子统计时。
 
 因此普通量子力学通常先固定粒子数，再讨论这个固定粒子数Hilbert 空间中的态。然而在
 相对论物理中，粒子可以产生和湮灭，固定粒子数的描述不再自然。量子场论的基本想法
@@ -133,10 +692,756 @@ $[-L/2,L/2]$ 上良好的函数可展开为 Fourier 级数
 因此，描述多粒子系统的量子态空间非常庞大，难以直接处理。为了解决这个问题，物理学家引入了\textbf{量子场}的概念，将粒子视为量子场的激发态，从而能够更有效地描述多粒子系统的行为。这种方法不仅简化了多粒子系统的描述，还为理解粒子之间的相互作用提供了一个更自然的框架。
 
 因此，量子力学给出了后文所需的两条主线：一是将经典物理量提升为非对易算符，二
-是用态矢量或波函数描述概率振幅．路径积分方法会把同样的量子理论改写为另一种形式：
-对所有可能的历史求和．
-
+是用态矢或波函数描述概率振幅。路径积分方法会把同样的量子理论改写为另一种形式：
+对所有可能的历史求和。
 
 \section{路径积分方法}
 
-我们曾在经典力学中学习过最小作用量原理。Feynman 对此有一个进一步的解释。
+我们曾在经典力学中学习过最小作用量原理。Feynman 对此有一个进一步的解释：量子粒子从初始点运动到末点时，并不是只选取某一条经典轨道，而是所有可能路径都对概率振幅有贡献；每条路径的贡献是一个相位，其相位由该路径的作用量决定。经典轨道之所以在宏观极限下显得特殊，是因为它附近的相位相干叠加，而远离经典轨道的路径相位快速振荡，彼此抵消。
+
+先考虑一维非相对论粒子，其 Hamiltonian 为
+\eq{
+    \hat H=\frac{\hat p^2}{2m}+V(\hat x,t).
+}
+量子态的时间演化由演化算符给出：
+\eq{
+    \ket{\psi(t_b)}=\hat U(t_b,t_a)\ket{\psi(t_a)}.
+}
+若 Hamiltonian 不显含时间，则
+\eq{
+    \hat U(t_b,t_a)=\e^{-\frac{\i}{\hbar}\hat H(t_b-t_a)}.
+}
+若 Hamiltonian 显含时间，则严格地说需要时间排序，但路径积分的基本构造仍可由把时间切成许多小段来理解。
+
+路径积分首先关心的是粒子从 $(x_a,t_a)$ 到 $(x_b,t_b)$ 的概率振幅，称为\textbf{传播子}(propagator)：
+\eq{
+    K(x_b,t_b;x_a,t_a):=\mel{x_b}{\hat U(t_b,t_a)}{x_a}.
+}
+若已知初始波函数 $\psi(x_a,t_a)$，则末态波函数为
+\eq{
+    \psi(x_b,t_b)=\int\d{x_a}K(x_b,t_b;x_a,t_a)\psi(x_a,t_a).
+}
+因此，传播子就是位置表象中的时间演化算符。路径积分要做的事情，就是把这个矩阵元写成“对所有路径求和”的形式。
+
+令
+\eq{
+    T=t_b-t_a,\quad \epsilon=\frac{T}{N},\quad t_j=t_a+j\epsilon,
+}
+其中 $j=0,1,\cdots,N$，并记
+\eq{
+    x_0=x_a,\quad x_N=x_b.
+}
+时间演化算符可分解为
+\eq{
+    \hat U(t_b,t_a)
+    =\hat U(t_N,t_{N-1})\cdots \hat U(t_2,t_1)\hat U(t_1,t_0).
+}
+在每两个相邻的演化算符之间插入位置完备关系
+\eq{
+    \int\d{x_j}\ket{x_j}\bra{x_j}=1,
+}
+得到
+\eq{
+    K(x_b,t_b;x_a,t_a)
+    =\int\prod_{j=1}^{N-1}\d{x_j}
+    \prod_{j=0}^{N-1}
+    \mel{x_{j+1}}{\hat U(t_{j+1},t_j)}{x_j}.
+}
+这一步已经显示出路径积分的雏形：固定端点 $x_0=x_a,x_N=x_b$ 后，积分变量 $x_1,\cdots,x_{N-1}$ 枚举了粒子在中间时刻可能经过的位置。当 $N\to\infty$ 时，这些离散点连成一条路径 $x(t)$。
+
+现在计算短时间传播子。对足够小的 $\epsilon$，
+\eq{
+    \hat U(t_{j+1},t_j)
+    \simeq \e^{-\frac{\i}{\hbar}\epsilon\hat H}.
+}
+由于 $\hat x,\hat p$ 不对易，严格处理需要保留高阶修正；但在 $\epsilon\to0$ 的极限中，可采用对称离散化。为说明基本结构，先写成
+\eq{
+    \mel{x_{j+1}}{\e^{-\frac{\i}{\hbar}\epsilon\hat H}}{x_j}
+    \simeq
+    \mel{x_{j+1}}{
+    \e^{-\frac{\i}{\hbar}\epsilon\frac{\hat p^2}{2m}}
+    \e^{-\frac{\i}{\hbar}\epsilon V(\hat x,t_j)}
+    }{x_j}.
+}
+势能项在位置表象中为乘法算符，因此
+\eq{
+    \e^{-\frac{\i}{\hbar}\epsilon V(\hat x,t_j)}\ket{x_j}
+    =
+    \e^{-\frac{\i}{\hbar}\epsilon V(x_j,t_j)}\ket{x_j}.
+}
+动能项可通过插入动量完备关系计算：
+\eq{
+    \int\frac{\d{p_j}}{2\pi\hbar}\ket{p_j}\bra{p_j}=1,\quad
+    \braket{x|p}=\e^{\frac{\i}{\hbar}px}.
+}
+于是
+\begin{align*}
+    \mel{x_{j+1}}{
+    \e^{-\frac{\i}{\hbar}\epsilon\frac{\hat p^2}{2m}}
+    }{x_j}
+    &=
+    \int\frac{\d{p_j}}{2\pi\hbar}
+    \braket{x_{j+1}|p_j}
+    \e^{-\frac{\i}{\hbar}\epsilon\frac{p_j^2}{2m}}
+    \braket{p_j|x_j}  \\
+    &=
+    \int\frac{\d{p_j}}{2\pi\hbar}
+    \exp\left[
+        \frac{\i}{\hbar}p_j(x_{j+1}-x_j)
+        -\frac{\i}{\hbar}\epsilon\frac{p_j^2}{2m}
+    \right].
+\end{align*}
+因此短时间传播子可写成
+\eq{
+    \mel{x_{j+1}}{\hat U(t_{j+1},t_j)}{x_j}
+    =
+    \int\frac{\d{p_j}}{2\pi\hbar}
+    \exp\left\{
+        \frac{\i}{\hbar}\epsilon
+        \left[
+            p_j\frac{x_{j+1}-x_j}{\epsilon}
+            -\frac{p_j^2}{2m}
+            -V(x_j,t_j)
+        \right]
+    \right\}.
+}
+代回传播子，有
+\eq{
+    K(x_b,t_b;x_a,t_a)
+    =
+    \lim_{N\to\infty}
+    \int\prod_{j=1}^{N-1}\d{x_j}
+    \prod_{j=0}^{N-1}\frac{\d{p_j}}{2\pi\hbar}
+    \exp\left\{
+        \frac{\i}{\hbar}\sum_{j=0}^{N-1}\epsilon
+        \left[
+            p_j\frac{x_{j+1}-x_j}{\epsilon}
+            -H(p_j,x_j,t_j)
+        \right]
+    \right\}.
+}
+这称为相空间形式的路径积分，常记为
+\eq{
+    K(x_b,t_b;x_a,t_a)
+    =
+    \int_{x(t_a)=x_a}^{x(t_b)=x_b}
+    \mathcal D x\,\mathcal D p\,
+    \exp\left\{
+        \frac{\i}{\hbar}
+        \int_{t_a}^{t_b}\d{t}
+        \left[p\dot x-H(p,x,t)\right]
+    \right\}.
+}
+其中 $\mathcal D x\,\mathcal D p$ 不是普通有限维积分测度，而是上述离散化极限的简写。
+
+对 Hamiltonian $H=p^2/2m+V(x,t)$，动量积分是 Gaussian 积分。完成平方：
+\eq{
+    p_j\frac{x_{j+1}-x_j}{\epsilon}-\frac{p_j^2}{2m}
+    =
+    -\frac{1}{2m}\left(p_j-m\frac{x_{j+1}-x_j}{\epsilon}\right)^2
+    +\frac{m}{2}\left(\frac{x_{j+1}-x_j}{\epsilon}\right)^2.
+}
+因此每个 $p_j$ 积分只贡献一个归一化因子，传播子化为构型空间形式
+\eq{
+    K(x_b,t_b;x_a,t_a)
+    =
+    \int_{x(t_a)=x_a}^{x(t_b)=x_b}
+    \mathcal D x\,
+    \exp\left\{
+        \frac{\i}{\hbar}S[x]
+    \right\},
+}
+其中
+\eq{
+    S[x]=\int_{t_a}^{t_b}\d{t}\,L(x,\dot x,t),\quad
+    L=\frac{1}{2}m\dot x^2-V(x,t)
+}
+就是经典作用量。更具体地，离散化版本为
+\eq{
+    K(x_b,t_b;x_a,t_a)
+    =
+    \lim_{N\to\infty}
+    \left(\frac{m}{2\pi\i\hbar\epsilon}\right)^{N/2}
+    \int\prod_{j=1}^{N-1}\d{x_j}
+    \exp\left\{
+        \frac{\i}{\hbar}
+        \sum_{j=0}^{N-1}
+        \epsilon
+        \left[
+            \frac{m}{2}
+            \left(\frac{x_{j+1}-x_j}{\epsilon}\right)^2
+            -V(x_j,t_j)
+        \right]
+    \right\}.
+}
+这就是路径积分的基本表达式。它的含义是：从 $x_a$ 到 $x_b$ 的总振幅等于所有路径振幅的叠加，而每条路径 $x(t)$ 的振幅为
+\eq{
+    \e^{\frac{\i}{\hbar}S[x]}.
+}
+
+现在解释它与经典力学的关系。考虑作用量在路径附近的微小变化：
+\eq{
+    x(t)\to x(t)+\delta x(t),\quad
+    \delta x(t_a)=\delta x(t_b)=0.
+}
+作用量的一阶变化为
+\begin{align*}
+    \delta S
+    &=
+    \int_{t_a}^{t_b}\d{t}
+    \left(
+        \pdv{L}{x}\delta x
+        +\pdv{L}{\dot x}\delta\dot x
+    \right) \\
+    &=
+    \int_{t_a}^{t_b}\d{t}
+    \left[
+        \pdv{L}{x}
+        -
+        \dv{t}\left(\pdv{L}{\dot x}\right)
+    \right]\delta x.
+\end{align*}
+若路径满足 Euler--Lagrange 方程
+\eq{
+    \dv{t}\left(\pdv{L}{\dot x}\right)-\pdv{L}{x}=0,
+}
+则 $\delta S=0$，称为作用量取驻值。路径积分中相邻路径的相位差为
+\eq{
+    \Delta\varphi=\frac{\Delta S}{\hbar}.
+}
+当 $\hbar$ 很小时，只要 $\Delta S$ 不是很小，相位就会迅速振荡，路径贡献彼此抵消；只有在 $\delta S=0$ 的经典路径附近，作用量变化缓慢，相位能够相干叠加。因此经典极限 $\hbar\to0$ 下，路径积分由经典路径主导。这就把 Feynman 的“所有路径求和”和经典的最小作用量原理统一起来。
+
+下面说明路径积分与 Schr\"odinger 表述等价。传播子满足组合律：
+\eq{
+    K(x_b,t_b;x_a,t_a)
+    =
+    \int\d{x}K(x_b,t_b;x,t)K(x,t;x_a,t_a),
+    \quad t_a<t<t_b.
+}
+这正是演化算符
+\eq{
+    \hat U(t_b,t_a)=\hat U(t_b,t)\hat U(t,t_a)
+}
+在位置表象中的写法。只需证明短时间传播子给出 Schr\"odinger 方程即可。
+
+取 $t_b=t+\epsilon$，$x_b=x$。由短时间传播子，
+\eq{
+    \psi(x,t+\epsilon)
+    =
+    \int\d{x'}K(x,t+\epsilon;x',t)\psi(x',t).
+}
+令 $\eta=x'-x$，则
+\eq{
+    \psi(x,t+\epsilon)
+    =
+    \left(\frac{m}{2\pi\i\hbar\epsilon}\right)^{1/2}
+    \int\d{\eta}
+    \exp\left[
+        \frac{\i m\eta^2}{2\hbar\epsilon}
+        -\frac{\i\epsilon}{\hbar}V(x,t)
+    \right]
+    \psi(x+\eta,t),
+}
+其中已在 $\epsilon\to0$ 的意义下把势能取在 $x$ 处。由于 Gaussian 因子主要约束 $\eta^2\sim \epsilon$，展开
+\eq{
+    \psi(x+\eta,t)=\psi(x,t)+\eta\pdv{\psi}{x}
+    +\frac{\eta^2}{2}\pdv[2]{\psi}{x}+\cdots,
+}
+以及
+\eq{
+    \e^{-\frac{\i\epsilon}{\hbar}V(x,t)}
+    =
+    1-\frac{\i\epsilon}{\hbar}V(x,t)+\cdots.
+}
+利用 Gaussian 积分
+\eq{
+    \left(\frac{m}{2\pi\i\hbar\epsilon}\right)^{1/2}
+    \int\d{\eta}\,
+    \e^{\frac{\i m\eta^2}{2\hbar\epsilon}}=1,
+}
+和
+\eq{
+    \left(\frac{m}{2\pi\i\hbar\epsilon}\right)^{1/2}
+    \int\d{\eta}\,
+    \eta^2
+    \e^{\frac{\i m\eta^2}{2\hbar\epsilon}}
+    =
+    \frac{\i\hbar\epsilon}{m},
+}
+奇函数项积分为零，于是
+\eq{
+    \psi(x,t+\epsilon)
+    =
+    \psi(x,t)
+    +\frac{\i\hbar\epsilon}{2m}\pdv[2]{\psi}{x}
+    -\frac{\i\epsilon}{\hbar}V(x,t)\psi(x,t)
+    +O(\epsilon^2).
+}
+另一方面
+\eq{
+    \psi(x,t+\epsilon)=\psi(x,t)+\epsilon\pdv{\psi}{t}+O(\epsilon^2).
+}
+比较两式并乘以 $\i\hbar$，得
+\eq{
+    \i\hbar\pdv{\psi}{t}
+    =
+    -\frac{\hbar^2}{2m}\pdv[2]{\psi}{x}
+    +V(x,t)\psi.
+}
+三维情形即为
+\eq{
+    \i\hbar\pdv{t}\psi(\bm x,t)
+    =
+    \left[
+        -\frac{\hbar^2}{2m}\Delta+V(\bm x,t)
+    \right]\psi(\bm x,t),
+}
+这正是前一节的 Schr\"odinger 方程。因此路径积分并不是新的动力学假设，而是同一量子理论的另一种表示。
+
+也可从路径积分看出 Heisenberg 表述。Schr\"odinger 表述中，态随时间演化：
+\eq{
+    \ket{\psi(t)}=\hat U(t,t_0)\ket{\psi(t_0)},
+}
+算符通常不显含时间。Heisenberg 表述则把时间演化转移到算符上：
+\eq{
+    \hat A_H(t)=\hat U^\dagger(t,t_0)\hat A_S\hat U(t,t_0),
+    \quad
+    \ket{\psi_H}=\ket{\psi(t_0)}.
+}
+对时间求导，若 $\hat A_S$ 不显含时间，则
+\begin{align*}
+    \dv{\hat A_H}{t}
+    &=
+    \dv{\hat U^\dagger}{t}\hat A_S\hat U
+    +
+    \hat U^\dagger\hat A_S\dv{\hat U}{t} \\
+    &=
+    \frac{\i}{\hbar}\hat U^\dagger\hat H\hat A_S\hat U
+    -
+    \frac{\i}{\hbar}\hat U^\dagger\hat A_S\hat H\hat U \\
+    &=
+    \frac{\i}{\hbar}[\hat H_H,\hat A_H].
+\end{align*}
+因此
+\eq{
+    \dv{\hat A_H}{t}
+    =
+    \frac{\i}{\hbar}[\hat H_H,\hat A_H].
+}
+若算符本身显含时间，则还需加上
+\eq{
+    \left(\pdv{\hat A_S}{t}\right)_H.
+}
+这就是 Heisenberg 方程。
+
+路径积分与 Heisenberg 表述的联系体现在关联函数上。给定若干时刻 $t_1,\cdots,t_n$，路径积分中的插入
+\eq{
+    x(t_1)\cdots x(t_n)
+}
+对应算符语言中的时间排序乘积：
+\eq{
+    \mel{x_b}{\hat U(t_b,t_n)\hat x\hat U(t_n,t_{n-1})\cdots
+    \hat x\hat U(t_1,t_a)}{x_a}.
+}
+因此有形式关系
+\eq{
+    \int_{x(t_a)=x_a}^{x(t_b)=x_b}\mathcal D x\,
+    x(t_1)\cdots x(t_n)\e^{\frac{\i}{\hbar}S[x]}
+    =
+    \mel{x_b,t_b}{T\{\hat x_H(t_1)\cdots \hat x_H(t_n)\}}{x_a,t_a},
+}
+其中 $T$ 表示时间排序。路径积分自然计算的对象，正是 Heisenberg 算符的时间排序关联函数。
+
+这种形式对量子场论尤其重要。普通量子力学的路径是函数 $x(t)$；场论中的“路径”则是整个场构型 $\phi(\bm x,t)$。因此后文会把
+\eq{
+    \int\mathcal D x\,\e^{\frac{\i}{\hbar}S[x]}
+}
+推广为
+\eq{
+    \int\mathcal D\phi\,\e^{\frac{\i}{\hbar}S[\phi]}.
+}
+前者对所有粒子轨道求和，后者对所有场的历史求和。量子场论的路径积分方法，本质上就是把本节的构造从有限自由度系统推广到无穷多个场自由度。
+
+\section{简并态*}
+前面讨论测量时，为了简化语言，我们常把一个本征值 $a_n$ 对应到一个本征态 $\ket{a_n}$。但这并非总是如此。若某个可观测量 $\hat A$ 的同一个本征值 $a$ 对应多个线性无关的本征态
+\eq{
+    \hat A\ket{a,\alpha}=a\ket{a,\alpha},\quad \alpha=1,\cdots,g,
+}
+则称谱值 $a$ 是 $g$ 重\textbf{简并}(degenerate)的。这里 $\alpha$ 不是新的测量值，只是在同一本征子空间中区分不同基矢的标签。可以取这些基矢正交归一：
+\eq{
+    \ip{a,\alpha}{a,\beta}=\delta_{\alpha\beta}.
+}
+于是对应本征子空间上的投影算符为
+\eq{
+    P_a=\sum_{\alpha=1}^{g}\op{a,\alpha}.
+}
+若 $\hat A$ 只有离散谱，则谱分解应写成
+\eq{
+    \hat A=\sum_a a P_a
+    =
+    \sum_a\sum_{\alpha=1}^{g_a}a\op{a,\alpha}.
+}
+测量 $\hat A$ 得到 $a$ 的概率不再是单个投影 $\op{a}$ 的平均值，而是整个本征子空间的投影：
+\eq{
+    P(a)=\frac{\ev{P_a}{\psi}}{\ip{\psi}}
+    =
+    \frac{1}{\ip{\psi}}\sum_{\alpha=1}^{g_a}
+    \abs{\ip{a,\alpha}{\psi}}^2.
+}
+测量后态矢坍缩到这个子空间中：
+\eq{
+    \ket\psi\to
+    \frac{P_a\ket\psi}{\sqrt{\ev{P_a}{\psi}}}.
+}
+只有当 $g_a=1$ 时，这才退化为前面写过的单一本征态 $\ket a$。
+
+简并态中最需要注意的一点是：同一本征子空间内的基底并不唯一。若 $U_{\alpha\beta}$ 是一个 $g$ 维幺正矩阵，则
+\eq{
+    \ket{a,\alpha'}=\sum_{\beta=1}^{g}U_{\alpha\beta}\ket{a,\beta}
+}
+仍然是一组正交归一的 $\hat A$ 本征态，且本征值仍为 $a$。这说明只测量 $\hat A$ 无法区分同一本征子空间中的方向。若想把态进一步区分开，需要寻找另一个与 $\hat A$ 对易的可观测量 $\hat B$。若
+\eq{
+    [\hat A,\hat B]=0,
+}
+则 $\hat B$ 不会把 $\hat A$ 的本征子空间变到别的本征值空间中。证明很简单：若 $\hat A\ket{a,\alpha}=a\ket{a,\alpha}$，则
+\eq{
+    \hat A(\hat B\ket{a,\alpha})
+    =
+    \hat B\hat A\ket{a,\alpha}
+    =
+    a(\hat B\ket{a,\alpha}).
+}
+因此 $\hat B\ket{a,\alpha}$ 仍属于同一个 $a$ 的本征子空间。于是可在这个有限维子空间内继续对 $\hat B$ 对角化，用 $\hat B$ 的本征值补充标签。量子力学中常说的一组“完备对易可观测量”，本质上就是用足够多的对易算符把这些简并自由度完全标记出来。
+
+Hamiltonian 的简并尤其重要。设
+\eq{
+    \hat H\ket{n,\alpha}=E_n\ket{n,\alpha},\quad \alpha=1,\cdots,g_n.
+}
+若系统处于某个能量本征态，则 Schr\"odinger 方程给出
+\eq{
+    \ket{n,\alpha;t}
+    =
+    \e^{-\frac{\i}{\hbar}E_n t}\ket{n,\alpha}.
+}
+整体相位不影响任何测量概率，故所以这类态是定态。若能级简并，则任意线性叠加
+\eq{
+    \ket{\chi}=\sum_{\alpha=1}^{g_n}c_\alpha\ket{n,\alpha}
+}
+仍满足
+\eq{
+    \hat H\ket{\chi}=E_n\ket{\chi},
+}
+因此也是同一能量的定态。许多简并来自对称性：若某个幺正算符 $\hat U$ 与 Hamiltonian 对易，$[\hat U,\hat H]=0$，则
+\eq{
+    \hat H(\hat U\ket{n,\alpha})
+    =
+    \hat U\hat H\ket{n,\alpha}
+    =
+    E_n(\hat U\ket{n,\alpha}).
+}
+也就是说，$\hat U$ 作用后的态仍具有同一能量。如果 $\hat U\ket{n,\alpha}$ 与原态线性无关，就会产生简并。后面场论中，旋转、平移、内部对称性都常以这种方式组织能级或粒子态。
+
+\section{定态微扰论*}
+
+多数 Hamiltonian 无法严格求解。实际问题中常见的情形是：我们知道一个可解 Hamiltonian $\hat H_0$ 的本征值和本征态，而真实 Hamiltonian 只是在它上面加了一个较小修正：
+\eq{
+    \hat H=\hat H_0+\lambda \hat V.
+}
+这里 $\hat V$ 称为\textbf{微扰}(perturbation)，$\lambda$ 是人为引入的无量纲参数，用来标记微扰阶数。计算完成后通常令 $\lambda=1$。若 $\hat V$ 不显含时间，就称为\textbf{定态微扰论}(time-independent perturbation theory)。它要解决的是本征值方程
+\eq{
+    \hat H\ket{n(\lambda)}
+    =
+    E_n(\lambda)\ket{n(\lambda)}.
+}
+物理动机很直接：若 $\lambda\hat V$ 相比 $\hat H_0$ 很小，则真实能级和真实本征态应当只是在未扰动结果附近发生小偏移。
+
+假设能量和态矢都可按 $\lambda$ 展开：
+\begin{align}
+    E_n(\lambda)
+    &=
+    E_n^{(0)}
+    +\lambda E_n^{(1)}
+    +\lambda^2 E_n^{(2)}
+    +\cdots,\\
+    \ket{n(\lambda)}
+    &=
+    \ket{n^{(0)}}
+    +\lambda\ket{n^{(1)}}
+    +\lambda^2\ket{n^{(2)}}
+    +\cdots.
+\end{align}
+其中上标 $(0)$ 表示未扰动问题：
+\eq{
+    \hat H_0\ket{n^{(0)}}=E_n^{(0)}\ket{n^{(0)}}.
+}
+将展开代入精确方程
+\[
+    (\hat H_0+\lambda\hat V)
+    \left(
+        \ket{n^{(0)}}+\lambda\ket{n^{(1)}}+\lambda^2\ket{n^{(2)}}+\cdots
+    \right)
+    =
+    \left(
+        E_n^{(0)}+\lambda E_n^{(1)}+\lambda^2 E_n^{(2)}+\cdots
+    \right)
+    \left(
+        \ket{n^{(0)}}+\lambda\ket{n^{(1)}}+\lambda^2\ket{n^{(2)}}+\cdots
+    \right).
+\]
+比较 $\lambda$ 的同次幂，零阶给出原本征方程；一阶给出
+\eq{
+    \hat H_0\ket{n^{(1)}}+\hat V\ket{n^{(0)}}
+    =
+    E_n^{(0)}\ket{n^{(1)}}+E_n^{(1)}\ket{n^{(0)}},
+}
+即
+\eq{
+    (\hat H_0-E_n^{(0)})\ket{n^{(1)}}
+    =
+    (E_n^{(1)}-\hat V)\ket{n^{(0)}}.
+}
+二阶给出
+\eq{
+    \hat H_0\ket{n^{(2)}}+\hat V\ket{n^{(1)}}
+    =
+    E_n^{(0)}\ket{n^{(2)}}
+    +E_n^{(1)}\ket{n^{(1)}}
+    +E_n^{(2)}\ket{n^{(0)}},
+}
+即
+\eq{
+    (\hat H_0-E_n^{(0)})\ket{n^{(2)}}
+    =
+    (E_n^{(1)}-\hat V)\ket{n^{(1)}}
+    +E_n^{(2)}\ket{n^{(0)}}.
+}
+微扰论的基本任务，就是逐阶解这些方程。
+
+态矢本身还存在相位和归一化约定。非简并时，常采用中间归一化
+\eq{
+    \ip{n^{(0)}}{n(\lambda)}=1.
+}
+于是
+\eq{
+    \ip{n^{(0)}}{n^{(1)}}=
+    \ip{n^{(0)}}{n^{(2)}}=\cdots=0.
+}
+这只是选定态矢沿 $\ket{n^{(0)}}$ 方向的分量，最终若需要严格归一化，可在计算结束后再归一化。
+
+\subsection{非简并微扰法}
+
+先假设未扰动能级 $E_n^{(0)}$ 非简并。取 $\hat H_0$ 的正交归一本征态
+\eq{
+    \hat H_0\ket{m^{(0)}}=E_m^{(0)}\ket{m^{(0)}},\quad
+    \ip{m^{(0)}}{n^{(0)}}=\delta_{mn}.
+}
+将一阶方程左乘 $\bra{n^{(0)}}$，得到
+\begin{align*}
+    \mel{n^{(0)}}{\hat H_0}{n^{(1)}}
+    +
+    \mel{n^{(0)}}{\hat V}{n^{(0)}}
+    &=
+    E_n^{(0)}\ip{n^{(0)}}{n^{(1)}}
+    +
+    E_n^{(1)}\ip{n^{(0)}}{n^{(0)}}.
+\end{align*}
+由于 $\hat H_0$ 是 Hermite 的，且 $\bra{n^{(0)}}\hat H_0=E_n^{(0)}\bra{n^{(0)}}$，上式左边第一项为 $E_n^{(0)}\ip{n^{(0)}}{n^{(1)}}$，与右边相同项抵消，故
+\eq{
+    \tcbhighmath{E_n^{(1)}=\mel{n^{(0)}}{\hat V}{n^{(0)}}.}
+}
+这说明一阶能量修正就是微扰 Hamiltonian 在原态上的平均值。
+
+为了求态矢的一阶修正，将 $\ket{n^{(1)}}$ 展开到未扰动本征态基底：
+\eq{
+    \ket{n^{(1)}}=\sum_m c_m^{(1)}\ket{m^{(0)}}.
+}
+中间归一化给出 $c_n^{(1)}=0$。再将一阶方程左乘 $\bra{m^{(0)}}$，其中 $m\neq n$，得
+\eq{
+    E_m^{(0)}c_m^{(1)}
+    +
+    \mel{m^{(0)}}{\hat V}{n^{(0)}}
+    =
+    E_n^{(0)}c_m^{(1)}.
+}
+因此
+\eq{
+    c_m^{(1)}
+    =
+    \frac{\mel{m^{(0)}}{\hat V}{n^{(0)}}}
+    {E_n^{(0)}-E_m^{(0)}}.
+}
+于是
+\eq{
+    \tcbhighmath{
+    \ket{n^{(1)}}
+    =
+    \sum_{m\neq n}
+    \ket{m^{(0)}}
+    \frac{\mel{m^{(0)}}{\hat V}{n^{(0)}}}
+    {E_n^{(0)}-E_m^{(0)}}.}
+}
+这个公式也解释了微扰论的适用条件：若 $\hat V$ 的矩阵元很小，且能级差 $E_n^{(0)}-E_m^{(0)}$ 不太小，则态的混合很弱；若分母接近零，非简并微扰论就会失效。
+
+二阶能量修正可由二阶方程得到。左乘 $\bra{n^{(0)}}$：
+\begin{align*}
+    \mel{n^{(0)}}{\hat H_0}{n^{(2)}}
+    +
+    \mel{n^{(0)}}{\hat V}{n^{(1)}}
+    &=
+    E_n^{(0)}\ip{n^{(0)}}{n^{(2)}}
+    +
+    E_n^{(1)}\ip{n^{(0)}}{n^{(1)}}
+    +
+    E_n^{(2)}.
+\end{align*}
+第一项仍与右边的 $E_n^{(0)}\ip{n^{(0)}}{n^{(2)}}$ 抵消，而中间归一化使 $\ip{n^{(0)}}{n^{(1)}}=0$，故
+\eq{
+    E_n^{(2)}
+    =
+    \mel{n^{(0)}}{\hat V}{n^{(1)}}.
+}
+代入 $\ket{n^{(1)}}$ 得
+\eq{
+    \tcbhighmath{
+    E_n^{(2)}
+    =
+    \sum_{m\neq n}
+    \frac{
+    \abs{\mel{m^{(0)}}{\hat V}{n^{(0)}}}^2}
+    {E_n^{(0)}-E_m^{(0)}}.}
+}
+因此非简并定态微扰论给出
+\eq{
+    E_n
+    =
+    E_n^{(0)}
+    +
+    \lambda\mel{n^{(0)}}{\hat V}{n^{(0)}}
+    +
+    \lambda^2
+    \sum_{m\neq n}
+    \frac{
+    \abs{\mel{m^{(0)}}{\hat V}{n^{(0)}}}^2}
+    {E_n^{(0)}-E_m^{(0)}}
+    +\cdots.
+}
+若需要态矢到一阶，则
+\eq{
+    \ket{n}
+    =
+    \ket{n^{(0)}}
+    +
+    \lambda
+    \sum_{m\neq n}
+    \ket{m^{(0)}}
+    \frac{\mel{m^{(0)}}{\hat V}{n^{(0)}}}
+    {E_n^{(0)}-E_m^{(0)}}
+    +\cdots.
+}
+
+\subsection{简并微扰法}
+
+若 $E_n^{(0)}$ 是简并能级，上面的非简并公式立刻出现问题：同一能级内存在 $m\neq n$ 但 $E_m^{(0)}=E_n^{(0)}$，分母为零。这不是数学技巧失效，而是物理假设错了。简并子空间中的任意线性组合都是同一零阶能量的本征态，微扰一打开，真实本征态到底接近哪一个线性组合，需要由微扰本身决定。
+
+设简并子空间为
+\eq{
+    \mathcal H_n
+    =
+    \operatorname{span}\{\ket{n,\alpha^{(0)}}\,|\,\alpha=1,\cdots,g\},
+}
+并有
+\eq{
+    \hat H_0\ket{n,\alpha^{(0)}}=E_n^{(0)}\ket{n,\alpha^{(0)}}.
+}
+真实态的零阶部分不能预先指定为某个 $\ket{n,\alpha^{(0)}}$，而应写成一般线性组合
+\eq{
+    \ket{\chi^{(0)}}=\sum_{\alpha=1}^{g}c_\alpha\ket{n,\alpha^{(0)}}.
+}
+一阶方程为
+\eq{
+    (\hat H_0-E_n^{(0)})\ket{\chi^{(1)}}
+    =
+    (E^{(1)}-\hat V)\ket{\chi^{(0)}}.
+}
+将其左乘 $\bra{n,\alpha^{(0)}}$。由于
+\[
+    \bra{n,\alpha^{(0)}}(\hat H_0-E_n^{(0)})=0,
+\]
+得到
+\eq{
+    \mel{n,\alpha^{(0)}}{\hat V}{\chi^{(0)}}
+    =
+    E^{(1)}\ip{n,\alpha^{(0)}}{\chi^{(0)}}.
+}
+代入 $\ket{\chi^{(0)}}=\sum_\beta c_\beta\ket{n,\beta^{(0)}}$，得
+\eq{
+    \sum_{\beta=1}^{g}
+    V_{\alpha\beta}c_\beta
+    =
+    E^{(1)}c_\alpha,
+    \quad
+    V_{\alpha\beta}
+    :=
+    \mel{n,\alpha^{(0)}}{\hat V}{n,\beta^{(0)}}.
+}
+这就是一个 $g$ 维矩阵本征值问题。结论是：\textbf{简并微扰论第一步不是直接套非简并公式，而是在简并子空间内对角化微扰矩阵 $V_{\alpha\beta}$。} 它的本征值就是一阶能量修正，本征向量给出正确的零阶线性组合。
+
+设微扰矩阵的本征向量记为 $c_\alpha^{(r)}$，本征值记为 $v_r$：
+\eq{
+    \sum_{\beta=1}^{g}
+    V_{\alpha\beta}c_\beta^{(r)}
+    =
+    v_r c_\alpha^{(r)}.
+}
+则相应的零阶态应选为
+\eq{
+    \ket{n,r^{(0)}}
+    =
+    \sum_{\alpha=1}^{g}
+    c_\alpha^{(r)}\ket{n,\alpha^{(0)}},
+}
+并有
+\eq{
+    E_{n,r}=E_n^{(0)}+\lambda v_r+\cdots.
+}
+若不同 $v_r$ 彼此不同，原来的 $g$ 重简并就在一阶被完全解除。若某些 $v_r$ 仍相同，则说明微扰在这部分子空间中仍保留简并，需要继续在剩余简并子空间内考察更高阶修正，或寻找更多对易可观测量。
+
+接着求态矢混入简并子空间外的部分。定义投影算符
+\eq{
+    P=\sum_{\alpha=1}^{g}\op{n,\alpha^{(0)}},\quad Q=1-P.
+}
+选定上面已经对角化的某个态 $\ket{n,r^{(0)}}$，并取约定 $P\ket{n,r^{(1)}}=0$，即一阶修正只写出流到其他能级的部分。将一阶方程投影到 $Q$ 子空间，并在 $\hat H_0$ 的其他本征态 $\ket{m,\beta^{(0)}}$ 上展开，其中 $E_m^{(0)}\neq E_n^{(0)}$，可得
+\eq{
+    \ket{n,r^{(1)}}
+    =
+    \sum_{m\neq n}\sum_{\beta}
+    \ket{m,\beta^{(0)}}
+    \frac{
+    \mel{m,\beta^{(0)}}{\hat V}{n,r^{(0)}}
+    }
+    {E_n^{(0)}-E_m^{(0)}}.
+}
+这里的求和 $m\neq n$ 表示排除整个原简并能级，而不是只排除某一个态。可见一旦先在简并子空间内选对基底，子空间外的修正又恢复成类似非简并微扰论的形式。
+
+二阶修正也可写成简洁的有效矩阵。若一阶已经完全解除简并，则某个态 $\ket{n,r^{(0)}}$ 的二阶能量为
+\eq{
+    E_{n,r}^{(2)}
+    =
+    \sum_{m\neq n}\sum_{\beta}
+    \frac{
+    \abs{\mel{m,\beta^{(0)}}{\hat V}{n,r^{(0)}}}^2
+    }
+    {E_n^{(0)}-E_m^{(0)}}.
+}
+若一阶仍有剩余简并，则不能只取对角元，而应在剩余简并子空间内继续对角化二阶有效矩阵
+\eq{
+    W^{(2)}_{rs}
+    =
+    \sum_{m\neq n}\sum_{\beta}
+    \frac{
+    \mel{n,r^{(0)}}{\hat V}{m,\beta^{(0)}}
+    \mel{m,\beta^{(0)}}{\hat V}{n,s^{(0)}}
+    }
+    {E_n^{(0)}-E_m^{(0)}}.
+}
+它的本征值给出二阶能量修正，它的本征向量进一步决定正确的零阶线性组合。由此可见，简并微扰法的逻辑始终是：先在简并子空间内寻找能被微扰选中的正确基底，再计算与其他能级之间的混合。
