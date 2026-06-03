@@ -19,7 +19,7 @@ $\hbar=h/2\pi$ 是约化 Planck 常数。这称为 $\hat{\bm x},\hat{\bm p}$ 的
 在经典力学中，$x,p$ 是一对共轭变量，也叫正则变量，满足 Poisson 括号 $\{x,p\}=1$。所以量子化就是把经典力学中的正则变量提升为算符，Poisson 括号替换为对易关系。进一步地，哈氏量可以变成哈氏量算符 $\hat H=\frac{\hat p^2}{2m}+V(\hat x)$。故准确来说，这称为\textbf{正则量子化}(canonical quantization)。
 
 下面我们来考察算符可能的数学表示。人们现已广泛清楚，矩阵的乘法是不对易的，因此矩阵是合适的数学候选。如此，量子态就是列矢，写作 $\ket{}$。一般会在里面放一些符号，仅表标签含义，比如 $\ket{\psi}$。全体 $\ket{\psi}$ 构成线性空间。再补充一些条件后，这个空间成为了俗称的\textbf{Hilbert 空间}，记作 $\Hilbert$，作为量子态的数学载体。
-但在当时，矩阵并非必学知识。Heisenberg 从 Poisson 括号绕了一圈才回到了矩阵，相当于重新发明了矩阵。可以说，今日之大学得以普及线性代数，有 Heisenberg 的功劳。
+但在当时，矩阵并非必学知识。Heisenberg 从 Poisson 括号绕了一圈才回到了矩阵乘法，相当于重新发明了矩阵。可以说，今日之大学得以普及线性代数，有 Heisenberg 的功劳。
 不过这里会比我们学的线性代数复杂：因为可以证明，任意有限维度的矩阵都无法凑出对易关系。因此，算符必须是无限维空间上的矩阵。
 相较于 Heisenberg，Schr\"odinger 更关注于量子态的具体表示，方法会更简单些。
 他考虑的算符是直接的偏微分算符，比如 $\grad=\pdv{\bm x},\pdv{t}$。因此量子态可以表示为某种实变但复值的函数 $\psi(\bm x,t)$，称为\textbf{波函数}(wave function)。
@@ -30,10 +30,11 @@ $\hbar=h/2\pi$ 是约化 Planck 常数。这称为 $\hat{\bm x},\hat{\bm p}$ 的
 回忆一下，本征的定义无非是 $\hat A \ket{a_n}=a_n \ket{a_n}$，这里 $\ket{a_n}$ 是 $\hat A$ 对应谱 $a_n$ 的本征矢，所以用了标签 $a_n$，仅此而已。
 由于 $a_n$ 是仪器的测量结果，我们自然希望 $a_n\in\R$，即使 $\Hilbert$ 是涉及复数的。
 若 $\{a_n\}$ 是有限或可数的，一般来说 $\hat A$ 就可称具有\textbf{离散谱}或\textbf{分立谱}。否则称\textbf{连续谱}。当然这个说法只是简化，后面会给出严格表述。
-进一步，Born 借用杨⽒双缝实验的思想提出，测量结果出现的概率由态决定：（离散谱时）任意态可分解为形如 $\ket\psi=\sum_n c_n \ket{a_n}$，称 $\{a_n\}$ \textbf{完备}；测到 $a_n$ 的概率为 $|c_n|^2/\sum_n |c_n|^2 \in [0,1]$。
+Born 借用杨⽒双缝实验的思想提出：给定离散谱可观测量算符，应当使任意态可分解为形如 $\ket\psi=\sum_n c_n \ket{a_n}$，称 $\{a_n\}$ \textbf{完备}；测到结果 $a_n$ 的概率由态决定，为 $|c_n|^2/\sum_n |c_n|^2 \in [0,1]$。
 通常也约定 $\sum_n |c_n|^2=1$，称态矢的\textbf{归一化条件}。
 这是量子力学必涉及复数的另一处体现：使 $\psi,c_n$ 涉及复数可以来源于波动理论（电磁学、光学）的复数方法。
-并且，如果做整体相位变换 $\ket\psi \to \e^{\i\alpha}\ket\psi$，概率密度分布是不变的，因此观测上无法区分，故认同 $\e^{\i\alpha}\ket\psi\sim\ket\psi$。形象的说法是称量子态实质是 Hilbert 空间中的一系列态矢，而不只是单独某个态矢。这些态矢的终点连成一条射线。
+相差倍数的态矢认为一致，形象的说法是称量子态实质是 Hilbert 空间中的一系列态矢，而不只是单独某个态矢。这些态矢的终点连成一条射线。
+并且，如果做整体相位变换 $\ket\psi \to \e^{\i\alpha}\ket\psi$，概率密度分布是不变的，因此观测上无法区分，故认同 $\e^{\i\alpha}\ket\psi\sim\ket\psi$。
 
 已知 $\psi,\{a_n\}$ 欲求出展开系数 $\{c_n\}$。按朴素思想，我们是将系数解释为 $\ket{\psi}$ 在 $\ket{a_n}$ 的投影。
 由于我们现在考虑的是复线性空间，所以内积的定义方式会区别于实线性代数，满足：
@@ -74,7 +75,7 @@ $P_n := \op{a_n}$ 称为\textbf{投影算符}，这里 $\op{}$ 表示列矢 $\ti
 \eq{
     \mel{\phi}{\hat A}{\psi} = \ip{\hat A\phi}{\psi},\quad \text{其中}\, \ket{\hat A\phi} := \hat A\ket{\phi},\enspace \bra{\hat A\phi} = \ket{\hat A\phi}^\dagger = \bra{\phi} \hat A^\dagger.
 }
-反之给定自伴性，可得存在 $\{\ket{a_n}\}$ 对算符进行谱分解 $\hat A = \sum_n a_n \op{a_n}$，且 $\{\ket{a_n}\}$ 满足 $\hat A \ket{a_n}=a_n \ket{a_n}$、$a_n\in\R$、完备且正交归一，这称为\textbf{谱分解定理}。
+反之给定自伴性，数学上可证，存在 $\{\ket{a_n}\}$ 满足 $\hat A \ket{a_n}=a_n \ket{a_n}$、$a_n\in\R$、完备且正交归一，且能对算符进行谱分解 $\hat A = \sum_n a_n \op{a_n}$，这称为\textbf{谱分解定理}。
 所以，我们可将若干性质简洁地统一说法：规定可观测量 $\hat A$ 自伴。
 注意 $\ip{\psi} = \sum_n \abs{\ip{a_n}{\psi}}^2$，可见归一化条件也写作 $\ip{\psi}=1$。
 根据概率论，算符 $\hat A$ 的平均值或期望值为
@@ -86,9 +87,9 @@ $P_n := \op{a_n}$ 称为\textbf{投影算符}，这里 $\op{}$ 表示列矢 $\ti
 
 下面推广到连续谱，位置算符 $\hat{\bm x}$ 就是典型例子。我们沿用自伴性的相关性质
 \eq{
-    \hat{A}\ket{a}=a\ket{a},\quad \tcbhighmath{1 = \int\d a \op{a}} \im \hat A = \hat A \int\d a \op{a} = \int\d{a} a \op{a}.
+    \hat{A}\ket{a}=a\ket{a},\quad \tcbhighmath{1 = \int\d a \op{a}} \im \hat A = \int\d{a} \hat A\op{a} = \int\d{a} a \op{a}.
 }
-其中沿用离散谱命题中不含求和的版本，不得不涉及求和时则尝试替换为积分（被积函数分布在 $a$ 所属的空间上，记测度微元为 $\d a$）。当然数学上，谱分解定理保证了从自伴性导出积分形式。
+其中沿用离散谱命题中不含求和的版本，不得不涉及求和时则尝试替换为积分。被积函数分布在 $a$ 所属的实数空间上，记测度微元为 $\d a$。当然数学上，谱分解定理保证了从自伴性导出积分形式。
 从而
 \begin{align}
     \ket{\psi} &= \int\d a \ket{a}\ip{a}{\psi},\quad \bra{\psi} = \int\d a \ip{\psi}{a}\bra{a},\\
@@ -100,7 +101,7 @@ $P_n := \op{a_n}$ 称为\textbf{投影算符}，这里 $\op{}$ 表示列矢 $\ti
 其中 $\delta(x)$ 就是我们熟悉的 Dirac 函数。
 于是 $\abs{\ip{a}{\psi}}^2/{\ip{\psi}}$ 现在理解为测量出 $a$ 的概率密度。
 
-取单粒子系统，坐标表象为 $\{\ket{\bm x}\}$，则态矢展开为
+取单粒子系统，位置本征矢为 $\{\ket{\bm x}\}$。这里均考虑欧氏空间 Descartes 坐标系，所以体积元是普通的 $\d[3]x$。态矢展开为
 \eq{
     \ket{\psi} = \int\d[3]{x} \ket{\bm x}\ip{\bm x}{\psi}.
 }
@@ -108,7 +109,7 @@ $P_n := \op{a_n}$ 称为\textbf{投影算符}，这里 $\op{}$ 表示列矢 $\ti
 \eq{
     1 = \int\d[3]{x} \abs{\ip{\bm x}{\psi}}^2,\quad \ev{\bm x} = \int\d[3]{x} \bm x \abs{\ip{\bm x}{\psi}}^2.
 }
-说明 $\abs{\ip{\bm x}{\psi}}^2$ 可以理解为测量粒子（某时刻）发现在 $\bm x$ 的概率密度。
+说明 $\abs{\ip{\bm x}{\psi}}^2$ 可以理解为（某时刻）测量粒子发现在 $\bm x$ 的概率密度。
 可见 Schr\"odinger 表述的等价性就体现在
 \eq{
     \tcbhighmath{\psi(\bm x) := \ip{\bm x}{\psi},}\quad \psi^*(\bm x) = \ip{\psi}{\bm x}.
@@ -120,12 +121,12 @@ $P_n := \op{a_n}$ 称为\textbf{投影算符}，这里 $\op{}$ 表示列矢 $\ti
 \eq{
     \ip{\phi}{\psi} = \int\d[3]{x} \phi^*(\bm x) \psi(\bm x),\quad \ev{A} = \int\d[3]{x} \psi^*(\bm x) (\hat A \psi)(\bm x).
 }
-注意 $(\hat{\bm x} \psi)(\bm x) = \mel{\bm x}{\hat{\bm x}}{\psi} = \bm x\ip{\bm x}{\psi} = \bm x \psi(\bm x)$，这意味着在坐标表象下，位置算符 $\hat{\bm x}$ 表为单纯的乘法 $\bm x$，我们记作
+注意 $(\hat{\bm x} \psi)(\bm x) = \mel{\bm x}{\hat{\bm x}}{\psi} = \bm x\ip{\bm x}{\psi} = \bm x \psi(\bm x)$，这意味着在坐标表象下，位置算符 $\hat{\bm x}$ 表为单纯的实数乘法 $\bm x$，我们记作
 \eq{
     \hat{\bm x} \to \bm x.
 }
 根据对易关系，由 Leibniz 乘法法则得 $\hat{\bm p} \to -\i\hbar\grad$。有时直接将箭头简记为等号。于是彻底还原了 Schr\"odinger 的微分算符理论。
-当然，也可以采取\textbf{动量表象} $\{\ket{\bm p}\}$，波函数为 $\psi(\bm p) := \ip{\bm p}{\psi}$，从而 $\hat{\bm p}\to\bm p,\hat{\bm x}\to\i\hbar\pdv*{\bm p}$。
+当然，也可以采取\textbf{动量表象} $\{\ket{\bm p}\}$，\textbf{动量空间波函数}为 $\psi(\bm p) := \ip{\bm p}{\psi}$，从而 $\hat{\bm p}\to\bm p,\hat{\bm x}\to\i\hbar\pdv*{\bm p}$。
 
 另一方面，$\hat{\bm p}$ 还可以解释对 $\bm x$ 平移的结果，于是自动得到自伴性和对易关系。考虑态矢的平移算符 $U(\bm a)$，它使得
 \eq{
@@ -176,34 +177,35 @@ U(\delta \bm a)
 }
 在相差一个整体相位的意义下，它等同于 $\ket a$。即测量后系统状态变成了对应的本征态，这称为\textbf{坍缩}(collapse)。可见测量不只是“读取”状态，它通常会改变状态，但也不能简单认为这是测量行为与态发生“相互作用”，因为坍缩的具体原因及过程目前尚无定论，涉及一个庞大的话题，称为\textbf{诠释}。
 
-数学上，配有复内积的完备的复线性空间称为 Hilbert 空间。物理上采用的大多 $\ket{\psi}$ 也仅在这一空间内。但对它采取连续谱展开时，问题会变得微妙：
-需要注意 $\ket{\bm x}$ 其实不在 Hilbert 空间中。因为 $\ip{\bm x}=\delta(\bm 0)$ 是发散的。换言之，坐标本征态 $\ket{\bm x_0}$ 的波函数为 Dirac 分布 $\delta(\bm x-\bm x_0)$。
-归一化条件其实说明了波函数至少是\textbf{平方可积函数}，所以单粒子 Hilbert 空间对应了 $\R^3$ 上全体的平方可积函数构成的集合 $L^2(\R^3)$。虽然 $\delta(\bm x)$ 积分为 1，但平方的积分是发散的。
+数学上，Hilbert 空间的严格定义是配有复内积的完备的复线性空间。物理上采用的大多 $\ket{\psi}$ 也仅在这一空间内。但对它采取连续谱展开时，问题会变得微妙。
+归一化条件其实说明了波函数至少是\textbf{平方可积函数}，所以单粒子 Hilbert 空间对应了 $\R^3$ 上全体的平方可积函数构成的集合 $L^2(\R^3)$。
+坐标本征态 $\ket{\bm x_0}$ 的波函数为 Dirac 分布 $\delta(\bm x-\bm x_0)$，虽然 $\delta(\bm x)$ 积分为 1，但平方的积分是发散的：$\ip{\bm x_0}=\delta(\bm 0)$。所以 $\ket{\bm x_0}$ 其实不在 Hilbert 空间中。
 关键原因是，$\delta(\bm x)$ 并不是普通的函数，而称为\textbf{分布}(distribution)。这种连续谱的特征矢称为\textbf{广义特征矢}(generalized eigenvector)。它生活在 Hilbert 空间的“一层薄薄的表面”上。这部分“表皮”加上 Hilbert 空间称为\textbf{装备}(rigged) Hilbert 空间。
-另一个例子是 $\ket{\bm p}$。其波函数记作 $\psi_{\bm p}(\bm x):=\ip{\bm x}{\bm p}$。由 $\hat{\bm p}\ket{\bm p}=\bm p\ket{\bm p}$，左乘坐标表象得到 $-\i\hbar\grad \psi_{\bm p}(\bm x)=\bm p \psi_{\bm p}(\bm x)$，方程的通解显然为简单平面波的形式 $\psi_{\bm p}(\bm x) = C \e^{\i \bm p\vdot\bm x/\hbar}$。
-剩下只是确定常系数。直接利用归一化条件会发现 $\int\d[3]{x} 1=\infty$，因此它同样不是平方可积函数，$\ket{\bm p}$ 同样不在 Hilbert 空间。
+
+另一个例子是动量本征态 $\ket{\bm p}$。其波函数记作 $\psi_{\bm p}(\bm x):=\ip{\bm x}{\bm p}$。由 $\hat{\bm p}\ket{\bm p}=\bm p\ket{\bm p}$，左乘坐标表象得到 $-\i\hbar\grad \psi_{\bm p}(\bm x)=\bm p \psi_{\bm p}(\bm x)$，方程的通解显然为简单平面波的形式 $\psi_{\bm p}(\bm x) = C \e^{\i \bm p\vdot\bm x/\hbar}$。
+剩下只是确定常系数。直接利用归一化条件会发现 $\int\d[3]{x} 1=\infty$，因此 $\ket{\bm p}$ 同样不在 Hilbert 空间。
 但可利用
-\eq{
+\[
     \delta(\bm p-\bm p') = \ip{\bm p}{\bm p'} = \int\d[3]{x} \ip{\bm p}{\bm x} \ip{\bm x}{\bm p'} = |C|^2 \int\d[3]{x} \e^{\i (\bm p'-\bm p)\vdot\bm x/\hbar}
-}
+\]
 确定。
 现在复习一下高数知识来判断平面波和 Dirac 函数的关系。
-$[-L/2,L/2]$ 上良好的函数可展开为 Fourier 级数
+将任意函数视为周期无穷大的函数，先设有限周期 $L$，在 $[-L/2,L/2]$ 上 Fourier 级数展开为
 \[f(x)=\sum_{N=-\infty}^\infty \frac{F(k_N)}{L} \e^{\i k_N x},\quad F(k_N)=\int_{-L/2}^{L/2}\d{x}\e^{-\i k_N x}f(x),\]
-其中 $k_N={2\pi N}/{L}$ 称为频谱或\textbf{模式}(mode)，$F(k)$（或记作 $\mathscr F(f)(k)$）称为 $f(x)$ 的\textbf{Fourier 变换}。令 $L\to\infty$，则 $\Delta k=2\pi/L\to 0$，级数化为积分，即 $f(x)=\int \frac{\d k}{2\pi} \e^{\i k x}F(k),F(k)=\int\d{x}\e^{-\i k x}f(x)$。任意 $f(x)$ 以 $\e^{\i kx}$ 为基底。
+其中 $k_N={2\pi N}/{L}$ 称为频谱或\textbf{模式}(mode)，$F(k)$（或记作 $\mathscr F(f)(k)$）称为 $f(x)$ 的\textbf{Fourier 变换}。随后令 $L\to\infty$，则 $\Delta k=2\pi/L\to 0$，级数化为积分，即 $f(x)=\int \frac{\d k}{2\pi} \e^{\i k x}F(k),F(k)=\int\d{x}\e^{-\i k x}f(x)$。
 同理，取 $V=L^n$ 并连续化，可得
 \eq{
     \tcbhighmath{
         f(x)=\int \frac{\d[n]k}{(2\pi)^n} \e^{\i k_\mu x^\mu}F(k),\quad F(k)=\int\d[n]{x}\e^{-\i k_\mu x^\mu}f(x).
     }
 }
-其中 $\mu$ 指标采用了求和约定。
-于是我们很容易验证（代入 $\bm p = \hbar\bm k$）
+其中 $\mu$ 指标采用了求和约定。于是我们很容易验证
 \eq{
-     1=\e^{0}=\int \frac{\d[3]p}{(2\pi\hbar)^3} \e^{\pm\i \bm p\vdot\bm x/\hbar}(2\pi\hbar)^3\delta(\bm p)\iff (2\pi\hbar)^3\delta(\bm p) = \int\d[3]{x} \e^{\pm\i \bm p\vdot\bm x/\hbar}.
+    1=\e^{0}=\int \frac{\d[n]k}{(2\pi)^n} \e^{\pm\i k_\mu x^\mu}(2\pi)^n\delta(k)\iff (2\pi)^n\delta(k) = \int\d[n]{x} \e^{\pm\i k_\mu x^\mu},
 }
-因此常函数的 Fourier 变换就是动量空间上的 Dirac 函数。固定模长 $|C|$ 带来相差相因子 $\e^{\i\alpha(\bm p)}$（这里甚至可以考虑随动量可变的相位）的自由度，不妨约定 $C\in[0,\infty)$，则 $C=1/(2\pi\hbar)^{3/2}$。
-故
+其中 $\delta(k)=\delta(k_1)\cdots\delta(k_n)$ 是 $n$ 维 Dirac 分布。因此常函数的 Fourier 变换就是动量空间上的 Dirac 函数。
+代入 $\bm p = \hbar\bm k$ 有 $(2\pi\hbar)^3\delta(\bm p) = \int\d[3]{x} \e^{\pm\i \bm p\vdot\bm x/\hbar}$。
+固定模长 $|C|$ 带来相差相因子 $\e^{\i\alpha(\bm p)}$（甚至可以考虑随动量可变的相位）的自由度。约定 $C\in[0,\infty)$，故
 \eq{
     \psi_{\bm p}(\bm x) = \frac{1}{(2\pi\hbar)^{3/2}} \e^{\i \bm p\vdot\bm x/\hbar},
 }
@@ -211,9 +213,11 @@ $[-L/2,L/2]$ 上良好的函数可展开为 Fourier 级数
 \eq{
     \psi(\bm x) = \int\frac{\d[3]p}{(2\pi\hbar)^{3/2}} \psi(\bm p)  \e^{\i \bm p\vdot\bm x/\hbar},\quad \psi(\bm p) = \int\frac{\d[3]x}{(2\pi\hbar)^{3/2}} \psi(\bm x)\e^{-\i \bm p\vdot\bm x/\hbar}.
 }
-这里注意 $\psi(\bm p)=\ip{\bm p}{\psi}$ 与 Fourier 变换结果相差常数因子。
-
-
+因此，我们也称任意函数都可把平面波作为展开基底。
+这里注意 $\psi(\bm p)=\ip{\bm p}{\psi}$ 与 Fourier 变换结果相差常数因子。用 Fourier 变换的语言来写则是
+\[
+    \psi(\bm x) = \int\frac{\d[3]p}{(2\pi\hbar)^{3}} \tilde\psi(\bm p)  \e^{\i \bm p\vdot\bm x/\hbar},\quad \tilde\psi(\bm p) = \int \d[3]{x} \psi(\bm x)\e^{-\i \bm p\vdot\bm x/\hbar}.
+\]
 
 下面我们考虑孤立系统（在不测量时）关于时间 $t$ 的演化。考虑态矢含时，写作 $\ket{\psi(t)}$，但可观测量不显含时间。这称为\textbf{Schr\"odinger 绘景}。时间平移对称性指出，态矢的演化由含时的幺正算符 $U$ 给出
 \eq{
@@ -235,7 +239,7 @@ $[-L/2,L/2]$ 上良好的函数可展开为 Fourier 级数
 \eq{
     \psi(\bm x,t)=\Psi(\bm x)\e^{-\i Et/\hbar},
 }
-$E$ 是常数能量（无关 $\bm x,t$）。
+$E$ 是常数能量，无关 $\bm x,t$。
 代入含时 Schr\"odinger 方程，从而分离变量得到\textbf{定态}(stationary state)方程
 \eq{
     \hat H\Psi(\bm x)=E\Psi(\bm x).
@@ -243,19 +247,16 @@ $E$ 是常数能量（无关 $\bm x,t$）。
 所以虽然波函数仍然随时间变，但时间的变化吸收进了指数因子，因此概率密度不随时间变化。即整体相位随时间转动，可观测的概率分布不变。
 含时的哈氏量一般是引入含时势能 $V(\bm x,t)$，算符 $U$ 的写法需要改。这里暂时不讲了。
 
-考虑时变情况，无非是乘上因子
-\eq{
-    \psi_{\bm p}(\bm x,t) = \frac{\e^{-\i Et/\hbar}\e^{\i \bm p\vdot\bm x/\hbar}}{(2\pi\hbar)^{3/2}}  = \frac{\e^{\i(\bm p\vdot\bm x-Et)/\hbar}}{(2\pi\hbar)^{3/2}}  \im \psi(\bm x,t) = \int\frac{\d[3]p}{(2\pi\hbar)^{3/2}} \psi(\bm p) \e^{\i(\bm p\vdot\bm x-Et)/\hbar}.
-}
 
 
+%%
 
 对 $-\i\hbar\grad \psi_{\bm p}(\bm x)=\bm p \psi_{\bm p}(\bm x)$ 再求一次导就会发现它相当于（定态）Schrödinger 方程的自由版本，即势能为常数（无关 $\bm x,t$）：$\hat H\psi_{\bm p}(\bm x)=E\psi_{\bm p}(\bm x)$，其中
 \eq{
     E = \bm p^2/2m + V_0.
 }
 
-
+%%
 
 $V$ 为常数时，上式具有简单的平面波解 $\psi=A\e^{\i(\bm k\vdot\bm x - \omega t)}$。容易发现 $\bm k,\omega$ 必须满足 $\omega = \hbar \bm k^2/2m + V/\hbar$。借 Planck 黑体辐射、Einstein 光电效应，de Broglie 指出，粒子的能量、动量可与波函数的波动性质相联系：
 \eq{
@@ -266,25 +267,40 @@ $V$ 为常数时，上式具有简单的平面波解 $\psi=A\e^{\i(\bm k\vdot\bm
     E = {\bm p^2}/{2m} + V.
 }
 
-我们通常说从 Schr\"odinger 方程观察出\textbf{线性叠加}：若 $\{\psi_i(\bm x)\}$ 是解，则任意 $\sum_i c_i\psi_i(\bm x)$ 也是解。
-这也意味着 $\psi(\bm x)$ 的重标度 $c\psi(\bm x)$ 仍是解，故总可以对波函数归一化。
+我们通常说从 Schr\"odinger 方程观察出\textbf{线性叠加}：若 $\{\psi_i(\bm x,t)\}$ 是解，则 $\sum_i c_i\psi_i(\bm x,t)$ 也是解。
+这也意味着 $\psi(\bm x,t)$ 的重标度 $c\psi(\bm x,t)$ 仍是解，故总可对（平方可积）波函数归一化。
+按照态矢记号，这其实就是线性空间上线性算符的结果。
 
-这与 $\ket{\psi}$ 的线性空间性质相符。
-
-
-
-这里平面波之所以重要，是因为它们是动量算符的本征函数。一般波函数未必本身是平面
-波解，但可在适当条件下展开为平面波的叠加。
+%%
 
 容易发现任意 $V$ 仍然具有平面波解。
 简单平面波的线性叠加也是解。
 
 自由单粒子的叠加
+ 
+
+线性方程意味着 $A\e^{-\i p_1x},B\e^{-\i p_2x}$ 各自是解 $\Rightarrow A\e^{-\i p_1x} + B\e^{-\i p_2x}$ 也是解。
+故通解可表为平面波的 Fourier 叠加，每种平面波具有相应 $p^\mu$，也就是一种动量模式。
+换言之，每个模式独立演化，模式间无相互作用。
+比如考虑势能 $V=\psi^3$。
+单独的平面波 $\e^{-\i px}$ 不是解，$p$ 通过 $\phi^3$ 项激发新模式 $3p$，存在自相互作用。
+两平面波叠加还将通过 $\phi^3$ 项产生 $2p_1+p_2,p_1+2p_2$，因此模式 $p_1$ 的存在影响了 $p_2$，存在相互作用。
 
 
 
+经典场有无穷多个自由度，依次最一般的 Fourier 展开是连续积分，每个动量 $\bm p$ 对应一个模式。
+我们来具体来计算一下。
+先考虑三维
+\[\phi(x) = \int\frac{\d[3]{p}}{(2\pi)^3}\e^{\i \bm p\cdot\bm x}\phi_{\bm p}(t), \quad \phi_{\bm p}(t) = \int\d[3]{x}\e^{-\i \bm p\cdot\bm x} \phi(x).\]
+代回 $(\square+m^2)\phi=0$：
+\[(\square+m^2)\phi = -\int\frac{\d[3]{p}}{(2\pi)^3}(\ddot\phi_{\bm p}(t) + \phi_{\bm p}(t) (\bm p^2 + m^2) )\e^{\i\bm p\cdot\bm x} = 0,\]
 
-但物理上显然广义特征矢仍然非常有用。
+作为对比，场论中的场的每个 Fourier 模式也会满足同样形式的方程，只是频率变成 $E_{\bm p}$ 或 $\omega_{\bm p}$。
+
+考虑时变情况，无非是乘上因子
+\eq{
+    \psi_{\bm p}(\bm x,t) = \frac{\e^{-\i Et/\hbar}\e^{\i \bm p\vdot\bm x/\hbar}}{(2\pi\hbar)^{3/2}}  = \frac{\e^{\i(\bm p\vdot\bm x-Et)/\hbar}}{(2\pi\hbar)^{3/2}}  \im \psi(\bm x,t) = \int\frac{\d[3]p}{(2\pi\hbar)^{3/2}} \psi(\bm p) \e^{\i(\bm p\vdot\bm x-Et)/\hbar}.
+}
 
 考虑可观测量算符含时，而态矢不含，称为\textbf{Heisenberg 绘景}。具体地，定义
 \eq{
