@@ -1,12 +1,12 @@
 \chapter{量子力学与路径积分}
 
-\section{量子力学}
+\section{量子力学回顾}
 
 近代光学实验中，光常同时表现出粒子和波动的性质，人们逐渐形成波粒二象性的观念，物质状态笼统地称为\textbf{量子态}(quantum state)。
 量子一词起初源于黑体辐射的能量离散化、光电效应的光量子，后来延伸为波粒二象性等有悖于经典状态的性质。
 
-经典理论中系统的物理可观测量是实数，比如单粒子的位置及动量 $\bm x,\bm p$。位置及动量可以同时测定，进而确定系统在相空间（由全体 $(\bm x,\bm p)$ 构成）中的运动轨迹。但有趣的是，在量子理论中，我们无法同时观测粒子位置及动量。
-Heisenberg 提出，经典测量值的不确定性意味着必须将其“提升”为一种\textbf{算符}(operator)，作用于物质的量子态上。比如 $\hat{\bm x}=(\hat x_1,\hat x_2,\hat x_3),\hat{\bm p}=(\hat p_1,\hat p_2,\hat p_3)$，他根据有关不确定性的实验和研究提炼出
+经典理论中系统的物理可观测量是实数，比如单粒子的位置及动量 $\bm x,\bm p$。位置及动量可以同时测定，进而确定系统在相空间中的运动轨迹。单粒子的相空间简单讲就是全体 $(\bm x,\bm p)$ 构成的集合，系统相空间就是多个粒子相空间的集合乘法。但有趣的是，在量子理论中，我们无法同时观测粒子位置及动量。
+Heisenberg 提出，测量的不确定性意味着必须将其“提升”为一种\textbf{算符}(operator)，作用于物质的量子态上。对物质某个性质的\textbf{测量}(measure)或\textbf{观测}(observe)，就抽象为用一个物理量算符去作用量子态。比如 $\hat{\bm x}=(\hat x_1,\hat x_2,\hat x_3),\hat{\bm p}=(\hat p_1,\hat p_2,\hat p_3)$，他根据有关不确定性的实验和研究提炼出
 \eq{
     \tcbhighmath{[\hat x_i,\hat p_j]:=\hat x_i\hat p_j - \hat p_i\hat x_j = \i\hbar\delta_{ij},}\quad (\delta_{ij}) = \diag(1,1,1).
 }
@@ -16,7 +16,7 @@ $\hbar=h/2\pi$ 是约化 Planck 常数。这称为 $\hat{\bm x},\hat{\bm p}$ 的
 一维情形为 $[\hat x,\hat p]:=\hat x\hat p - \hat p\hat x = \i\hbar$。
 经典力学是 $\hbar\to 0$ 的极限，意味着 $\hat x\hat p=\hat p\hat x$，作为普通实数的 $x,p$ 就满足这个可交换乘法。
 算符的非对易性可以说是量子性质的关键，因此这种“算符提升”也称为从经典力学走向量子力学的\textbf{量子化}。
-在经典力学中，$x,p$ 是一对共轭变量，也叫正则变量，满足 Poisson 括号 $\{x,p\}=1$。所以量子化就是把经典力学中的正则变量提升为算符，Poisson 括号替换为对易关系。进一步地，哈氏量可以变成哈氏量算符 $\hat H=\frac{\hat p^2}{2m}+V(\hat x)$。故准确来说，这称为\textbf{正则量子化}(canonical quantization)。
+在经典力学中，$x,p$ 是一对共轭变量，也叫正则变量，满足 Poisson 括号 $\{x,p\}=1$。所以量子化就是把经典力学中的正则变量提升为算符，Poisson 括号替换为对易关系。进一步地，哈氏量可以变成哈氏量算符 $\hat H=\frac{\hat p^2}{2m}+V(\hat x)$。故具体的称呼是\textbf{正则量子化}(canonical quantization)。
 
 下面我们来考察算符可能的数学表示。人们现已广泛清楚，矩阵的乘法是不对易的，因此矩阵是合适的数学候选。如此，量子态就是列矢，写作 $\ket{}$。一般会在里面放一些符号，仅表标签含义，比如 $\ket{\psi}$。全体 $\ket{\psi}$ 构成线性空间。再补充一些条件后，这个空间成为了俗称的\textbf{Hilbert 空间}，记作 $\Hilbert$，作为量子态的数学载体。
 但在当时，矩阵并非必学知识。Heisenberg 从 Poisson 括号绕了一圈才回到了矩阵乘法，相当于重新发明了矩阵。可以说，今日之大学得以普及线性代数，有 Heisenberg 的功劳。
@@ -76,7 +76,7 @@ $P_n := \op{a_n}$ 称为\textbf{投影算符}，这里 $\op{}$ 表示列矢 $\ti
     \mel{\phi}{\hat A}{\psi} = \ip{\hat A\phi}{\psi},\quad \text{其中}\, \ket{\hat A\phi} := \hat A\ket{\phi},\enspace \bra{\hat A\phi} = \ket{\hat A\phi}^\dagger = \bra{\phi} \hat A^\dagger.
 }
 反之给定自伴性，数学上可证，存在 $\{\ket{a_n}\}$ 满足 $\hat A \ket{a_n}=a_n \ket{a_n}$、$a_n\in\R$、完备且正交归一，且能对算符进行谱分解 $\hat A = \sum_n a_n \op{a_n}$，这称为\textbf{谱分解定理}。
-所以，我们可将若干性质简洁地统一说法：规定可观测量 $\hat A$ 自伴。
+所以，我们可将若干性质简洁地统一说法：\textit{规定可观测量 $\hat A$ 自伴}。
 注意 $\ip{\psi} = \sum_n \abs{\ip{a_n}{\psi}}^2$，可见归一化条件也写作 $\ip{\psi}=1$。
 根据概率论，算符 $\hat A$ 的平均值或期望值为
 \eq{
@@ -147,7 +147,7 @@ U(\delta \bm a)
 \simeq
 1-\frac{\i}{\hbar}\delta\bm a\vdot \hat{\bm p}.
 \]
-故把 $\hat{\bm p}$ 称为空间平移的\textbf{无穷小生成元}(infinitesimal generator)。这里的“生成元”意思是：有限平移 $U(\bm a)$ 由 $\hat{\bm p}$ 指数化生成。当然，观察上式也可显式地写出 $\hat{\bm p}=\i\hbar\grad_{\bm a}U(\bm a)|_{\bm a=\bm 0}$。
+故把 $\hat{\bm p}$ 称为空间平移的\textbf{无穷小生成元}(infinitesimal generator)，“生成元”意思是有限平移 $U(\bm a)$ 由 $\hat{\bm p}$ 指数化生成。当然，观察上式也可显式地写出 $\hat{\bm p}=\i\hbar\grad_{\bm a}U(\bm a)|_{\bm a=\bm 0}$。
 由 $U(\bm a)\ket{\bm x} = \ket{\bm x+\bm a}$ 易得
 \eq{
     U(\bm a)^\dagger \hat{\bm x} U(\bm a)
