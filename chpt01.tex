@@ -191,7 +191,7 @@ U(\delta \bm a)
 现在复习一下高数知识来判断平面波和 Dirac 函数的关系。
 将任意函数视为周期无穷大的函数，先设有限周期 $L$，在 $[-L/2,L/2]$ 上 Fourier 级数展开为
 \[f(x)=\sum_{N=-\infty}^\infty \frac{F(k_N)}{L} \e^{\i k_N x},\quad F(k_N)=\int_{-L/2}^{L/2}\d{x}\e^{-\i k_N x}f(x),\]
-其中 $k_N={2\pi N}/{L}$ 称为频谱或\textbf{模式}(mode)，$F(k)$（或记作 $\mathscr F(f)(k)$）称为 $f(x)$ 的\textbf{Fourier 变换}。随后令 $L\to\infty$，则 $\Delta k=2\pi/L\to 0$，级数化为积分，即 $f(x)=\int \frac{\d k}{2\pi} \e^{\i k x}F(k),F(k)=\int\d{x}\e^{-\i k x}f(x)$。
+其中 $k_N={2\pi N}/{L}$ 称为\textbf{频谱}，与之相应的平面波 $\e^{\i k_N x}$ 称为该频谱的\textbf{模式}(mode)。$F(k)$（或记作 $\mathscr F(f)(k)$）称为 $f(x)$ 的\textbf{Fourier 变换}。随后令 $L\to\infty$，则 $\Delta k=2\pi/L\to 0$，级数化为积分，即 $f(x)=\int \frac{\d k}{2\pi} \e^{\i k x}F(k),F(k)=\int\d{x}\e^{-\i k x}f(x)$。
 同理，取 $V=L^n$ 并连续化，可得
 \eq{
     \tcbhighmath{
@@ -288,7 +288,7 @@ $E$ 是常数能量，无关 $\bm x,t$。
 \eq{
     \Psi(\bm x,t) = \int\d[3]p \ip{\bm x}{\bm p} \ip{\bm p}{\Psi(0)} \e^{-\frac{\i}{\hbar}E_{\bm p} t} = \int\frac{\d[3]p}{(2\pi\hbar)^{3}} \tilde\Psi(\bm p,0)  \e^{\frac{\i}{\hbar}(\bm p\vdot\bm x - E_{\bm p} t)},
 }
-每种平面波具有相应的动量模式 $\bm p$。
+每种模式具有相应动量 $\bm p$。
 当然，还有一种做法是对良好的函数直接进行空间 Fourier 变换 $\tilde\Psi(\bm p,t)$，则展开为
 \[\Psi(\bm x,t) = \int\frac{\d[3]{p}}{(2\pi\hbar)^3}\tilde\Psi(\bm p,t) \e^{\i \bm p\cdot\bm x/\hbar},\]
 随后代入自由方程就可得 $\tilde\Psi(\bm p,t)$ 的一阶时间常微分方程，解得 $\tilde\Psi(\bm p,t) = \tilde\Psi(\bm p,0)\e^{-\i E_{\bm p} t/\hbar}$。
@@ -1067,7 +1067,7 @@ $\hat A_S$ 的平均值为 $\ev{A_S}(t)=\mel{\Psi(t)}{\hat A_S}{\Psi(t)}$，其�
 }
 
 
-\section{氢原子波函数求解*}
+\section{氢原子路径积分方法*}
 
 
 \section{简并态*}

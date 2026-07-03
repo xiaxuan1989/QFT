@@ -150,11 +150,11 @@ $p^\mu$ 是\textbf{4-动量算符} $\hat p^\mu=\i\p^\mu$ 的本征值，并且
 $\square=-\hat p^2$。$\hat p^0 = \i\pdv{t} = \hat E,\hat{\bm p} = -\i\grad$ 分别是能量、动量算符。这就是选择 $-2$ 号差的原因。平面波解往往对应着\textbf{自由}情形。作为对比，我们知道自由 Schr\"odinger 方程具有平面波解，而得非相对论性色散关系 $T=\bm p^2/2m$。
 即使将不同动量的平面波叠加，每个平面波仍然独立演化，之间无相互作用，故称自由。
 
-实际上，一般解显然就是平面波的 Fourier 展开，对动量模式连续地积分。
+实际上，一般解显然就是 Fourier 展开，对动量模式连续地积分。
 这里可对任意 $1\sim 4$ 个变量做 Fourier 变换，只是三维或四维最方便。
 三维方法类似于波函数的方法。先取 $\phi(x) = \int\frac{\d[3]p}{(2\pi)^3}\e^{\i \bm p\cdot\bm x}\phi_{\bm p}(t)$，代回方程：
 \[(\square+m^2)\phi = \int\frac{\d[3]p}{(2\pi)^3}(\dot\phi_{\bm p}(t) + \phi_{\bm p}(t) (\bm p^2 + m^2) )\e^{\i\bm p\cdot\bm x} = 0 \iff \dot\phi_{\bm p}(t) + \phi_{\bm p}(t) (\bm p^2 + m^2) = 0,\]
-故对每个模式 $\bm p$ 满足同样形式的方程，所以谐振子模型的确是自由模型。
+故对每个模式满足同样形式的方程，所以谐振子模型的确是自由模型。
 若引入 $\frac{\lambda}{4!}\phi^4$ 等，则方程 $(\square+m^2)\phi = \frac{\lambda}{3!}\phi^3$ 不再线性，则动量模式之间会相互作用，不再“自由”。
 首先，单独的平面波 $\e^{-\i px}$ 不是解，$p$ 通过 $\phi^3$ 项激发新模式 $3p$，存在自相互作用。
 两平面波叠加还将通过 $\phi^3$ 项产生 $2p_1+p_2,p_1+2p_2$，因此模式 $p_1$ 的存在影响了 $p_2$，存在相互作用。
@@ -247,24 +247,15 @@ $\d[4]{p}$ 诱导出双曲面单支上的 Lorentz 不变体元，方法是利用
 
 经过一些稍微长的计算得到自由场的哈氏量为
 \begin{align}
-  H
+  H &= \frac 12 \int\d[3]{x} (\Pi^2 + (\grad\phi)^2 + m^2\phi^2) \notag\\
   &= \frac{1}{2}\int\frac{\d^3p}{(2\pi)^3}E_{\bm{p}}
      (a_{\bm{p}}a^\dagger_{\bm{p}}+a^\dagger_{\bm{p}}a_{\bm{p}}) = \frac{1}{2}\int\frac{\d^3p}{(2\pi)^3}E_{\bm{p}}
      (2a^\dagger_{\bm{p}}a_{\bm{p}}+(2\pi)^3\delta(\bm{p}-\bm{p}))\notag\\
   &= \int\frac{\d^3p}{(2\pi)^3}E_{\bm{p}}
      \left(N_{\bm{p}}+\frac{1}{2}(2\pi)^3\delta(\bm 0)\right),\quad N_{\bm{p}}:= a^\dagger_{\bm{p}}a_{\bm{p}},
 \end{align}
-其中
-
-
-其中 $E_{\bm p}$ 由场的运动方程决定。
-$a_{\bm p}^\dagger$ 产生一个动量为 $\bm p$ 的粒子，$a_{\bm p}$ 则湮灭一个动量为 $\bm p$ 的粒子。
-于是，“粒子”不再作为基本点状对象预先放入理论，而是作为场的某个模式的激发出现。
-同时，零点能项 $\frac{1}{2}\sum_r E_r$ 会变成发散的积分。这不是本节要解决的问题；在自由场量子化中通常先通过正规序或重整化处理这类真空能常数。
-
-$N$ 称为\textbf{数算符}(number operator)。原因如下。
-只要求出 $N$ 的本征值，就求出了能谱。
-先看 $N$ 的基本性质。由 $[a,a^\dagger]=1$ 和对易子公式
+其中 $N_{\bm p}$ 称为\textbf{数算符}(number operator)。原因如下。
+由 $[a,a^\dagger]=1$ 和对易子公式
 \begin{align*}
   [AB,C] &= ABC-ACB+ACB-CAB = A[B,C]+[A,C]B,\\
   [A,BC] &= ABC-BAC+BAC-BCA = [A,B]C+B[A,C],
@@ -352,6 +343,10 @@ $N$ 称为\textbf{数算符}(number operator)。原因如下。
     H a\ket n=(aH-\hbar\omega a)\ket n=(E_n-\hbar\omega)a\ket n,\quad Ha^\dagger\ket n=(E_n+\hbar\omega)a^\dagger\ket n.
 }
 这种写法直接就说明能量是一份一份增加的。相邻能级差为 $E_{n+1}-E_n=\hbar\omega$。
+
+$a_{\bm p}^\dagger$ 产生一个动量为 $\bm p$ 的粒子，$a_{\bm p}$ 则湮灭一个动量为 $\bm p$ 的粒子。
+于是，“粒子”不再作为基本点状对象预先放入理论，而是作为场的某个模式的激发出现。
+同时，零点能项 $\frac{1}{2}\sum_r E_r$ 会变成发散的积分。这不是本节要解决的问题；在自由场量子化中通常先通过正规序或重整化处理这类真空能常数。
 
 %%
 
@@ -593,4 +588,4 @@ $\Pi(\bm{x},t)$ 与 $\Pi^\dagger(\bm{x},t)$ 互为厄米共轭。等时对易关
 
 \section{重整化}
 
-\section{弯曲时空 QFT}
+\section{弯曲时空 QFT*}
