@@ -26,13 +26,14 @@ $\Lag$ 叫做拉氏密度，与拉氏量的关系为 $L=\int\d[3]{x}\Lag$。同�
 这些场的分量在经典力学中无非是实数。QFT就是将场提升\textbf{量子场}，表为\textbf{场算符}，此后算符默认省略 $\hat{}$ 帽号，读者可自明。场算符的本征值、期望值可以联系回经典理论。“波函数”现在提升为某种本征场的波函数。所以注意不要把场和波函数弄混，场对应的是广义坐标。
 
 场算符有基本的动机。我们已经看到，上一节的非相对论量子力学中，粒子数是固定的，但实验告诉我们粒子一定存在湮灭和产生现象。我们只得将希望寄托于相对论性的量子力学\footnote{注意，所谓的“非相对论性”是因为我们从经典力学做量子化而来。尝试从相对论、经典场论做对易关系便也就考虑了“相对论性”量子力学，仍然满足上一节的那些公理。}。相对论和经典场论的关系十分紧密，换言之，时空场是必定会引入的，故进一步再考虑场的算符化即可。
-后续将了解到，粒子可以解释为\textbf{场算符的激发态}，首先不同激发态可测得不同粒子数，叠加时测量数值也具有概率性。总之，粒子数将可变。这种方法不仅简化了多粒子系统的描述，还为理解粒子之间的相互作用提供了一个更自然的框架。
+后续将了解到，粒子可以解释为\textbf{场算符的激发态}，首先不同激发态可测得不同粒子数，叠加时测量数值也具有概率性。总之，粒子数将可变。
+
+这种方法不仅简化了多粒子系统的描述，还为理解粒子之间的相互作用提供了一个更自然的框架。
+量子场论中，质子、电子、夸克等 Fermi 子场携带荷，Bose 子场提供相互作用的传播媒介。
+电子场影响电磁场来产生光子传递作用，在经典时表现为电磁力。
+自相互作用会出现无穷大，但量子场论中可用自能图的重整化方法来消除。
 
 直接将时空场算符化所得到的公式，可以直接继承相对论显式带来的 Lorentz 协变性。场算符的时变性意味着 QFT 几乎只使用 Heisenberg 和 Dirac 绘景。使用 Schr\"odinger 绘景的话，需要讨论态演化的 Schr\"odinger 方程，比较繁琐。转化到 Heisenberg 绘景上来，其实直接就是经典场论的那些场运动方程的量子版本。
-
-路径积分形式对QFT尤其重要。无非是替换 $q(t)\to\Phi(x)$：
-\[\int\mathcal D q\,\e^{\frac{\i}{\hbar}S[q]} \to \int\mathcal D\Phi\,\e^{\frac{\i}{\hbar}S[\Phi]}.\]
-前者对所有粒子轨道求和，后者对所有场的历史求和。这显式上避开了算符或态矢。
 
 \section{正则量子化}
 量子算符化的关键在于给出对易关系。
@@ -238,85 +239,87 @@ $\d[4]{p}$ 诱导出双曲面单支上的 Lorentz 不变体元，方法是利用
 四元函数 $f(p),f(-p)$ 独立\footnote{注意并没有给定函数 $f$，知道 $f(p)$ 当然不会确定 $f(-p)$，除非有对称性，比如奇函数性。}，分别正比于前文 $a_{\bm p},\tilde a_{\bm p}$。
 这样直接可通过 $f(\pm E_{\bm p},\pm\bm p)\e^{\mp\i px},\phi$ 的不变性断言 ${\d[3]p}/{E_{\bm p}}$ 不变。
 
-
-
-
-
-
 \subsection{粒子的湮灭与产生}
 
-经过一些稍微长的计算得到自由场的哈氏量为
+将平面波展开代入到自由场的哈氏量，计算得
 \begin{align}
   H &= \frac 12 \int\d[3]{x} (\Pi^2 + (\grad\phi)^2 + m^2\phi^2) \notag\\
   &= \frac{1}{2}\int\frac{\d^3p}{(2\pi)^3}E_{\bm{p}}
      (a_{\bm{p}}a^\dagger_{\bm{p}}+a^\dagger_{\bm{p}}a_{\bm{p}}) = \frac{1}{2}\int\frac{\d^3p}{(2\pi)^3}E_{\bm{p}}
      (2a^\dagger_{\bm{p}}a_{\bm{p}}+(2\pi)^3\delta(\bm{p}-\bm{p}))\notag\\
   &= \int\frac{\d^3p}{(2\pi)^3}E_{\bm{p}}
-     \left(N_{\bm{p}}+\frac{1}{2}(2\pi)^3\delta(\bm 0)\right),\quad N_{\bm{p}}:= a^\dagger_{\bm{p}}a_{\bm{p}},
+     \left(a^\dagger_{\bm{p}}a_{\bm{p}}+\frac{1}{2}(2\pi)^3\delta(\bm 0)\right).
 \end{align}
-其中 $N_{\bm p}$ 称为\textbf{数算符}(number operator)。原因如下。
-由 $[a,a^\dagger]=1$ 和对易子公式
+定义\textbf{数算符}(number operator)
+\eq{
+    \tcbhighmath{
+    N := \int \frac{\d^3p}{(2\pi)^3} a^\dagger_{\bm{p}}a_{\bm{p}}.
+    }
+}
+由对易子公式
 \begin{align*}
   [AB,C] &= ABC-ACB+ACB-CAB = A[B,C]+[A,C]B,\\
   [A,BC] &= ABC-BAC+BAC-BCA = [A,B]C+B[A,C],
 \end{align*}
-可得
+得
 \begin{align}
-    [N,a]
-    &=
-    [a^\dagger a,a]
+    [N,a_{\bm p}]
+    &
+    =\int\frac{\d^3q}{(2\pi)^3}(a^\dagger_{\bm q}[a_{\bm q},a_{\bm p}]+[a^\dagger_{\bm q},a_{\bm p}]a_{\bm q})
     =
-    a^\dagger[a,a]+[a^\dagger,a]a
-    =
-    -a,\\
-    [N,a^\dagger]
-    &=
-    [a^\dagger a,a^\dagger]
-    =
-    a^\dagger[a,a^\dagger]
+    -a_{\bm p},\\
+    [N,a^\dagger_{\bm p}]
+    &
+    =\int\frac{\d^3q}{(2\pi)^3}(
+    a^\dagger_{\bm q}[a_{\bm q},a^\dagger_{\bm p}]
     +
-    [a^\dagger,a^\dagger]a
+    [a^\dagger_{\bm q},a^\dagger_{\bm p}]a_{\bm q})
     =
-    a^\dagger.
+    a^\dagger_{\bm p}.
 \end{align}
 若 $\ket n$ 是 $N$ 的归一化本征态，则
 \[
-    N(a\ket n)
+    N a_{\bm p}\ket n
     =
-    (aN-a)\ket n
+    (a_{\bm p}N-a_{\bm p})\ket n
     =
-    (n-1)a\ket n,\quad N(a^\dagger\ket n)
+    (n-1)a_{\bm p}\ket n,\quad N a^\dagger_{\bm p}\ket n
     =
-    (a^\dagger N+a^\dagger)\ket n
+    (a^\dagger_{\bm p} N+a^\dagger_{\bm p})\ket n
     =
-    (n+1)a^\dagger\ket n.
+    (n+1)a^\dagger_{\bm p}\ket n.
 \]
-所以 $a$ 会把数算符本征值降低 $1$，$a^\dagger$ 会把本征值升高 $1$，即 $a\ket{n}\propto\ket{n-1},a^\dagger\ket{n}\propto\ket{n+1}$。故又分别称为\textbf{湮灭算符}和\textbf{产生算符}。
-通过以下方法可以确定系数。注意 $n + 1 = \mel{n}{aa^\dagger}{n},n=\mel{n}{a^\dagger a}{n}$，则系数确定为
+所以 $a_{\bm p}$ 会把数算符本征值降低 $1$，$a^\dagger_{\bm p}$ 会把本征值升高 $1$，即 $a_{\bm p}\ket{n}\propto\ket{n-1},a^\dagger_{\bm p}\ket{n}\propto\ket{n+1}$。故又分别称为\textbf{湮灭算符}和\textbf{产生算符}。
+
+通过以下方法可以确定系数。注意
+\[
+    n + 1 = \mel{n}{N+1}{n} = \mel{n}{a_{\bm p}a^\dagger_{\bm p}}{n},n=\mel{n}{a^\dagger_{\bm p} a_{\bm p}}{n}
+\]
+则系数确定为
 \eq{
-    a\ket{n} = \sqrt{n}\ket{n-1},\quad
-    a^\dagger\ket{n} = \sqrt{n+1}\ket{n+1}.
+    a_{\bm p}\ket{n} = \sqrt{n}\ket{n-1},\quad
+    a^\dagger_{\bm p}\ket{n} = \sqrt{n+1}\ket{n+1}.
 }
 然而注意本征值不能无限向下，因为对任意归一化态 $\ket\psi$，
 \eq{
     \ev{N}{\psi}
     =
-    \mel{\psi}{a^\dagger a}{\psi}
+    \mel{\psi}{a^\dagger_{\bm q} a_{\bm q}}{\psi}
     =
-    \ip{a\psi}{a\psi}
+    \ip{a_{\bm q}\psi}{a_{\bm q}\psi}
     \geq 0,
 }
-因此 $N$ 的本征值非负。若从某个本征态不断作用 $a$，本征值每次减 $1$，由于 $n=\ev{n}{n}=\ev{N}{n}\geq 0$。
-必定存在一个最小本征值 $n_0$，它的本征态 $\ket{n_0}$ 满足 $a\ket{n_0}=0$，否则 $a\ket{n_0}$ 会给出本征值 $n_0-1$ 的态。
-这是使本征值停止减小的条件。于是 $n_0=\ev{N}{n_0}=\ev{a^\dagger a}{n_0}=0$。换言之，最终必须停在最低态 $\ket0$。
+因此 $N$ 的本征值非负。若从某个本征态不断作用 $a_{\bm p}$，本征值每次减 $1$，由于 $n=\ev{n}{n}=\ev{N}{n}\geq 0$。
+必定存在一个最小本征值 $n_0$，它的本征态 $\ket{n_0}$ 满足 $a_{\bm p}\ket{n_0}=0$，否则 $a_{\bm p}\ket{n_0}$ 会给出本征值 $n_0-1$ 的态。
+这是使本征值停止减小的条件。于是 $n_0=\ev{N}{n_0}=\ev{a^\dagger_{\bm q} a_{\bm q}}{n_0}=0$。换言之，最终必须停在最低态 $\ket0$。
 这个最低态称为\textbf{基态}或\textbf{真空态}(vacuum)。
-反之从 $\ket0$ 出发，所有其他态由反复作用 $a^\dagger$ 得到，所以 $N$ 的谱为非负整数，是离散谱的！离散谱的本征态一般确切地在 Hilbert 空间内，可以做归一化，而非广义本征态。
-利用归一性，显然作用 $a^\dagger$ 可得所有激发态为
+反之从 $\ket0$ 出发，所有其他态由反复作用 $a^\dagger_{\bm p}$ 得到，所以 $N_{\bm q}$ 的谱为非负整数，是离散谱的！离散谱的本征态一般确切地在 Hilbert 空间内，可以做归一化，而非广义本征态。
+利用归一性，显然作用 $a^\dagger_{\bm p}$ 可得所有激发态为
 \eq{
     \ket n
     =
     \frac{1}{\sqrt{n!}}
-    (a^\dagger)^n\ket0,
+    (a^\dagger_{\bm p})^n\ket0,
     \quad n=0,1,2,\cdots.
 }
 能量本征值为
@@ -334,13 +337,13 @@ $\d[4]{p}$ 诱导出双曲面单支上的 Lorentz 不变体元，方法是利用
 }
 这称为\textbf{零点能}(zero-point energy)或\textbf{真空能}。此非人为，而是由 $x,p$ 非对易性（或者说 $\hbar\ne 0$）导致。另一方面，也可注意湮灭产生算符与哈氏量的对易关系为
 \eq{
-    [a,H]=\hbar\omega a,
+    [a_{\bm p},H]=\hbar\omega a_{\bm p},
     \quad
-    [a^\dagger,H]=-\hbar\omega a^\dagger.
+    [a^\dagger_{\bm p},H]=-\hbar\omega a^\dagger_{\bm p}.
 }
 作用于 $\ket n$ 有
 \eq{
-    H a\ket n=(aH-\hbar\omega a)\ket n=(E_n-\hbar\omega)a\ket n,\quad Ha^\dagger\ket n=(E_n+\hbar\omega)a^\dagger\ket n.
+    H a_{\bm p}\ket n=(a_{\bm p}H-\hbar\omega a_{\bm p})\ket n=(E_n-\hbar\omega)a_{\bm p}\ket n,\quad  a^\dagger_{\bm p}\ket n=(E_n+\hbar\omega)a^\dagger_{\bm p}\ket n.
 }
 这种写法直接就说明能量是一份一份增加的。相邻能级差为 $E_{n+1}-E_n=\hbar\omega$。
 
