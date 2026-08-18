@@ -52,6 +52,37 @@ b_\mu(\bm k)\e^{\i|\bm k|t+\i\bm k\cdot\bm x}
 k^\mu \tilde A_\mu(k)=0.
 \]
 
+\section{自能图}
+
+%%%%
+
+在量子电动力学里，电子传播子的一回圈自能图给出
+\[
+\Sigma(\slashed p)
+= (-ie^2)\!\int\!\frac{d^d k}{(2\pi)^d}\,
+\gamma^\mu\frac{\slashed p-\slashed k + m}{(p-k)^2-m^2+i0}\gamma_\mu\,
+\frac{1}{k^2+i0},
+\]
+用维数正规化 $d=4-2\varepsilon$ 计算，在 Feynman 规下可化为（略去与 $\slashed p-m$ 成正比的项）：
+\[
+\Sigma(\slashed p)=\frac{\alpha}{4\pi}\Big[\big(\tfrac{1}{\varepsilon_{\rm UV}}-\gamma_E+\ln4\pi+\ln\frac{\mu^2}{m^2}\big)(-\slashed p+4m)
++\text{有限项}\Big].
+\]
+为保证物理质量是传播子的极点位置（on-shell 方案），引入质量对消子 $\delta m$ 与场强重整 $Z_2$，令
+\[
+S_R^{-1}(\slashed p)=\slashed p-m_{\rm phys}-\big(\Sigma(\slashed p)-\delta m\big),
+\]
+并施加
+\[
+S_R^{-1}(\slashed p)\big|{\slashed p=m{\rm phys}}=0,\qquad
+\frac{d S_R^{-1}}{d\slashed p}\Big|{\slashed p=m{\rm phys}}=1.
+\]
+解得（on-shell 方案）
+\boxed{\;\delta m_{\rm OS}
+= m_{\rm phys}\,\frac{3\alpha}{4\pi}
+\Big(\frac{1}{\varepsilon_{\rm UV}}-\gamma_E+\ln4\pi+\ln\frac{\mu^2}{m_{\rm phys}^2}+\frac{4}{3}\Big)\;}
+（以及相应
+
 \begin{comment}
 \chapter{Poincaré 代数}
 \chapter{矢量场}
