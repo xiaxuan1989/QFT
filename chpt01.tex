@@ -223,25 +223,26 @@ U(\delta \bm a)
 \]
 再次注意：严格说平面波本身不是可归一化态，而是广义本征态；真正的物理态是一系列不同频率的平面波的叠加，称为\textbf{波包}。
 
-下面我们考虑孤立系统（在不测量时）关于时间 $t$ 的演化。考虑态矢\textbf{显含时间}，写作 $\ket{\Psi(t)}$，但可观测量不含时。这称为\textbf{Schr\"odinger 绘景}。时间平移对称性指出，态矢的演化由含时的幺正算符 $U$ 给出
+下面我们考虑孤立系统（在不测量时）关于时间 $t$ 的演化。考虑\textbf{Schr\"odinger 绘景}：态矢\textbf{显含时间}，写作 $\ket{\Psi(t)}$，而可观测量不具有由动力学演化产生的时间依赖，即算符不因绘景演化而含时，但仍允许显式含时。实验指出，态矢演化由含时幺正算符 $U$ 给出
 \eq{
-    \ket{\Psi(t)} = U(t,t_0)\ket{\Psi(t_0)} \xRightarrow{\text{Stone}} U(t,t_0)=\e^{-\frac{\i}{\hbar}\hat H(t-t_0)} \iff i\hbar\dv{t}\ket{\Psi(t)}=\hat H\ket{\Psi(t)}.
+    \ket{\Psi(t)} = U(t,t_0)\ket{\Psi(t_0)}.
 }
-其中 $\hat H$ 不含时，称为\textbf{哈氏算符}。这也说明哈氏算符（能量算符）代表时间平移生成元。后者称为 Schr\"odinger 方程。
-写成坐标表象就是 
-\[\i\hbar\pdv{t}\Psi(\bm x,t)=\hat H\Psi(\bm x,t).\]
-量子化给出了从\textit{经典力学}过渡到量子力学的方案：
+求导得\textbf{Schr\"odinger 方程}
 \eq{
-    H = \frac{{\bm p}^2}{2m} + V \to \hat H = \frac{\hat{\bm p}^2}{2m} + V(\hat{\bm x}).
+    i\hbar\dv{t}\ket{\Psi(t)}=\hat H(t)\ket{\Psi(t)},\quad \hat H(t) := \i\hbar \pdv{t}U(t,t_0) U^\dagger(t,t_0).
 }
+显然 $U$ 幺正使 $\hat H$ 自伴。$\hat H$ 称\textbf{哈氏算符}（能量算符），因为它是时间演化的无穷小生成元：
+\eq{
+    U(t+\delta t,t) \simeq 1-\frac{\i}{\hbar}\hat H(t)\delta t.
+}
+方程写成坐标表象就是 $\i\hbar\pdv{t}\Psi(\bm x,t)=\hat H\Psi(\bm x,t)$。
+量子化给出了从\textit{经典力学}过渡到量子力学的方案：$H = \frac{{\bm p}^2}{2m} + V \to \hat H = \frac{\hat{\bm p}^2}{2m} + V(\hat{\bm x},t)$，
 代入坐标表象得到所谓的含时 Schr\"odinger 方程
 \eq{
-    \tcbhighmath{\i\hbar\pdv{t}\Psi(\bm x,t)=\left(-\frac{\hbar^2}{2m}\nabla^2+V(\bm x)\right)\Psi(\bm x,t).}
+    \tcbhighmath{\i\hbar\pdv{t}\Psi(\bm x,t)=\left(-\frac{\hbar^2}{2m}\nabla^2+V(\bm x,t)\right)\Psi(\bm x,t).}
 }
 最初 Schr\"odinger 通过波动力学的一些类比方法得到。
-
-注意哈氏量不含时才写 $\ket{\Psi(t)} = \e^{-\frac{\i}{\hbar}\hat H(t-t_0)}\ket{\Psi(t_0)}$。
-含时哈氏量一般是引入含时势能 $V(\bm x,t)$，算符 $U$ 的写法需要改。这里暂时不讲了。
+如果系统具有时间平移对称性，则 $\hat H$ 不含时，于是 $U(t,t_0)=\e^{-\frac{\i}{\hbar}\hat H(t-t_0)}$。这一结论也称 Stone 定理。接下来几乎只考虑不含时 $\hat H$。 
 
 考虑能量本征方程
 \eq{
@@ -252,7 +253,7 @@ $E$ 是常数能量，无关 $\bm x,t$。
 \[
     \ket{\Psi(t)} = \e^{-\frac{\i}{\hbar}\hat H t} \ket{\Psi(0)} = \sum_n \ip{E_n}{\Psi(0)} \e^{-\frac{\i}{\hbar}E_n t} \ket{E_n} \;\text{或}\;  \int\d{E} \ip{E}{\Psi(0)} \e^{-\frac{\i}{\hbar}E t} \ket{E}.
 \]
-通常教材以偏微分方程求解为主线，用所谓的\textbf{分离变量法}来求特解。具体思想就是把含时波函数写成乘积 $\Psi_\text{特}(\bm x,t)=f(t)\psi(\bm x)$，代入含时方程，从而将偏微分化为常微分，得知 $f(t)$ 的解为指数型，$\psi(\bm x)$ 正是能量本征态。在我们的表述里，可以显然地发现这一点：
+普通教材以偏微分方程求解为主线，用所谓的\textbf{分离变量法}来求特解。具体思想就是把含时波函数写成乘积 $\Psi_\text{特}(\bm x,t)=f(t)\psi(\bm x)$，代入含时方程，从而将偏微分化为常微分，得知 $f(t)$ 的解为指数型，$\psi(\bm x)$ 正是能量本征态。在我们的表述里，可以显然地发现这一点：
 \[
     \ket{\Psi_\text{特}(t)} = \e^{-\frac{\i}{\hbar}E t} \ket{E} \iff \Psi_\text{特}(\bm x,t) = \e^{-\frac{\i}{\hbar}E t} \psi(\bm x),\quad \psi(\bm x):=\ip{\bm x}{E}.
 \]
@@ -305,7 +306,7 @@ $E$ 是常数能量，无关 $\bm x,t$。
 
 %% 绘景引入 - 参考 Sean Carrol
 
-考虑算符含时，态矢不含，称\textbf{Heisenberg 绘景}。用下标 $S,H$ 分别表示 Schr\"odinger 绘景和 Heisenberg 绘景。
+考虑态矢不含时，则算符必然含时，称\textbf{Heisenberg 绘景}。用下标 $S,H$ 分别表示两种绘景。
 $\hat A_S$ 的平均值为 $\ev{A_S}(t)=\mel{\Psi(t)}{\hat A_S}{\Psi(t)}$，其中 $\hat A_S$ 本身不含时。同理，$\hat A_H$ 的平均值为 $\ev{A_H}(t)=\mel{\Psi_H}{\hat A_H(t)}{\Psi_H}$，其中 $\ket{\Psi_H}$ 不含时间。
 要求绘景不改变任何可观测结果，即 $\ev{A_S}(t)=\ev{A_H}(t)$。
 注意 $\ket{\Psi(t)}=U(t,t_0)\ket{\Psi(t_0)}$，Hermite 共轭为 $\bra{\Psi(t)}=\bra{\Psi(t_0)}U^\dagger(t,t_0)$，则不妨定义
@@ -345,7 +346,7 @@ $\hat A_S$ 的平均值为 $\ev{A_S}(t)=\mel{\Psi(t)}{\hat A_S}{\Psi(t)}$，其�
     \right)=
     \frac{\i}{\hbar}[\hat H_H(t),\hat A_H(t)].
 \end{align*}
-如果 $\hat H$ 不含时，则 $\hat H_H=U^\dagger \hat H U=\hat H$，因为 $\hat H$ 与它自身的指数函数对易。因此两种绘景的哈氏算符是完全一样的，均记 $\hat H$。于是 Heisenberg 绘景下算符的运动方程为
+如果 $\hat H$ 不含时，则 $\hat H_H=U^\dagger \hat H U=\hat H$，因为 $\hat H$ 与它自身的指数函数对易。因此两种绘景的哈氏算符是完全一样的，均记 $\hat H$。于是 Heisenberg 绘景下算符的运动方程为\textbf{Heisenberg 方程}
 \eq{
     \dv{\hat A_H}{t}
     =
@@ -353,7 +354,6 @@ $\hat A_S$ 的平均值为 $\ev{A_S}(t)=\mel{\Psi(t)}{\hat A_S}{\Psi(t)}$，其�
     =
     \frac{1}{\i\hbar}[\hat A_H,\hat H].
 }
-这称为\textbf{Heisenberg 方程}。
 若 $\hat A_S(t)$ 本身含时，比如外场或人为调节的测量装置带来一个显含 $t$ 的算符，只需类似地定义 $\hat A_H(t)=U^\dagger(t,t_0)\hat A(t)U(t,t_0)$，随后乘法求导还多出一项：
 \eq{
     \dv{\hat A_H}{t}
@@ -405,8 +405,6 @@ $\hat A_S$ 的平均值为 $\ev{A_S}(t)=\mel{\Psi(t)}{\hat A_S}{\Psi(t)}$，其�
     \dv{\hat A_H}{t}=0.
 }
 因此 $\hat A$ 对应守恒量。例如自由粒子 $V=0$ 时，$[\hat{\bm p},\hat H]=0$，动量守恒；若势能具有空间平移或旋转对称性，相应的动量或角动量也会守恒。这与经典力学中“对称性给出守恒量”的思想一致，后文场论中仍会反复使用。
-
-最后还有\textbf{Dirac 绘景}，态矢和算符都含时。更多是在（微扰）相互作用中使用，故也称\textbf{相互作用绘景}。方法是，尝试将哈氏量分解为 $\hat H = \hat H_0 + \hat H_I$，其中 $\hat H_0$ 是某个参考哈氏量，$\hat H_I$ 是相对于 $\hat H_0$ 的“扰动”。随后（取 $t_0=0$）定义$\ket{\Psi_D(t)}=\e^{-\frac{\i}{\hbar}\hat H_0t}\ket{\Psi(t)}$，$\hat A_D(t)= \e^{\frac{\i}{\hbar}\hat H_I t} \hat A_S \e^{-\frac{\i}{\hbar}\hat H_I t}$，其中 $U_0$ 是某个参考哈氏量 $\hat H_0$ 的演化算符。
 
 最后来看看复合系统的态，称为\textbf{复合态}。如果有两个系统，态空间分别为 $\Hilbert_A$、$\Hilbert_B$，实验表明复合态属于张量积空间
 \eq{
@@ -579,7 +577,7 @@ $\hat A_S$ 的平均值为 $\ev{A_S}(t)=\mel{\Psi(t)}{\hat A_S}{\Psi(t)}$，其�
 \eq{
     W_F(g,N)=\binom{g}{N}.
 }
-这两个计数方式分别称为 Bose--Einstein 统计和 Fermi--Dirac 统计的计数基础。
+这两个计数方式分别称为 Bose-Einstein 统计和 Fermi-Dirac 统计的计数基础。
 
 若进一步考虑无相互作用粒子的热平衡，设第 $r$ 个模式能量为 $\epsilon_r$，温度 $T$ 下 $\beta=1/(k_B T)$，化学势为 $\mu$。用巨正则系综时，一个模式占有数为 $n_r$ 的权重为
 \eq{
@@ -618,7 +616,377 @@ $\hat A_S$ 的平均值为 $\ev{A_S}(t)=\mel{\Psi(t)}{\hat A_S}{\Psi(t)}$，其�
     =
     \frac{1}{\e^{\beta(\epsilon_r-\mu)}+1}.
 }
-这就是常说的 Bose--Einstein 分布和 Fermi--Dirac 分布。可见两种统计并不是热力学中的人为规定，而是多粒子量子态交换性质的直接后果。
+这就是常说的 Bose-Einstein 分布和 Fermi-Dirac 分布。可见两种统计并非热力学中的人为规定，而是多粒子量子态交换性质的直接后果。
+
+\section{相互作用绘景}
+
+存在相互作用时，在 Schr\"odinger 绘景中，将哈氏量分解为 $\hat H = \hat H_0 + \hat H_1$，其中 $\hat H_0$ 是自由哈氏量，$\hat H_1$ 是相对于 $\hat H_0$ 的相互作用部分。
+下面均考虑 $\hat H_0,\hat H_1$ 不含时的情形。可建立\textbf{相互作用绘景}(interaction picture)，也称\textbf{Dirac 绘景}。
+以下讨论以 $0$ 作为绘景变换的参考时刻，如果想将参考时刻改为 $t_0$，只需要作变量替换 $t\to t- t_0$。定义
+\eq{
+    \ket{\Psi_D(t)} := \e^{\frac{\i}{\hbar}\hat H_0 t}\ket{\Psi(t)},\quad
+    \hat A_D(t) := \e^{\frac{\i}{\hbar}\hat H_0 t}\hat A\e^{-\frac{\i}{\hbar}\hat H_0 t}.
+}
+动机是使态矢和算符都含时，且演化方程各自只依赖于一个哈氏量。
+这样一来，相互作用绘景中 $\hat H_0^D = \hat H_0$，但 $\hat H_D(t)\ne\hat H$，$\hat H_1^D(t) = \hat H^D(t) - \hat H_0^D$。
+注意 Schr\"odinger 绘景与 Heisenberg 绘景的变换关系为
+\[
+    \e^{-\frac{\i}{\hbar}\hat H t}\ket{\Psi_H}=\ket{\Psi(t)},\quad
+    \e^{-\frac{\i}{\hbar}\hat H t}\hat A_H(t)\e^{\frac{\i}{\hbar}\hat H t}=\hat A.
+\]
+以 Schr\"odinger 绘景为中介，可得相互作用绘景与 Heisenberg 绘景之间的关系
+\eq{
+    \ket{\Psi_D(t)}=V(t)\ket{\Psi_H},\quad
+    \hat A_D(t)=V(t)\hat A_H(t)V^\dagger(t),\quad V(t):=\e^{\frac{\i}{\hbar}\hat H_0 t}\e^{-\frac{\i}{\hbar}\hat H t}.
+}
+其中注意幺正算符 $V$ 的共轭 $V^\dagger(t)=\e^{\frac{\i}{\hbar}\hat H t}\e^{-\frac{\i}{\hbar}\hat H_0 t}$。
+幺正变换保持等时对易关系的形式：
+\eq{
+    [\hat A_D(t),\hat B_D(t)]
+    =V(t)[\hat A_H(t),\hat B_H(t)]V^\dagger(t).
+}
+在 $t=0$ 时三种绘景一致；任意时刻均有
+\eq{
+    \mel{\Psi(t)}{\hat A_S}{\Psi(t)}
+    =\mel{\Psi_D(t)}{\hat A_D(t)}{\Psi_D(t)}
+    =\mel{\Psi_H}{\hat A_H(t)}{\Psi_H},
+}
+故三者描述相同的物理。若无相互作用，即 $\hat H_1=0$，则 $V(t)=1$，相互作用绘景退化为 Heisenberg 绘景。
+由定义和 Schr\"odinger 方程，
+\begin{align*}
+    \i\hbar\dv{t}\ket{\Psi_D(t)}
+    &=
+    -\hat H_0\ket{\Psi_D(t)}
+    +\e^{\frac{\i}{\hbar}\hat H_0 t}\hat H\ket{\Psi(t)}\\
+    &=
+    \e^{\frac{\i}{\hbar}\hat H_0 t}(\hat H-\hat H_0)\ket{\Psi(t)}
+    =\hat H_1^D(t)\ket{\Psi_D(t)}.
+\end{align*}
+因此相互作用绘景的态矢演化方程为
+\eq{
+    \i\hbar\dv{t}\ket{\Psi_D(t)}
+    =\hat H_1^D(t)\ket{\Psi_D(t)},\quad
+    \hat H_1^D(t)=\e^{\frac{\i}{\hbar}\hat H_0 t}\hat H_1\e^{-\frac{\i}{\hbar}\hat H_0 t}.
+}
+另一方面，对可能显含时间的算符 $\hat A_S(t)$ 求导，得到
+\begin{align*}
+    \dv{\hat A_D(t)}{t}
+    &=
+    \frac{\i}{\hbar}\hat H_0\hat A_D(t)
+    -\frac{\i}{\hbar}\hat A_D(t)\hat H_0
+    +\e^{\frac{\i}{\hbar}\hat H_0 t}
+    \pdv{\hat A_S(t)}{t}
+    \e^{-\frac{\i}{\hbar}\hat H_0 t}\\
+    &=
+    \frac{\i}{\hbar}[\hat H_0,\hat A_D(t)]
+    +\left(\pdv{\hat A_S(t)}{t}\right)_D.
+\end{align*}
+这就是相互作用绘景的算符演化方程；若 $\hat A_S$ 不显含时间，末项为零。可见，态矢演化遵循 $\hat H_1^D(t)$ 的 Schr\"odinger 方程，算符演化遵循 $\hat H_0$ 的Heisenberg 方程。
+在 Heisenberg 绘景中，对未加相互作用的系统求出各个算符间的关系之后，加入相互作用有可能改变这些关系。不过在相互作用绘景中，加入后的算符关系，仍然与加入前在 Heisenberg 绘景中的关系相同，可以直接套用原来的公式，这就是相互作用绘景的好处。
+
+综上，相互作用绘景下，$\hat H_1^D(t)$ 的影响由态矢承载，其演化等价为
+\eq{
+    \ket{\psi_D(t)} = U_D(t,t_0)\ket{\psi_D(t_0)},\quad U_D(t,t_0) = V(t)V^\dagger(t_0),\quad
+    \i\hbar\pdv{t}U_D(t,t_0) = \hat H_1^D(t)U_D(t,t_0).
+}
+接下来，省略表示相互作用绘景标志，默认在相互作用绘景中讨论。
+设 $t\geqslant t_0$，结合初始条件 $U(t_0,t_0) = 1$，将方程的解表达为
+\eq{
+    U(t,t_0) = 1 - \frac{\i}{\hbar}\int_{t_0}^t\d{t_1} \hat H_1(t_1)U(t_1,t_0) .
+}
+不断迭代就有
+\eq{
+    U(t,t_0) = \sum_{n=0}^\infty \left(-\frac{\i}{\hbar}\right)^n \int_{t_0}^t\d{t_1}\cdots\int_{t_0}^{t_{n-1}}\d{t_n} \hat H_1(t_1)\cdots\hat H_1(t_n),
+}
+其中积分上限时刻呈降序排列 $t\geqslant t_1\geqslant \cdots \geqslant t_n\geqslant\cdots\geqslant t_0$。
+由于积分上限与积分变量相互依赖，这样的多重积分很难处理。为将每个积分的区间都扩展成 $[t_0, t]$，引入\textbf{时序乘积}或\textbf{编时乘积}的概念。无论 $t_1,\cdots,t_n$ 是否排序，这种乘积使结果一定按时间降序排列：
+\eq{
+    \Tord[A(t_1)\cdots A(t_n)] = A(t_{\sigma(1)})\cdots A(t_{\sigma(n)}),\quad t_{\sigma(1)}\geqslant \cdots \geqslant t_{\sigma(n)}.
+}
+即时间较晚的算符放在左边。比如对两个玻色型算符（$\hat A\hat B = \hat B\hat A$），
+\eq{
+    \Tord[\hat A(t_1)\hat B(t_2)]
+    =
+    \theta(t_1-t_2)\hat A(t_1)\hat B(t_2)
+    +
+    \theta(t_2-t_1)\hat B(t_2)\hat A(t_1),
+}
+其中阶跃函数为
+\[
+    \theta(t)=\begin{cases}
+        1, & t>0,\\
+        0, & t<0.
+    \end{cases}
+\]
+总之，很容易验证
+\eq{
+    \int_{t_0}^t\d{t_1}\cdots\int_{t_0}^{t_{n-1}}\d{t_n} \hat H_1(t_1)\cdots\hat H_1(t_n) = \frac{1}{n!}\int_{t_0}^t\d{t_1}\cdots\int_{t_0}^{t}\d{t_n} \Tord[\hat H_1(t_1)\cdots\hat H_1(t_n)].
+}
+因而
+\eq{
+    U(t,t_0) = \Tord\exp(-\frac{\i}{\hbar}\int_{t_0}^t\d{t'} \hat H_1(t')),
+}
+这个级数也称\textbf{Dyson 级数}，因为他将其广泛应用于后续的量子电动力学中。
+
+在散射问题中，假设 $\hat H_1$ 足够弱，粒子在远过去尚未相遇，在远未来又彼此分离，相互作用在 $t\to\pm\infty$ 时可忽略，体系渐近为自由态。设 $\ket{\alpha},\ket{\beta}$ 是 $\hat H_0$ 的本征态，比如连续动量本征态。
+相互作用绘景自由态无需演化，因为 Schr\"odinger 绘景自由态演化为 $\e^{-\frac{\i}{\hbar}\hat H_0 t}\ket{\alpha}$，转换到相互作用绘景就是 $\e^{\frac{\i}{\hbar}\hat H_0 t}\e^{-\frac{\i}{\hbar}\hat H_0 t}\ket{\alpha}=\ket{\alpha}$，态矢的确只承载相互作用的影响。
+定义 M\o ller 算符
+\[
+    \Omega_{\mathrm{in}}
+    :=U(0,-\infty)=V^\dagger(-\infty),\quad
+    \Omega_{\mathrm{out}}
+    :=U(0,+\infty)=V^\dagger(+\infty).
+\]
+\textbf{出入射散射态}就是参考时刻 $t=0$ 的相互作用绘景态矢
+\[
+    \ket{\alpha,\mathrm{in}}:=\Omega_{\mathrm{in}}\ket{\alpha},\quad
+    \ket{\beta,\mathrm{out}}:=\Omega_{\mathrm{out}}\ket{\beta}.
+\]
+它渐近于自由态，故也称\textbf{渐近态}(asymptotic state)。
+\textbf{散射算符}将入射的自由数据映为出射的自由数据：
+\eq{
+    S:=\Omega_{\mathrm{out}}^\dagger\Omega_{\mathrm{in}}
+    =U(+\infty,-\infty)
+    =\Tord\exp[-\frac{\i}{\hbar}
+    \int\d{t}\,\hat H_1(t)].
+}
+$S$ 在自由态基底下的矩阵元称为\textbf{$S$ 矩阵元}：
+\eq{
+    S_{\beta\alpha}
+    :=\mel{\beta}{S}{\alpha}
+    =\ip{\beta,\mathrm{out}}{\alpha,\mathrm{in}}.
+}
+它是入射道 $\alpha$ 跃迁至出射道 $\beta$ 的概率振幅；在渐近完备的情形下 $S$ 幺正，$S^\dagger S=1$。
+若相互作用较弱，可将 Dyson 级数按 $\hat H_1$（或耦合常数）逐阶展开，并在给定阶数截断；忽略高阶项所得的近似即为\textbf{微扰近似}。
+为了分离未发生散射的恒等部分与真正的跃迁部分，可将散射算符写为
+\eq{
+S=1+\i T,
+\qquad
+S_{\beta\alpha}
+=\ip{\beta}{\alpha}
++\i\mel{\beta}{T}{\alpha}.
+}
+其中对于连续谱 $\ip{\beta}{\alpha}=\delta(\beta-\alpha)$。
+这里 \textbf{$T$ 算符}表示 $S$ 算符中的非平凡跃迁部分。
+
+由 $S-1=-\frac{\i}{\hbar}\int\d{t}\,\hat H_1(t)U(t,-\infty)$ 和 $\hat H_0\ket{\alpha}=E_\alpha\ket{\alpha},\hat H_0\ket{\beta}=E_\beta\ket{\beta}$，有
+\[
+U(t,-\infty)\ket{\alpha}=U(t,0)\ket{\alpha,\mathrm{in}}=\e^{\frac{\i}{\hbar}\hat H_0t}\e^{-\frac{\i}{\hbar}E_\alpha t}\ket{\alpha,\mathrm{in}},
+\]
+因此
+\[
+\mel{\beta}{\hat H_1(t)U(t,-\infty)}{\alpha}=
+\e^{\frac{\i}{\hbar}(E_\beta-E_\alpha)t}
+\mathcal T_{\beta\alpha}(E_\alpha),\quad
+\mathcal T_{\beta\alpha}(E) := \mel{\beta}{\mathcal T(E)}{\alpha},
+\]
+其中以 $\mathcal T(E_\alpha)\ket{\alpha}:=\hat H_1\ket{\alpha,\mathrm{in}}$ 定义\textbf{在壳跃迁算符}。
+代回时间积分：
+\[
+S_{\beta\alpha}-\ip{\beta}{\alpha}=
+-\frac{\i}{\hbar}
+\int\d{t}\,
+\e^{\frac{\i}{\hbar}(E_\beta-E_\alpha)t}
+\mathcal T_{\beta\alpha}(E_\alpha)=
+-2\pi\i\,
+\delta(E_\beta-E_\alpha)
+\mathcal T_{\beta\alpha}(E_\alpha),
+\]
+故
+\eq{
+\i\mel{\beta}{T}{\alpha}=-2\pi\i\delta(E_\beta-E_\alpha)\mathcal T_{\beta\alpha}(E_\alpha).
+}
+其中 $\delta(E_\beta-E_\alpha)$ 体现定态散射中的能量守恒，而 $\mathcal T_{\beta\alpha}$ 包含具体相互作用所决定的散射动力学。
+
+到底如何由 $\hat H_1$ 算出 $\mathcal T(E)$？很容易知道\textbf{交织关系}
+\[ \hat H\Omega_{\mathrm{in/out}} = \Omega_{\mathrm{in/out}}\hat H_0. \]
+考虑 $\ket{\alpha,\mathrm{in/out}} = \Omega_{\mathrm{in/out}}\ket{\alpha}$ 以统一讨论 $\ket{\alpha,\mathrm{in}},\ket{\beta,\mathrm{out}}$，则
+\[\hat H\ket{\alpha,\mathrm{in/out}} =\hat H\Omega_{\mathrm{in/out}}\ket{\alpha}=\Omega_{\mathrm{in/out}}\hat H_0\ket{\alpha}=E_\alpha\Omega_{\mathrm{in/out}}\ket{\alpha}=E_\alpha\ket{\alpha,\mathrm{in/out}}.\]
+故散射态与自由态虽然是不同哈氏量的本征态，但具有相同能量本征值，即 M\o ller 算符保持能量标签。物理上，这是因为所讨论的哈氏量不显含时间，散射过程中总能量守恒。相互作用会改变波函数、动量方向和散射道，却不会改变定态散射的总能量。这里的“相同能量”正是渐近自由态与精确散射态进行匹配的条件。
+综上，写下散射态满足的方程
+\eq{
+    (E_\alpha-\hat H_0)\ket{\alpha,\mathrm{in/out}}
+    =\hat H_1\ket{\alpha,\mathrm{in/out}}.
+}
+由于 $E_\alpha$ 位于 $\hat H_0$ 连续谱上，$E_\alpha-\hat H_0$ 不可直接求逆。引入带边界条件的自由\textbf{预解算符}(resolvent)
+\eq{
+    G_0^{\pm}(E)
+    :=\lim_{\epsilon\to0^+}
+    \frac{1}{E-\hat H_0\pm\i\epsilon}.
+}
+以下可省略 $\lim_{\epsilon\to0^+}$。
+通解还包含齐次方程 $(E_\alpha-\hat H_0)\ket{\alpha}=0$ 的自由平面波解，得\textbf{Lippmann-Schwinger 方程}
+\eq{
+    \ket{\alpha,\mathrm{in/out}}
+    =\ket{\alpha}+G_0^\pm(E_\alpha)\hat H_1\ket{\alpha,\mathrm{in/out}}.
+}
+我们之前用 $\ket{\alpha,\mathrm{in}}$ 定义 $\mathcal T(E)$，于是
+\eq{
+\mathcal T(E)=\hat H_1+\hat H_1G_0^{+}(E)\mathcal T(E)=\hat H_1+\hat H_1G_0^{+}(E)\hat H_1+\cdots.
+}
+这称为\textbf{Born 级数}。
+
+方程的另一种写法是谱分解。设 $\{\ket{\sigma}\}$ 是 $\hat H_0$ 的连续谱完备本征态，满足 $1=\int\d{\sigma}\op{\sigma}$。
+若 $\sigma$ 还包含离散量子数，$\int\d{\sigma}$ 约定也包含对它们求和。将完备关系插入预解算符，得到谱分解
+\eq{
+    G_0^\pm(E)
+    =\int\d{\sigma}
+    \frac{\op{\sigma}}{E-E_\sigma\pm\i\epsilon}.
+}
+于是
+\[
+    \ket{\alpha,\mathrm{in}}
+    =\ket{\alpha}
+    +\int\d{\sigma}\ket{\sigma}
+    \frac{\mel{\sigma}{\hat H_1}{\alpha,\mathrm{in}}}
+    {E_\alpha-E_\sigma+\i\epsilon},\quad
+    \ket{\alpha,\mathrm{out}}
+    =\ket{\alpha}
+    +\int\d{\sigma}\ket{\sigma}
+    \frac{\mel{\sigma}{\hat H_1}{\alpha,\mathrm{out}}}
+    {E_\alpha-E_\sigma-\i\epsilon}.
+\]
+如果方程左乘某个 $\hat H_0$ 本征态 $\bra{\beta}$，则
+\[
+    \ip{\beta}{\alpha,\mathrm{in/out}}=\ip{\beta}{\alpha} +\frac{1}{E_\alpha-E_\beta\pm\i\epsilon} \mel{\beta}{\hat H_1}{\alpha,\mathrm{in/out}}.
+\]
+但如果不是本征态，比如取坐标表象，则
+\[
+    \psi_{\alpha,\mathrm{in/out}}(\bm r) = \phi_\alpha(\bm r) + \int\d[3]{r'}\mel{\bm r}{G_0^{\pm}(E_\alpha)}{\bm r'} (\hat H_1\psi_{\alpha,\mathrm{in/out}})(\bm r').
+\]
+其中 $\phi_\alpha(\bm r):=\ip{\bm r}{\alpha}$ 是平面波。
+考虑非相对论二体运动，取\textbf{质心系}最为简单：
+\[
+    M=m_1+m_2,\quad \mu=\frac{m_1m_2}{M},\quad
+    \bm R=\frac{m_1\bm r_1+m_2\bm r_2}{M},\quad
+    \bm r=\bm r_1-\bm r_2,
+\]
+$\mu$ 称为约化质量。并定义总动量和相对动量
+\[
+    \bm P=\bm p_1+\bm p_2,\quad
+    \bm p=\mu\left(\frac{\bm p_1}{m_1}-\frac{\bm p_2}{m_2}\right).
+\]
+若相互作用仅依赖相对坐标，则
+\[
+    \hat H=\frac{\hat{\bm P}^2}{2M}
+    +\frac{\hat{\bm p}^2}{2\mu}+V(\hat{\bm r}).
+\]
+质心系中 $\bm P=\bm 0$，两体散射遂化为质量为 $\mu$ 的单粒子散射，散射角就是入射与出射相对动量之间的夹角。
+自由项是 $\hat H_0=\hat{\bm p}^2/2\mu$，势能项是 $\hat H_1=V(\hat{\bm r})$，坐标表象也就是 $\hat H_1\psi(\bm r)=V(\bm r)\psi(\bm r)$，显然动量本征态的确也是 $\hat H_0$ 本征态。
+波矢模长为 $k=\sqrt{2\mu E}/\hbar$。
+自由预解算符的坐标表象为
+\eq{
+    \mel{\bm r}{G_0^{\pm}(E)}{\bm r'}
+    = \int\frac{\d[3]{p}}{(2\pi\hbar)^3}\frac{\e^{\pm\i\bm p\cdot(\bm r-\bm r')/\hbar}}{E-\frac{\bm p^2}{2\mu}\pm\i\epsilon}  = -\frac{\mu}{2\pi\hbar^2}
+    \frac{\e^{\pm\i k|\bm r-\bm r'|}}{|\bm r-\bm r'|}.
+}
+$\e^{\pm\i k r}/r$ 就是出射、入射的球面波的形式，因为演化 $\e^{-\i \omega t}\e^{\pm\i k r}/r$ 的波峰随时间分别向更大、更小的 $r$ 传播。
+因此 $G_0^+$ 产生出射球面波并规定入态，$G_0^-$ 产生入射球面波并规定出态。
+
+
+对于 $\beta\ne\alpha$ 的真正跃迁，恒等算符没有贡献，概率振幅就是 $\mel{\beta}{\i T}{\alpha}$。若初、末态未归一化，按照 Born 规则，跃迁概率应写为
+\eq{
+    P_{\alpha\to\beta}
+    =\frac{|\mel{\beta}{\i T}{\alpha}|^2}
+    {\ip{\alpha}\ip{\beta}}
+    =\frac{4\pi^2\delta^2(E_\beta-E_\alpha)
+    |\mathcal T_{\beta\alpha}(E_\alpha)|^2}
+    {\ip{\alpha}\ip{\beta}}.
+}
+归一化波包的分母为 $1$；动量本征态则是广义本征态，分母含有 $\delta(\bm 0)$，不能省略。此外，上式还出现了能量 Dirac 函数的平方。设相互作用持续时间为 $\tau$，由
+\eq{
+    2\pi\hbar\delta(E)
+    =\lim_{\tau\to\infty}
+    \int_{-\tau/2}^{\tau/2}\d{t}\,
+    \e^{\frac{\i}{\hbar}Et},\quad
+    \delta(0)=\frac{\tau}{2\pi\hbar},
+}
+可将它理解为
+\eq{
+    \delta^2(E_\beta-E_\alpha)
+    =\frac{\tau}{2\pi\hbar}\delta(E_\beta-E_\alpha).
+}
+因此，先将振幅模方除以初、末态的归一化因子得到概率，再将这一概率除以作用时间，得到单位时间的跃迁概率
+\eq{
+    \Gamma_{\alpha\to\beta}
+    :=\frac{P_{\alpha\to\beta}}{\tau}
+    =\frac{2\pi}{\hbar}
+    \frac{|\mathcal T_{\beta\alpha}(E_\alpha)|^2}
+    {\ip{\alpha}\ip{\beta}}
+    \delta(E_\beta-E_\alpha).
+}
+对于连续末态，还要对实验无法分辨的末态求和。把末态归一化因子吸收到末态数 $\d{\rho_\beta}$ 中，并取归一化的初态，便有
+\eq{
+    \d{\Gamma_{\alpha\to\beta}}
+    =\frac{2\pi}{\hbar}|\mathcal T_{\beta\alpha}(E_\alpha)|^2
+    \delta(E_\beta-E_\alpha)\d{\rho_\beta}.
+}
+这就是 Fermi 黄金律的散射形式。可见，$S$ 矩阵元的模方首先给出跃迁概率，除以作用时间后才得到跃迁率。
+
+考虑非相对论两体散射。沿用前文质心系中的相对坐标和约化质量，并将入射波振幅取为 $1$。从入射道 $\alpha$ 到出射道 $\beta$ 的渐近波函数为
+\eq{
+    \psi(\bm r)\xrightarrow{r\to\infty}
+    \e^{\frac{\i}{\hbar}\bm p_\alpha\vdot\bm r}
+    +f_{\beta\alpha}(\Omega)
+    \frac{\e^{\frac{\i}{\hbar}p_\beta r}}{r}.
+}
+第一项是入射平面波，第二项是出射球面波，其系数 $f_{\beta\alpha}(\Omega)$ 称为\textbf{散射振幅}。对于单道弹性散射，$p_\alpha=p_\beta=p$；沿用 $\ip{\bm p'}{\bm p}=\delta(\bm p'-\bm p)$，有
+\eq{
+    f(\bm p',\bm p)
+    =-4\pi^2\mu\hbar
+    \mel{\bm p'}{\mathcal T(E+\i\epsilon)}{\bm p},\quad
+    E=\frac{p^2}{2\mu},\quad \bm p'=p\hat{\bm r}.
+}
+
+实验上常用\textbf{束流打靶}：大量入射粒子形成束流，轰击近似静止的靶粒子，再统计各方向的出射粒子。散射道 $\gamma$ 的概率流密度为
+\eq{
+    \bm j_\gamma
+    =\frac{\hbar}{2\mu_\gamma\i}
+    (\psi_\gamma^*\grad\psi_\gamma
+    -\psi_\gamma\grad\psi_\gamma^*),\quad
+    v_\gamma=\frac{p_\gamma}{\mu_\gamma}.
+}
+若束流的粒子数密度为 $n_{\mathrm b}$，其入射流密度为
+\eq{
+    \Phi_{\mathrm{in}}=n_{\mathrm b}v_{\mathrm{rel}},\quad
+    v_{\mathrm{rel}}=|\bm v_1-\bm v_2|=\frac{p_\alpha}{\mu_\alpha}.
+}
+固定靶实验中 $\bm v_2=0$。若靶中有 $N_{\mathrm T}$ 个彼此独立的散射中心，则以跃迁率除以入射流密度
+\eq{
+    \Gamma_{\mathrm{sc}}=N_{\mathrm T}\Phi_{\mathrm{in}}\sigma
+}
+定义\textbf{散射截面} $\sigma$，其量纲为面积；进一步定义\textbf{微分截面}
+\eq{
+    \dv{\sigma}{\Omega}
+    :=\frac{1}{N_{\mathrm T}\Phi_{\mathrm{in}}}
+    \dv{\Gamma_{\mathrm{sc}}}{\Omega},\quad
+    \sigma=\int\d{\Omega}\dv{\sigma}{\Omega}.
+}
+将上述渐近波代入概率流公式，入射流和出射球面波的径向流分别为
+\eq{
+    j_{\mathrm{in}}=v_\alpha,\quad
+    j_{\mathrm{sc}}^{(r)}
+    =\frac{v_\beta}{r^2}|f_{\beta\alpha}(\Omega)|^2.
+}
+立体角 $\d\Omega$ 对应球面面积 $r^2\d\Omega$。微分截面就是单位入射流所产生的出射流，因而
+\eq{
+    \dv{\sigma_{\beta\leftarrow\alpha}}{\Omega}
+    =\frac{r^2j_{\mathrm{sc}}^{(r)}}{j_{\mathrm{in}}}
+    =\frac{v_\beta}{v_\alpha}|f_{\beta\alpha}(\Omega)|^2.
+}
+对于弹性散射，$v_\beta=v_\alpha$，故 $\dv*{\sigma}{\Omega}=|f(\Omega)|^2$。
+
+固定靶实验中，一部分动能用于质心整体运动；若质量为 $m_1$ 的粒子轰击静止的质量为 $m_2$ 的靶，其可用于相对运动的能量为
+\eq{
+    E_{\mathrm{cm}}=\frac{1}{2}\mu v_{\mathrm{rel}}^2
+    =\frac{m_2}{m_1+m_2}E_{\mathrm{lab}}.
+}
+\textbf{对撞机}令两束粒子反向运动，可使质心近似静止，从而将更多束流能量用于相对运动和散射过程。两束粒子数密度分别为 $n_1,n_2$ 时，事件率仍可写成
+\eq{
+    \Gamma_{\mathrm{sc}}=\mathcal L\sigma,\quad
+    \mathcal L:=\int\d[3]{x}\,n_1(\bm x)n_2(\bm x)v_{\mathrm{rel}},
+}
+其中 $\mathcal L$ 称为\textbf{亮度}。不过实际对撞机中的粒子速度通常接近光速，此时上述非相对论公式不再适用，必须改用相对论运动学，后续再讨论。
 
 \section{路径积分方法}
 
@@ -639,7 +1007,7 @@ $\hat A_S$ 的平均值为 $\ev{A_S}(t)=\mel{\Psi(t)}{\hat A_S}{\Psi(t)}$，其�
 
 如果关注于概率振幅的路径依赖性，那么可以将把量子理论改写为另一种形式：对所有可能的历史求和。这一方法称为\textbf{路径积分}(path integral)法。换言之，Schr\"odinger 方法关注于如何求解给定的 $\hat H$ 方程，路径积分则关注于如何计算 Feynman 核。
 我们曾在经典力学中学习过最小作用量原理。路径积分可以对此有一个进一步的解释。
-量子粒子从初始点运动到末点时，并不是只选取某一条经典轨道，而是所有可能路径都对概率振幅有贡献；每条路径的贡献是一个相位，其相位由该路径的作用量决定。经典轨道之所以在宏观极限下显得特殊，是因为它附近的相位相干叠加，而远离经典轨道的路径相位快速振荡，彼此抵消。
+量子粒子从初始点运动到末点时，并非只选取某一条经典轨道，而是所有可能路径都对概率振幅有贡献；每条路径的贡献是一个相位，其相位由该路径的作用量决定。经典轨道之所以在宏观极限下显得特殊，是因为它附近的相位相干叠加，而远离经典轨道的路径相位快速振荡，彼此抵消。
 
 \begin{figure}
     \centering
@@ -685,7 +1053,7 @@ $\hat A_S$ 的平均值为 $\ev{A_S}(t)=\mel{\Psi(t)}{\hat A_S}{\Psi(t)}$，其�
 \caption{路径积分}
 \end{figure}
 
-为使化简结果好看一些，我们采取这样一种动量本征矢约定，与之前的定义相差因子：
+为使化简方便一些，我们采取这样一种动量本征矢约定，与之前的定义相差因子：
 \eq{
     \int \frac{\d[3]{p}}{(2\pi\hbar)^3}\op{\bm p}:=1 \im \ip{\bm p}{\bm p'} = (2\pi\hbar)^3\delta(\bm p-\bm p'),\quad \ip{\bm x}{\bm p} = \e^{\frac{\i}{\hbar}\bm p\cdot\bm x}.
 }
@@ -720,24 +1088,17 @@ $\hat A_S$ 的平均值为 $\ev{A_S}(t)=\mel{\Psi(t)}{\hat A_S}{\Psi(t)}$，其�
     &= \int\frac{\d[3]{p_j}}{(2\pi\hbar)^3} \exp(\frac{\i}{\hbar}\epsilon \left(\bm p_j\vdot\frac{\bm x_{j+1}-\bm x_j}{\epsilon}-H\right)) + O(\epsilon^2),
 \end{align*}
 即
-\[
-    \ip{\bm x_b,t_b}{\bm x_a,t_a} = \lim_{N\to\infty} \int\prod_{j=1}^{N-1}\d[3]{x_j} \prod_{j=0}^{N-1} \frac{\d[3]{p_j}}{(2\pi\hbar)^3} \exp(\frac{\i}{\hbar}\epsilon\sum_{j=0}^{N-1}\left(\bm p_j\vdot\frac{\bm x_{j+1}-\bm x_j}{\epsilon}-H\right)),
-\]
-这称为\textbf{相空间形式的路径积分}。由于这是对任意路径遍历，因此至少在形式上是泛函的积分，常记为
-\eq{
-    \tcbhighmath{
-    \ip{\bm x_b,t_b}{\bm x_a,t_a}
-    =
-    \int_{\bm x(t_a)=\bm x_a}^{\bm x(t_b)=\bm x_b}
+\begin{align}
+    \ip{\bm x_b,t_b}{\bm x_a,t_a} &= \lim_{N\to\infty} \int\prod_{j=1}^{N-1}\d[3]{x_j} \prod_{j=0}^{N-1} \frac{\d[3]{p_j}}{(2\pi\hbar)^3} \exp(\frac{\i}{\hbar}\epsilon\sum_{j=0}^{N-1}\left(\bm p_j\vdot\frac{\bm x_{j+1}-\bm x_j}{\epsilon}-H\right)),\notag \\
+    &=: \tcbhighmath{\int_{\bm x(t_a)=\bm x_a}^{\bm x(t_b)=\bm x_b}
     \mathcal D\bm x\,\mathcal D\bm p\,
     \exp(
         \frac{\i}{\hbar}
         \int_{t_a}^{t_b}\d{t}
         \left[\bm p\cdot\dot{\bm x}-H(\bm x,\bm p)\right]
-    ).
-    }
-}
-其中 $\mathcal D\bm x\,\mathcal D\bm p$ 不是普通有限维积分测度，而是上述离散化极限的简写。严格上来说无穷维函数空间很难有良定义的测度，但在物理上一般总采取离散方法去计算路径积分，因此 $\mathcal D$ 可以仅作为形式记号。在路径积分表达式中，只涉及到演化算符，不涉及 Hilbert 空间上
+    ).}
+\end{align}
+这称为\textbf{相空间形式的路径积分}。由于这是对任意路径遍历，因此至少在形式上是泛函的积分，但 $\mathcal D\bm x\,\mathcal D\bm p$ 不是普通有限维积分测度，而是上述离散化极限的简写。严格上来说无穷维函数空间很难有良定义的测度，但在物理上一般总采取离散方法去计算路径积分，因此 $\mathcal D$ 可以仅作为形式记号。在路径积分表达式中，只涉及到演化算符，不涉及 Hilbert 空间上
 的算符和态矢，但积分结果却给出了像 Feymnan 核这样的量子跃迁振幅，已然实现了量子化，但显式上避开了算符或态矢。
 这样的量子化方法称为\textbf{路径积分量子化}。
 
@@ -776,20 +1137,13 @@ $\hat A_S$ 的平均值为 $\ev{A_S}(t)=\mel{\Psi(t)}{\hat A_S}{\Psi(t)}$，其�
     \ip{\bm x_b,t_b}{\bm x_a,t_a}
     =
     \int_{\bm x(t_a)=\bm x_a}^{\bm x(t_b)=\bm x_b}
-    \mathcal D \bm x\,
-    \exp(
-        \frac{\i}{\hbar}S[\bm x]
-    ),
-    }
+    \mathcal D \bm x\, \e^{\frac{\i}{\hbar}S[\bm x]},
+    }\enspace S[\bm x]=\int_{t_a}^{t_b}\d{t} L(\bm x,\dot{\bm x}),\enspace
+    L=\frac{1}{2}m\dot{\bm x}^2-V(\bm x),
 }
-其中
-\eq{
-    S[\bm x]=\int_{t_a}^{t_b}\d{t} L(\bm x,\dot{\bm x}),\quad
-    L=\frac{1}{2}m\dot{\bm x}^2-V(\bm x)
-}
-就是经典作用量。
+$S$ 就是经典作用量。
 此即从 $\bm x_a$ 到 $\bm x_b$ 的总振幅等于所有路径振幅的叠加，而每条路径 $\bm x(t)$ 的振幅为 $\e^{\frac{\i}{\hbar}S[\bm x]}$。
-考虑路径的 Fréchet 变分 $q(t)\to q(t)+\delta q(t),\delta q(t_a)=\delta q(t_b)=0$。
+经典力学学过，考虑路径的 Fréchet 变分 $q(t)\to q(t)+\delta q(t),\delta q(t_a)=\delta q(t_b)=0$。
 作用量的一阶变化为
 \[\delta S
     =
@@ -804,10 +1158,7 @@ $\hat A_S$ 的平均值为 $\ev{A_S}(t)=\mel{\Psi(t)}{\hat A_S}{\Psi(t)}$，其�
         -
         \dv{t}\left(\pdv{L}{\dot q}\right)
     \right]\delta q.\]
-变分为零的充分必要条件是路径满足 Euler--Lagrange 方程
-\eq{
-    \delta S=0\iff\dv{t}\left(\pdv{L}{\dot q}\right)-\pdv{L}{q}=0.
-}
+变分为零的充分必要条件是这个大括号为零，这就是 Euler-Lagrange 方程。
 路径积分中相邻路径的相位差为 $\Delta\varphi={\Delta S}/{\hbar}$。
 当 $\hbar$ 很小时，只要 $\Delta S$ 不是很小，相位就会迅速振荡，路径贡献彼此抵消；只有在 $\delta S=0$ 的经典路径附近，作用量变化缓慢，相位能够相干叠加。因此经典极限 $\hbar\to0$ 下，路径积分由经典路径主导。这就把 Feynman 的“所有路径求和”和经典的最小作用量原理统一起来。
 
@@ -973,6 +1324,11 @@ $\hat A_S$ 的平均值为 $\ev{A_S}(t)=\mel{\Psi(t)}{\hat A_S}{\Psi(t)}$，其�
 %% 关联函数、时序 - 参考 Sean Carrol
 %% 生成泛函 - 参考《简明量子场论》
 
+前文的自由预解算符 $G_0(E) = \frac{1}{E-\hat H_0}$（不考虑边界条件）也称\textbf{Green 算符}，因为其坐标表象 $G_0(\bm x,\bm x';E) = \mel{\bm x}{G_0(E)}{\bm x'}$ 就是 Green 函数。它满足
+\[
+    (E-\hat H_0)G_0(\bm x,\bm x';E) = \delta(\bm x-\bm x').
+\]
+
 现在把这种 Green 函数语言放回量子力学中。路径积分本身给出从初态到末态的转移振幅；若想知道路径在若干中间时刻的统计性质，就在积分函数中插入相应的坐标函数。先设 $t_b>t_n>\cdots>t_1>t_a$，
 由演化算符的分片可知
 \begin{align*}
@@ -984,22 +1340,8 @@ $\hat A_S$ 的平均值为 $\ev{A_S}(t)=\mel{\Psi(t)}{\hat A_S}{\Psi(t)}$，其�
     \hat{\bm x}\hat U(t_1,t_a)}{\bm x_a}.
 \end{align*}
 右侧从右向左读，正是先从 $t_a$ 演化到 $t_1$，插入一次位置算符，再演化到 $t_2$，如此直到 $t_b$。因此，路径积分中的普通乘积并不对应任意顺序的算符乘积，而对应按时间先后排列好的算符乘积。
-为避免每次都假设 $t_1,\cdots,t_n$ 已经排好序，引入\textbf{时序}或\textbf{编时}符号 $\Tord$。对两个玻色型算符，
-\eq{
-    \Tord[\hat A(t_1)\hat B(t_2)]
-    =
-    \theta(t_1-t_2)\hat A(t_1)\hat B(t_2)
-    +
-    \theta(t_2-t_1)\hat B(t_2)\hat A(t_1),
-}
-其中阶跃函数为
-\[
-    \theta(t)=\begin{cases}
-        1, & t>0,\\
-        0, & t<0.
-    \end{cases}
-\]
-即时间较晚的算符放在左边。这称为\textbf{传播子}(propagator)或两点\textbf{关联函数}(correlation function)。
+
+这称为\textbf{传播子}(propagator)或两点\textbf{关联函数}(correlation function)。
 
 
 对多个算符，$\Tord$ 的含义完全类似：按时间从晚到早重排。于是对任意给定的 $t_1,\cdots,t_n$，
@@ -1067,7 +1409,7 @@ $\hat A_S$ 的平均值为 $\ev{A_S}(t)=\mel{\Psi(t)}{\hat A_S}{\Psi(t)}$，其�
 }
 
 
-\section{氢原子路径积分方法*}
+%\section{氢原子路径积分方法*}
 
 
 \section{简并态*}
@@ -1351,7 +1693,7 @@ $\hat A_S$ 的平均值为 $\ev{A_S}(t)=\mel{\Psi(t)}{\hat A_S}{\Psi(t)}$，其�
 
 \subsection{简并微扰法}
 
-若 $E_n^{(0)}$ 是简并能级，上面的非简并公式立刻出现问题：同一能级内存在 $m\neq n$ 但 $E_m^{(0)}=E_n^{(0)}$，分母为零。这不是数学技巧失效，而是物理假设错了。简并子空间中的任意线性组合都是同一零阶能量的本征态，微扰一打开，真实本征态到底接近哪一个线性组合，需要由微扰本身决定。
+若 $E_n^{(0)}$ 是简并能级，上面的非简并公式立刻出现问题：同一能级内存在 $m\neq n$ 但 $E_m^{(0)}=E_n^{(0)}$，分母为零。说明物理假设有错。简并子空间中的任意线性组合都是同一零阶能量的本征态，微扰一打开，真实本征态到底接近哪一个线性组合，需要由微扰本身决定。
 
 设简并子空间为
 \eq{
@@ -1394,7 +1736,7 @@ $\hat A_S$ 的平均值为 $\ev{A_S}(t)=\mel{\Psi(t)}{\hat A_S}{\Psi(t)}$，其�
     :=
     \mel{n,\alpha^{(0)}}{\hat V}{n,\beta^{(0)}}.
 }
-这就是一个 $g$ 维矩阵本征值问题。结论是：\textit{简并微扰论第一步不是直接套非简并公式，而是在简并子空间内对角化微扰矩阵 $V_{\alpha\beta}$。} 它的本征值就是一阶能量修正，本征向量给出正确的零阶线性组合。
+这就是一个 $g$ 维矩阵本征值问题。结论是：\textit{简并微扰论第一步并非直接套非简并公式，而是在简并子空间内对角化微扰矩阵 $V_{\alpha\beta}$。} 它的本征值就是一阶能量修正，本征向量给出正确的零阶线性组合。
 
 设微扰矩阵的本征向量记为 $c_\alpha^{(r)}$，本征值记为 $v_r$：
 \eq{
