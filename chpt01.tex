@@ -988,7 +988,7 @@ $\e^{\pm\i k r}/r$ 就是出射、入射的球面波的形式，因为演化 $\e
 }
 其中 $\mathcal L$ 称为\textbf{亮度}。不过实际对撞机中的粒子速度通常接近光速，此时上述非相对论公式不再适用，必须改用相对论运动学，后续再讨论。
 
-\section{路径积分方法}
+\section{路径积分量子化}
 
 所谓量子，就是将经典物理量提升为非对易算符，再用态矢或波函数描述概率振幅，概率振幅的平方解释为概率密度。Schr\"odinger 绘景的态矢在 $t_a,t_b$ 的演化为 $\ket{\psi(t_b)}=\hat U(t_b,t_a)\ket{\psi(t_a)}$。插入初始的位置完备关系 $\int\d[3]{x_a}\op{\bm x_a}=1$，得到
 \begin{align}
@@ -1102,24 +1102,93 @@ $\e^{\pm\i k r}/r$ 就是出射、入射的球面波的形式，因为演化 $\e
 的算符和态矢，但积分结果却给出了像 Feymnan 核这样的量子跃迁振幅，已然实现了量子化，但显式上避开了算符或态矢。
 这样的量子化方法称为\textbf{路径积分量子化}。
 
-%% 可以直接写出 Gauss 路径积分 - 参考《简明量子场论》
-
-对于非相对论哈氏量 $\hat H=\hat{\bm p}^2/2m+V(\hat{\bm x})$，动量是简单的二次项，故可进一步对动量积分。配方一下：
+先给出 Gauss 路径积分的形式公式。设 $A$ 是对称可逆的核，并记
 \eq{
-    \bm p_j\cdot\dot{\bm x}_j-\frac{\bm p_j^2}{2m}
-    =
-    -\frac{1}{2m}\left(\bm p_j-m\dot{\bm x}_j\right)^2
-    +\frac{m}{2} \dot{\bm x}_j^2,\quad \dot{\bm x}_j = \frac{\bm x_{j+1}-\bm x_j}{\epsilon}.
+    \xi A\xi:=\int\d{t}\d{t'}\,\xi(t)A(t,t')\xi(t'),\quad
+    J\xi:=\int\d{t}\,J(t)\xi(t).
 }
-因此每个 $p_j$ 积分只贡献一个归一化因子，积分为 Gauss 型
+配方得到
+\eq{
+    -\frac{1}{2}\xi A\xi+J\xi
+    =-\frac{1}{2}(\xi-A^{-1}J)A(\xi-A^{-1}J)
+    +\frac{1}{2}JA^{-1}J.
+}
+为说明从普通积分到路径积分的过渡，将时间区间离散成 $N$ 个积分变量，并把时间步长吸收到矩阵和向量的定义中：
+\eq{
+    \xi(t)\longrightarrow\bm\xi=(\xi_1,\ldots,\xi_N)^\mathrm T,
+    \quad \xi A\xi\longrightarrow\bm\xi^\mathrm T A_N\bm\xi,
+    \quad J\xi\longrightarrow\bm J_N^\mathrm T\bm\xi,
+    \quad \mathcal D\xi\longrightarrow C_N\d[N]{\xi}.
+}
+于是路径积分在有限 $N$ 时由普通多重积分近似：
+\eq{
+    I_N[\bm J_N]
+    :=C_N\int\d[N]{\xi}\,
+    \exp\{\frac{\i}{\hbar}
+    [-\frac{1}{2}\bm\xi^\mathrm T A_N\bm\xi
+    +\bm J_N^\mathrm T\bm\xi]\}.
+}
+令 $\bm\eta:=\bm\xi-A_N^{-1}\bm J_N$。这是平移变换，Jacobi 行列式为 $1$，故 $\d[N]{\xi}=\d[N]{\eta}$。有限维的配方是严格的，因而
 \[
-    \int \frac{\d[3]{p_j}}{(2\pi\hbar)^3} \exp(-\frac{\i\epsilon}{2m\hbar}\left(\bm p_j-m\dot{\bm x}_j\right)^2) = \frac{1}{(2\pi\hbar)^3}\left(\frac{\pi}{{\i\epsilon}/{2m\hbar}}\right)^{3/2} = \left(\frac{m}{2\pi\i\hbar\epsilon}\right)^{3/2},
+    I_N[\bm J_N]
+    =C_N\exp(\frac{\i}{2\hbar}
+    \bm J_N^\mathrm T A_N^{-1}\bm J_N)
+    \int\d[N]{\eta}\,
+    \exp(-\frac{\i}{2\hbar}\bm\eta^\mathrm T A_N\bm\eta)=:\mathcal N_{A,N}\exp(\frac{\i}{2\hbar}
+    \bm J_N^\mathrm T A_N^{-1}\bm J_N).
 \]
-于是
+余下的积分与 $\bm J_N$ 无关。根据 Fresnel--Gauss 公式\footnote{严格地说，实时积分是振荡积分，需要加入 $\i\epsilon$ 并选定平方根分支。若矩阵不定，还会出现由其符号差决定的 Fresnel 相位。}
+\eq{
+    \int \d[n]{\eta}\,
+    \exp(\frac{\i}{2}\bm\eta^\mathrm T B\bm\eta)
+    =\frac{(2\pi\i)^{n/2}}{\sqrt{\det B}},
+}
+可知 $\mathcal N_{A,N}\propto(\det A_N)^{-1/2}$，比例系数由测度 $C_N$ 和 $\i\epsilon$ 规定决定。
+最后令时间步长趋于零。此时 $A_N^{-1}$ 趋于逆核 $A^{-1}$，满足
+\eq{
+    \int\d{t''}\,A(t,t'')A^{-1}(t'',t')=\delta(t-t'),
+}
+并且 $\bm J_N^\mathrm T A_N^{-1}\bm J_N\to JA^{-1}J$。将 $\mathcal N_A:=\lim_{N\to\infty}\mathcal N_{A,N}$ 作为形式归一化因子，便得到\textbf{Gauss 路径积分}
+\eq{
+    \int\mathcal D\xi\,
+    \e^{\frac{\i}{\hbar}(-\frac{1}{2}\xi A\xi+J\xi)}
+    =\mathcal N_A\,
+    \e^{\frac{\i}{2\hbar}JA^{-1}J},\quad
+    \mathcal N_A:=\int\mathcal D\xi\,
+    \e^{-\frac{\i}{2\hbar}\xi A\xi}.
+}
+连续极限中的 $\det A$ 称为泛函行列式，只作离散极限意义下的形式理解。可见，平移积分变量将所有 $J$ 依赖性集中到 $JA^{-1}J/2$，而 $\mathcal N_A$ 只负责归一化。
+
+现在取非相对论哈氏量 $\hat H=\hat{\bm p}^2/2m+V(\hat{\bm x})$。相空间作用量关于 $\bm p$ 是二次型，在上式中令
 \[
-    \ip{\bm x_b,t_b}{\bm x_a,t_a}
-    =
-    \lim_{N\to\infty}
+    A(t,t')=\frac{1}{m}\delta(t-t'),\quad
+    J(t)=\dot{\bm x}(t),\quad
+    A^{-1}(t,t')=m\delta(t-t'),
+\]
+立即得到
+\[
+    \int\mathcal D\bm p\,
+    \exp[\frac{\i}{\hbar}\int\d{t}
+    \left(\bm p\vdot\dot{\bm x}-\frac{\bm p^2}{2m}\right)]
+    =\mathcal N_p
+    \exp[\frac{\i}{\hbar}\int\d{t}\,\frac{m}{2}\dot{\bm x}^2].
+\]
+离散化后，这一归一化因子正是各时间片上普通 Gauss 积分的乘积：
+\[
+    \int \frac{\d[3]{p_j}}{(2\pi\hbar)^3}
+    \exp[-\frac{\i\epsilon}{2m\hbar}
+    (\bm p_j-m\dot{\bm x}_j)^2]
+    =\left(\frac{m}{2\pi\i\hbar\epsilon}\right)^{3/2},\quad
+    \dot{\bm x}_j=\frac{\bm x_{j+1}-\bm x_j}{\epsilon}.
+\]
+于是得\textbf{坐标空间的路径积分}
+\begin{align}
+    \ip{\bm x_b,t_b}{\bm x_a,t_a}&=
+    \tcbhighmath{
+    \int_{\bm x(t_a)=\bm x_a}^{\bm x(t_b)=\bm x_b}
+    \mathcal D \bm x\, \e^{\frac{\i}{\hbar}S[\bm x]},
+    }\\
+    &=\lim_{N\to\infty}
     \left(\frac{m}{2\pi\i\hbar\epsilon}\right)^{3N/2}
     \int\prod_{j=1}^{N-1}\d[3]{x_j}
     \exp(
@@ -1129,20 +1198,10 @@ $\e^{\pm\i k r}/r$ 就是出射、入射的球面波的形式，因为演化 $\e
             \frac{m}{2}\dot{\bm x}_j^2
             -V(\bar{\bm x}_j)
         \right]
-    ),
-\]
-这称为\textbf{坐标空间的路径积分}。可以把这个系数吸收进形式记号 $\mathcal D x$ 中，最终得到
-\eq{
-    \tcbhighmath{
-    \ip{\bm x_b,t_b}{\bm x_a,t_a}
-    =
-    \int_{\bm x(t_a)=\bm x_a}^{\bm x(t_b)=\bm x_b}
-    \mathcal D \bm x\, \e^{\frac{\i}{\hbar}S[\bm x]},
-    }\enspace S[\bm x]=\int_{t_a}^{t_b}\d{t} L(\bm x,\dot{\bm x}),\enspace
-    L=\frac{1}{2}m\dot{\bm x}^2-V(\bm x),
-}
-$S$ 就是经典作用量。
-此即从 $\bm x_a$ 到 $\bm x_b$ 的总振幅等于所有路径振幅的叠加，而每条路径 $\bm x(t)$ 的振幅为 $\e^{\frac{\i}{\hbar}S[\bm x]}$。
+    ), \notag
+\end{align}
+其中经典作用量为 $S=\int_{t_a}^{t_b}\d{t} L(\bm x,\dot{\bm x}),L=\frac{1}{2}m\dot{\bm x}^2-V(\bm x)$，归一化系数吸收进形式记号 $\mathcal D x$ 中。
+此即从 $\bm x_a$ 到 $\bm x_b$ 的总振幅等于所有路径振幅的叠加，而每条路径 $\bm x(t)$ 的振幅为 $\e^{\frac{\i}{\hbar}S}$。
 经典力学学过，考虑路径的 Fréchet 变分 $q(t)\to q(t)+\delta q(t),\delta q(t_a)=\delta q(t_b)=0$。
 作用量的一阶变化为
 \[\delta S
@@ -1160,10 +1219,9 @@ $S$ 就是经典作用量。
     \right]\delta q.\]
 变分为零的充分必要条件是这个大括号为零，这就是 Euler-Lagrange 方程。
 路径积分中相邻路径的相位差为 $\Delta\varphi={\Delta S}/{\hbar}$。
-当 $\hbar$ 很小时，只要 $\Delta S$ 不是很小，相位就会迅速振荡，路径贡献彼此抵消；只有在 $\delta S=0$ 的经典路径附近，作用量变化缓慢，相位能够相干叠加。因此经典极限 $\hbar\to0$ 下，路径积分由经典路径主导。这就把 Feynman 的“所有路径求和”和经典的最小作用量原理统一起来。
+当 $\hbar$ 很小时，只要 $\Delta S$ 不是很小，相位就会迅速振荡，路径贡献彼此抵消；只有在 $\delta S=0$ 的经典路径附近，作用量变化缓慢，相位能够相干叠加。因此经典极限 $\hbar\to0$ 下，路径积分由经典路径主导。因而 Feynman 的路径积分量子化，能直接导出经典的最小作用量原理。
 
-虽然归一化系数 $\lim_{N\to\infty}\left({m}/{2\pi\i\hbar\epsilon}\right)^{3N/2}$ 发散，但整个式子是收敛的 —— 显然 Feynman 核有限！坐标积分应当有反因子与之相消。为直接计算来体现这一点，考虑自由粒子 $V=0$。
-注意 $\hat H$ 只含 $\hat{\bm p}$，于是 $\e^{-\frac{\i}{\hbar}\frac{\hat{\bm p}^2}{2m} (t_b-t_a)}\ket{\bm p}=\e^{-\frac{\i}{\hbar}\frac{{\bm p}^2}{2m} (t_b-t_a)}\ket{\bm p}$，故通常的办法是直接插入动量完备关系
+虽然系数 $\left({m}/{2\pi\i\hbar\epsilon}\right)^{3N/2}$ 发散，但整个式子仍收敛 —— 显然（经 $\i\epsilon$ 规定后的）Feynman 核有限！坐标积分应当有反因子与之相消。为直接计算来体现这一点，考虑自由粒子 $V=0$。由于 $\hat H=\hat{\bm p}^2/2m$ 只含 $\hat{\bm p}$，在动量表象中对角，于是 $\e^{-\frac{\i}{\hbar}\frac{\hat{\bm p}^2}{2m} (t_b-t_a)}\ket{\bm p}=\e^{-\frac{\i}{\hbar}\frac{{\bm p}^2}{2m} (t_b-t_a)}\ket{\bm p}$，故通常的办法是直接插入动量完备关系并应用普通 Gauss 积分得
 \begin{align*}
 \ip{\bm x_b,t_b}{\bm x_a,t_a}&=\mel{\bm x_b}{\e^{-\frac{\i}{\hbar}\hat H (t_b-t_a)}}{\bm x_a}=
 \int \frac{\dd[3]{p}}{(2\pi\hbar)^3}
@@ -1172,83 +1230,57 @@ $S$ 就是经典作用量。
 -\frac{\i}{\hbar}\frac{\bm p^2}{2m}(t_b-t_a))\\
 &=\exp\frac{\i m(\bm x_b-\bm x_a)^2}{2\hbar (t_b-t_a)}
 \int \frac{\dd[3]{q}}{(2\pi\hbar)^3}
-\exp(-\frac{\i(t_b-t_a)}{2m\hbar}\bm q^2)\\
+\exp\frac{-\i(t_b-t_a)\bm q^2}{2m\hbar}\\
 &=\left(\frac{m}{2\pi\i\hbar (t_b-t_a)}\right)^{3/2}
     \exp\frac{\i m(\bm x_b-\bm x_a)^2}{2\hbar (t_b-t_a)}.
 \end{align*}
 其中配方法取 $\bm q=\bm p-m\frac{\bm x_b-\bm x_a}{t_b-t_a}$。
-考虑坐标空间路径积分法，$V=0$ 使 $\mathcal D\bm x$ 部分也会类似于 Gauss 积分，即 $\frac{\i m\epsilon}{2\hbar}\left(\frac{\bm x_{j+1}-\bm x_j}{\epsilon}\right)^2=\frac{\i m}{2\hbar\epsilon}(\bm x_{j+1}-\bm x_j)^2$ 项。
+下面从路径积分复核这一结果，并具体计算其归一化因子。
+$V=0$ 使 $\mathcal D\bm x$ 部分也会类似于 Gauss 积分，即 $\frac{\i m\epsilon}{2\hbar}\left(\frac{\bm x_{j+1}-\bm x_j}{\epsilon}\right)^2=\frac{\i m}{2\hbar\epsilon}(\bm x_{j+1}-\bm x_j)^2$ 项。
 当然，由于 $\prod_{j=1}$ 与 $\sum_{j=0}$ 不对应，且 $\bm x_{j+1}-\bm x_j$ 会产生交叉项，因此稍微复杂一些。
-把路径 $\bm x=\bm x_\mathrm{cl}+\bm\eta$ 拆成经典直线路径 $\bm x_\mathrm{cl}=\bm x_a+\frac{\bm x_b-\bm x_a}{t_b-t_a}(t-t_a)$ 与涨落 $\bm\eta$，从而形式上
+把路径 $\bm x=\bm x_\mathrm{cl}+\bm\eta$ 拆成经典直线路径 $\bm x_\mathrm{cl}=\bm x_a+\frac{\bm x_b-\bm x_a}{t_b-t_a}(t-t_a)$ 与涨落 $\bm\eta$，满足 $\bm\eta(t_a)=\bm\eta(t_b)=0$。
+经典路径满足 $\ddot{\bm x}_\mathrm{cl}=0$，结合涨落的零端点条件，作用量中的交叉项消失。从而
 \[
-    \int \mathcal D \bm x\,\exp(\frac{\i m}{2\hbar}\int\d{t}\dot{\bm x}^2) = \exp\frac{\i m(\bm x_b-\bm x_a)^2}{2\hbar (t_b-t_a)} \int \mathcal D \bm \eta\,\exp(\frac{\i m}{2\hbar}\int\d{t}\dot{\bm \eta}^2).
+    \int_{\bm x(t_a)=\bm x_a}^{\bm x(t_b)=\bm x_b}
+    \mathcal D\bm x\,
+    \exp(\frac{\i m}{2\hbar}\int\d{t}\dot{\bm x}^2)=\exp\frac{\i m(\bm x_b-\bm x_a)^2}{2\hbar(t_b-t_a)}
+    \int_{\bm\eta(t_a)=0}^{\bm\eta(t_b)=0}
+    \mathcal D\bm\eta\,
+    \exp(\frac{\i m}{2\hbar}\int\d{t}\dot{\bm\eta}^2).
 \]
-具体地，为计算离散的 $(N-1)$ 个三维积分，取 $\bm x_j=\bm x_j^\mathrm{cl}+\bm \eta_j,\bm \eta_0=\bm \eta_N=\bm 0$，
-其中 $\bm x_j^\mathrm{cl}=\bm x_a+\frac{j}{N}(\bm x_b-\bm x_a)$。
-于是 $\bm x_{j+1}-\bm x_j=\frac{\bm x_b-\bm x_a}{N}+\bm \eta_{j+1}-\bm \eta_j$。
-代入二次型，得到
+这正是前述 Gauss 路径积分公式在 $A=m\dv[2]{}{t}$ 及零端点边界条件下的应用。余下的涨落积分与端点无关，只决定归一化因子。
+记这个涨落积分为 $F(t_b-t_a)$。分部积分并利用 $\bm\eta(t_a)=\bm\eta(t_b)=0$，可将其二次型写成
 \[
-    \sum_{j=0}^{N-1}
-    \left(\bm x_{j+1}-\bm x_j\right)^2
-    =
-    \sum_{j=0}^{N-1}
-    \left(
-        \frac{\bm x_b-\bm x_a}{N}
-        +
-        \bm \eta_{j+1}-\bm \eta_j
-    \right)^2
-    =
-    \frac{(\bm x_b-\bm x_a)^2}{N}
-    +
-    \sum_{j=0}^{N-1}
-    (\bm \eta_{j+1}-\bm \eta_j)^2 .
+    \frac{m}{2}\int_{t_a}^{t_b}\d{t}\,\dot{\bm\eta}^2
+    =\frac{1}{2}\int_{t_a}^{t_b}\d{t}\,
+    \bm\eta\left(-m\dv[2]{}{t}\right)\bm\eta\im F(t_b-t_a)=C\left[\det\nolimits_D
+    \left(-\dv[2]{}{t}\right)\right]^{-3/2}.
 \]
-其中交叉项 $\sum_{j=0}^{N-1}(\bm \eta_{j+1}-\bm \eta_j)=\bm \eta_N-\bm \eta_0=\bm 0$ 消失。第一项对 $\d[3]x_j$ 是常数，只需关注第二个涨落项并对 $\d[3]\eta_j$ 积分。
-记 $\bm \eta=(\bm \eta_1,\cdots, \bm \eta_{N-1})^\mathrm{T}$，则
+其中下标 $D$ 表示零端点的 Dirichlet 边界条件；与 $t_b-t_a$ 无关的 $m,\hbar$、测度归一化及 Fresnel 相位均暂时吸收到常数 $C$ 中。这个泛函行列式可由 Gel'fand--Yaglom 方法计算：求解
 \[
-    \sum_{j=0}^{N-1}
-    (\bm \eta_{j+1}-\bm \eta_j)^2
-    =
-    \sum_{\mu=1}^{3}
-    \sum_{j,k=1}^{N-1}
-    \eta_j^\mu A_{jk}\eta_k^\mu ,\qquad A=
-    \begin{pmatrix}
-        2 & -1 & 0 & \cdots & 0\\
-        -1 & 2 & -1 & \cdots & 0\\
-        0 & -1 & 2 & \cdots & 0\\
-        \vdots & \vdots & \vdots & \ddots & -1\\
-        0 & 0 & 0 & -1 & 2
-    \end{pmatrix},
+    -\ddot y(t)=0,\quad y(t_a)=0,\quad \dot y(t_a)=1,
 \]
-其中 $A$ 是 $(N-1)$ 阶的三对角方阵，行列式满足递推关系 $D_n=2D_{n-1}-D_{n-2},D_0=1,D_1=2\Rightarrow D_n=n+1$，这里 $n=N-1$，所以 $\det A=N$。
-由 Fresnel-Gauss 积分
+得到 $y(t)=t-t_a$。该方法指出 Dirichlet 泛函行列式正比于 $y(t_b)$，故
 \[
-    \int \d[n]{\eta}\,\exp(\frac{\i}{2}\eta^\mathrm{T} B\eta)
-    =
-    \frac{(2\pi\i)^{n/2}}{\sqrt{\det B}},
+    \det\nolimits_D\left(-\dv[2]{}{t}\right)\propto t_b-t_a,\quad
+    F(t_b-t_a)=C (t_b-t_a)^{-3/2}.
 \]
-取 $B=\frac{m}{\hbar\epsilon}A,n=N-1$，得到涨落项的积分为
-\[
-    \prod_{\mu=1}^{3}\int \prod_{j=1}^{N-1}\d{\eta_j^\mu}
-    \exp(\frac{\i m}{2\hbar\epsilon}
-        \sum_{j,k=1}^{N-1}
-        \eta_j^\mu A_{jk}\eta_k^\mu)
-    =\left(\frac{2\pi\i\hbar\epsilon}{m}\right)^{3(N-1)/2}
-    \frac{1}{N^{3/2}}.
-\]
-于是（注意 $N\epsilon=t_b-t_a$）
-\[
-    \int \prod_{j=1}^{N-1}\d[3]{x_j}
-    \exp(
-        \frac{\i m}{2\hbar\epsilon}
-        \sum_{j=0}^{N-1}
-        \left(\bm x_{j+1}-\bm x_j\right)^2
-    )
-    =
-    \left(\frac{2\pi\i\hbar\epsilon}{m}\right)^{3(N-1)/2}
-    \frac{1}{N^{3/2}}
-    \exp\frac{\i m(\bm x_b-\bm x_a)^2}{2\hbar (t_b-t_a)}.
-\]
+于是自由粒子核必为 $\ip{\bm x_b,t_b}{\bm x_a,t_a}
+    =C (t_b-t_a)^{-3/2}
+    \exp\frac{\i m(\bm x_b-\bm x_a)^2}{2\hbar (t_b-t_a)}$。
+最后用演化算符在零时间间隔退化为恒等算符，即
+\eq{
+    \lim_{t_b\to t_a^+}\ip{\bm x_b,t_b}{\bm x_a,t_a}
+    =\delta(\bm x_b-\bm x_a).
+}
+对照 Dirac 函数的 Fresnel 表示
+\eq{
+    \delta(\bm x)
+    =\lim_{t_b\to t_a^+}
+    \left(\frac{m}{2\pi\i\hbar (t_b-t_a)}\right)^{3/2}
+    \exp\frac{\i m\bm x^2}{2\hbar (t_b-t_a)},
+}
+确定 $C=(m/2\pi\i\hbar)^{3/2}$。
 代回就得相同结果。
 
 下面将 Feynman 核的路径积分表达代入波函数中，就可以得到 Schr\"odinger 方程，因此两种表述等价。根据 Feynman 核或者演化算符的拆分的组合律，其实也即完备性，显然只需用短时 Feynman 核给出 Schr\"odinger 方程即可。
@@ -1258,7 +1290,7 @@ $S$ 就是经典作用量。
     &=
     \int\d[3]{\bm x'}\ip{\bm x,t+\epsilon}{\bm x',t}\psi(\bm x',t)\\
     &=
-    \left(\frac{m}{2\pi\i\hbar\epsilon}\right)^{1/2}
+    \left(\frac{m}{2\pi\i\hbar\epsilon}\right)^{3/2}
     \int\d[3]{\bm\eta}
     \exp\left[
         \frac{\i m\bm\eta^2}{2\hbar\epsilon}
@@ -1276,10 +1308,10 @@ $S$ 就是经典作用量。
     1-\frac{\i\epsilon}{\hbar}V(\bm x)+\cdots$，
 利用 Gauss 积分
 \[
-    \left(\frac{m}{2\pi\i\hbar\epsilon}\right)^{1/2}
+    \left(\frac{m}{2\pi\i\hbar\epsilon}\right)^{3/2}
     \int\d[3]{\bm\eta} 
     \e^{\frac{\i m\bm\eta^2}{2\hbar\epsilon}}=1,\quad
-    \left(\frac{m}{2\pi\i\hbar\epsilon}\right)^{1/2}
+    \left(\frac{m}{2\pi\i\hbar\epsilon}\right)^{3/2}
     \int\d[3]{\bm\eta} 
     \bm\eta^2
     \e^{\frac{\i m\bm\eta^2}{2\hbar\epsilon}}
@@ -1303,110 +1335,210 @@ $S$ 就是经典作用量。
 
 \subsection{关联函数}
 
-考虑非齐次微分方程
+考虑线性方程
 \eq{
-    \hat L_x u(x)=f(x),\quad \hat L_x=\sum_n a_n(x)\pdv[n]{x},
+    \hat L\ket{u}=\ket{f}.
 }
-求通解的办法是考虑线性微分算符的逆 $\hat L_x^{-1}$，通解必定形如
+取坐标表象 $u(x):=\ip{x}{u}$、$f(x):=\ip{x}{f}$，方程写成非齐次微分方程
+\eq{
+    \hat L_xu(x)=f(x),\quad
+    \hat L_x:=\sum_n a_n(x)\pdv[n]{x}.
+}
+这里下标 $x$ 表示微分算符作用于变量 $x$。选定边界条件后，以 $\hat L^{-1}$ 表示相应的逆算符，则
 \[
-    u(x) = u_0(x) + \hat L_x^{-1}f(x) = u_0(x) + \hat L_x^{-1}\int\d{y} \delta(x-y)f(y) = u_0(x) + \int\d{y} G(x,y)f(y),
+    u(x)=u_0(x)+\mel{x}{\hat L^{-1}}{f}=u_0(x)+\int\d{y}\mel{x}{\hat L^{-1}}{y}f(y),
 \]
-其中\textbf{齐次解} $u_0(x)$ 是方程 $\hat L_x u_0(x)=0$ 的解，而 $G(x,y):=\hat L_x^{-1}\delta(x-y)$ 称为\textbf{Green 函数}。在物理中通常还有别称。注意 $\delta(x-y)=\ip{x}{y}$，因此它可以表示为概率振幅
+其中齐次解满足 $\hat L_xu_0(x)=0$。逆算符 $\hat L^{-1}$ 的积分核称为\textbf{Green 函数}：
 \eq{
-    G(x,y) = \mel{x}{\hat L_x^{-1}}{y}.
+    G(x,y)
+    :=\mel{x}{\hat L^{-1}}{y}
+    = \hat L_x^{-1}\delta(x-y) .
 }
-插入 $\int \frac{\d{k}}{2\pi} \op{k}=1$ 或直接用 Fourier 性质有
+所以 $\hat L_xG(x,y)=\delta(x-y)$。
+$G(x,y)$ 描述 $y$ 处的非齐次源对 $x$ 处解的线性响应，一般不能解释为概率振幅。
+若 $a_n$ 均为常数，$\hat L_x$ 具有平移不变性，平面波才是其本征函数。记
 \eq{
-    G(x,y) = \hat L_x^{-1}\int \frac{\d{k}}{2\pi} \ip{x}{k}\ip{k}{y} = \int \frac{\d{k}}{2\pi} \hat L_x^{-1} \e^{\i k(x-y)} = \int \frac{\d{k}}{2\pi} \frac{\e^{\i k(x-y)}}{L(k)},
+    \hat L_x\e^{\i kx}=L(k)\e^{\i kx},\quad
+    L(k):=\sum_n a_n(\i k)^n,
 }
-其中 $L(k)$ 是 $\hat L_x$ 的特征值，也就是把 $\hat L_x$ 中的导数全部替换为 $\i k$，$\hat L_x^{-1}$ 作用在 $\e^{\i k x}$ 上相当于乘以 $L(k)^{-1}$。
+则 Fourier 变换给出
+\eq{
+    G(x,y)=\int\frac{\d k}{2\pi}
+    \frac{\e^{\i k(x-y)}}{L(k)}.
+}
+若 $L(k)$ 在积分路径上有零点，还须规定绕过极点的方式；这正对应 Green 函数的边界条件。系数依赖 $x$ 时，平面波一般不再是本征函数，上述 Fourier 表达也不成立。
+前文的自由预解算符
+\eq{
+    G_0(z):=(z-\hat H_0)^{-1},\quad
+    z\notin\operatorname{spec}(\hat H_0),
+}
+也称\textbf{Green 算符}。其坐标表象为
+\eq{
+    G_0(\bm x,\bm x';z)
+    :=\mel{\bm x}{G_0(z)}{\bm x'}
+    = (z-\hat H_{0,\bm x})^{-1}
+    \delta(\bm x-\bm x') ,
+}
+下标 $\bm x$ 同样表示哈氏量的坐标表象作用于第一个变量。若 $E$ 位于 $\hat H_0$ 的连续谱上，$E-\hat H_0$ 不可逆，必须取边界值 $G_0^\pm(E)=(E-\hat H_0\pm\i\epsilon)^{-1}$。
+$+\i\epsilon,-\i\epsilon$ 分别规定出射和入射边界条件。
 
-%% 关联函数、时序 - 参考 Sean Carrol
-%% 生成泛函 - 参考《简明量子场论》
-
-前文的自由预解算符 $G_0(E) = \frac{1}{E-\hat H_0}$（不考虑边界条件）也称\textbf{Green 算符}，因为其坐标表象 $G_0(\bm x,\bm x';E) = \mel{\bm x}{G_0(E)}{\bm x'}$ 就是 Green 函数。它满足
+为简洁只写一个坐标自由度 $q$。
+取 $t_b>t_1>t_a$。由演化算符的组合律并在 $t_1$ 插入位置完备关系，得到
 \[
-    (E-\hat H_0)G_0(\bm x,\bm x';E) = \delta(\bm x-\bm x').
+    \ip{q_b,t_b}{q_a,t_a}
+    =\int\d{q_1}
+    \ip{q_b,t_b}{q_1,t_1}\ip{q_1,t_1}{q_a,t_a}.
 \]
+即从初态到末态的振幅，等于经过所有可能中间态的振幅之和。这称为转移振幅的\textbf{Huygens 原理}，也是前文用时间切片构造路径积分的基础。
+若在中间时刻插入坐标算符，则位置本征值带来一个额外因子 $q_1$：
+\[
+    \mel{q_b,t_b}{\hat q_H(t_1)}{q_a,t_a}
+    =\int\d{q_1}
+    \ip{q_b,t_b}{q_1,t_1}q_1\ip{q_1,t_1}{q_a,t_a}=\int_{q(t_a)=q_a}^{q(t_b)=q_b}\mathcal Dq\,
+    q(t_1)\e^{\frac{\i}{\hbar}S[q]}.
+\]
+这里第一行的 $\hat q_H(t_1)$ 是算符，第二行的 $q(t_1)$ 则是某条路径在 $t_1$ 的函数值。反复插入完备关系可知，当 $t_b>t_n>\cdots>t_1>t_a$ 时，
+\[
+    \int_{q(t_a)=q_a}^{q(t_b)=q_b}\mathcal Dq\,
+    q(t_n)\cdots q(t_1)\e^{\frac{\i}{\hbar}S[q]}
+    =\mel{q_b,t_b}{\hat q_H(t_n)\cdots\hat q_H(t_1)}{q_a,t_a}.
+\]
+路径积分中的 $q(t_i)$ 是普通数，乘积次序可以任意；算符却未必对易，其次序由时间切片确定。因此对任意 $t_1,\ldots,t_n$，应写成
+\eq{
+    \int_{q(t_a)=q_a}^{q(t_b)=q_b}\mathcal Dq\,
+    q(t_1)\cdots q(t_n)\e^{\frac{\i}{\hbar}S[q]}
+    =\mel{q_b,t_b}{\Tord[\hat q_H(t_1)\cdots\hat q_H(t_n)]}{q_a,t_a}.
+}
+前文已定义时序符号 $\Tord$：它把时间较晚的算符放在左边。可见，路径积分天然对应时序乘积。
+上式称为带固定端点的 $n$ 点\textbf{关联函数}。
+在量子理论中，时序关联函数也常称 Green 函数；对自由的二次型体系，它确实与运动方程的逆核成正比。
+除以无插入的 Feynman 核，可定义归一化关联函数
+\eq{
+    G_{ba}^{(n)}(t_1,\ldots,t_n)
+    :=\frac{
+    \mel{q_b,t_b}{\Tord[\hat q_H(t_1)\cdots\hat q_H(t_n)]}{q_a,t_a}}
+    {\ip{q_b,t_b}{q_a,t_a}}
+    =\frac{
+    \int_{q_a}^{q_b}\mathcal Dq\,
+    q(t_1)\cdots q(t_n)\e^{\frac{\i}{\hbar}S[q]}}
+    {\int_{q_a}^{q_b}\mathcal Dq\,
+    \e^{\frac{\i}{\hbar}S[q]}}.
+}
+它是在端点固定的所有路径上所作的归一化条件平均；由于实时路径的权重是复相位，这并非普通概率分布下的统计平均。$n=2$ 时称为两点关联函数，在自由体系中也常称传播子。
 
-现在把这种 Green 函数语言放回量子力学中。路径积分本身给出从初态到末态的转移振幅；若想知道路径在若干中间时刻的统计性质，就在积分函数中插入相应的坐标函数。先设 $t_b>t_n>\cdots>t_1>t_a$，
-由演化算符的分片可知
-\begin{align*}
-    &\int_{\bm x(t_a)=\bm x_a}^{\bm x(t_b)=\bm x_b}\mathcal D \bm x\,
-    \bm x(t_n)\cdots \bm x(t_1)\e^{\frac{\i}{\hbar}S[\bm x]}\\
-    &\quad =
-    \mel{\bm x_b}{\hat U(t_b,t_n)\hat{\bm x}\hat U(t_n,t_{n-1})
-    \hat{\bm x}\cdots
-    \hat{\bm x}\hat U(t_1,t_a)}{\bm x_a}.
-\end{align*}
-右侧从右向左读，正是先从 $t_a$ 演化到 $t_1$，插入一次位置算符，再演化到 $t_2$，如此直到 $t_b$。因此，路径积分中的普通乘积并不对应任意顺序的算符乘积，而对应按时间先后排列好的算符乘积。
+逐个插入算符并不方便。Schwinger 的做法是引入随时间变化的辅助函数 $J(t)$，称为\textbf{外源}，并令
+\eq{
+    S[q]\longrightarrow S_J[q]
+    :=S[q]+\int_{t_a}^{t_b}\d{t}\,J(t)q(t).
+}
+外源既可描述真实作用，也可只作为计算工具，求导后令 $J=0$。有外源时的 Feynman 核为
+\[
+    \ip{q_b,t_b}{q_a,t_a}_J
+    :=\int_{q(t_a)=q_a}^{q(t_b)=q_b}\mathcal Dq\,
+    \e^{\frac{\i}{\hbar}S_J[q]}=\mel{q_b,t_b}{\Tord\exp[\frac{\i}{\hbar}
+    \int_{t_a}^{t_b}\d{t}\,J(t)\hat q_H(t)]}{q_a,t_a}.
+\]
+第二式可将时序指数展开为级数，再使用上面的算符插入公式逐项验证。
+位置本征态并不特殊。对任意初态 $\ket{\psi_i,t_a}$ 和末态 $\ket{\psi_f,t_b}$，同样有
+\eq{
+    \ip{\psi_f,t_b}{\psi_i,t_a}_J
+    =\mel{\psi_f,t_b}{\Tord\exp[\frac{\i}{\hbar}
+    \int_{t_a}^{t_b}\d{t}\,J(t)\hat q_H(t)]}{\psi_i,t_a}.
+}
+因此外源可以看成对体系施加的探针：它既能制备扰动，也能在末端探测响应。在散射问题中，这相当于用外源概括前文所说的粒子源和探测器，而无须重新指定每一种中间过程。
 
-这称为\textbf{传播子}(propagator)或两点\textbf{关联函数}(correlation function)。
+为了说明外源如何生成关联函数，先以变分关系定义\textbf{泛函导数}：
+\eq{
+    \delta F[J]
+    =\int\d{t}\,\fdv{F[J]}{J(t)}\delta J(t),\quad
+    \fdv{J(t')}{J(t)}=\delta(t-t').
+}
+因此
+\eq{
+    \fdv{}{J(t)}
+    \exp[\frac{\i}{\hbar}\int\d{t'}\,J(t')q(t')]
+    =\frac{\i}{\hbar}q(t)
+    \exp[\frac{\i}{\hbar}\int\d{t'}\,J(t')q(t')].
+}
+每对 $J$ 作一次泛函微分，便从指数中取出一个坐标。定义归一化的端点\textbf{生成泛函}
+\eq{
+    Z_{ba}[J]:=\frac{\ip{q_b,t_b}{q_a,t_a}_J}
+    {\ip{q_b,t_b}{q_a,t_a}},\quad Z_{ba}[0]=1,
+}
+于是
+\eq{
+    G_{ba}^{(n)}(t_1,\ldots,t_n)
+    =\left(\frac{\hbar}{\i}\right)^n
+    \left.\frac{\delta^nZ_{ba}[J]}
+    {\delta J(t_1)\cdots\delta J(t_n)}\right|_{J=0}.
+}
 
+最常用的是基态关联函数。记外源插入为
+\eq{
+    \mathcal O_J:=\Tord\exp[\frac{\i}{\hbar}
+    \int\d{t}\,J(t)\hat q_H(t)].
+}
+在外源作用区间的两侧各接上一段无外源演化，并插入能量本征态完备关系，可得
+\[
+    \mel{\chi_f}{\e^{-\frac{\i}{\hbar}\hat H T_+}
+    \mathcal O_J
+    \e^{-\frac{\i}{\hbar}\hat H T_-}}{\chi_i}=\sum_{m,n}
+    \e^{-\frac{\i}{\hbar}(E_mT_++E_nT_-)}
+    \ip{\chi_f}{m}\mel{m}{\mathcal O_J}{n}\ip{n}{\chi_i}.
+\]
+令 $T_\pm\to\infty(1-\i\varepsilon)$，其中 $\varepsilon>0$。每一项因而多出 $\e^{-\varepsilon(E_mT_++E_nT_-)/\hbar}$；只要边界态与基态不正交，激发态相对于能量最低的基态便指数衰减。再除以无外源的同一振幅，边界态重叠和基态演化相位均相消，最终只留下归一化的基态矩阵元。这就是 $\i\epsilon$ 的\textbf{基态投影}作用。
 
-对多个算符，$\Tord$ 的含义完全类似：按时间从晚到早重排。于是对任意给定的 $t_1,\cdots,t_n$，
+记基态 $\ket 0$，相应的基态到基态生成泛函为
 \eq{
-    \int_{\bm x(t_a)=\bm x_a}^{\bm x(t_b)=\bm x_b}\mathcal D \bm x\,
-    \bm x(t_1)\cdots \bm x(t_n)\e^{\frac{\i}{\hbar}S[\bm x]}
-    =
-    \mel{\bm x_b,t_b}{\Tord[\hat{\bm x}_H(t_1)\cdots \hat{\bm x}_H(t_n)]}{\bm x_a,t_a}.
+    Z[J]
+    :=\frac{\mel{0}{\Tord\exp[\frac{\i}{\hbar}
+    \int\d{t}\,J(t)\hat q_H(t)]}{0}}{\ip{0}}
+    =\frac{\int\mathcal Dq\,
+    \e^{\frac{\i}{\hbar}(S[q]+\int\d{t}\,Jq)}}
+    {\int\mathcal Dq\,\e^{\frac{\i}{\hbar}S[q]}},\quad Z[0]=1,
 }
-这里 $\hat{\bm x}_H(t)=\hat U^\dagger(t,t_a)\hat{\bm x}\hat U(t,t_a)$ 是 Heisenberg 绘景中的位置算符。路径积分左侧的 $\bm x(t_i)$ 是普通函数，彼此可以交换；非平凡的算符顺序信息已经由时间切片的构造固定下来。
+其中积分区间及 $\i\epsilon$ 规定均隐含在记号中，也可把分母的倒数记为归一化常数 $\mathcal N$。对于二次型模型，还可在 Lagrange 量中加入 $+\i\varepsilon q^2/2$；它在路径积分权重中产生实的负指数，从而实现同样的收敛规定。它生成基态的时序关联函数：
+\eq{
+    G^{(n)}(t_1,\ldots,t_n)
+    :=\mel{0}{\Tord[\hat q_H(t_1)\cdots\hat q_H(t_n)]}{0}
+    =\left(\frac{\hbar}{\i}\right)^n
+    \left.\frac{\delta^n Z[J]}
+    {\delta J(t_1)\cdots\delta J(t_n)}\right|_{J=0}.
+}
+“生成”二字正是指 $Z[J]$ 的泛函 Taylor 系数给出所有 $n$ 点函数：
+\eq{
+    Z[J]=\sum_{n=0}^{\infty}\frac{1}{n!}
+    \left(\frac{\i}{\hbar}\right)^n
+    \int\d{t_1}\cdots\d{t_n}\,
+    G^{(n)}(t_1,\ldots,t_n)
+    J(t_1)\cdots J(t_n).
+}
+对于二次型作用量，前述 Gauss 路径积分可显式算出 $Z[J]$，而其二次项正由运动方程的逆核决定。这便解释了为何两点关联函数也被称为 Green 函数。
 
-通常把上式再除以无插入的转移振幅，得到归一化的 $n$ 点关联函数。
+还可用\textbf{Wick 转动}把实时路径积分化为收敛性更直观的形式。令 $t=-\i\tau$，对 $L=m\dot q^2/2-V(q)$ 有
 \eq{
-    \langle \bm x(t_1)\cdots\bm x(t_n)\rangle_{\bm x_b t_b;\bm x_a t_a}
-    :=
-    \frac{
-    \int_{\bm x(t_a)=\bm x_a}^{\bm x(t_b)=\bm x_b}\mathcal D \bm x\,
-    \bm x(t_1)\cdots \bm x(t_n)\e^{\frac{\i}{\hbar}S[\bm x]}
-    }{
-    \int_{\bm x(t_a)=\bm x_a}^{\bm x(t_b)=\bm x_b}\mathcal D \bm x\,
-    \e^{\frac{\i}{\hbar}S[\bm x]}
-    }.
+    \frac{\i}{\hbar}S[q]\longrightarrow
+    -\frac{1}{\hbar}S_E[q],\quad
+    S_E[q]:=\int\d{\tau}\left[
+    \frac{m}{2}\left(\dv{q}{\tau}\right)^2+V(q)\right].
 }
-这只是条件平均：在所有从 $(\bm x_a,t_a)$ 走到 $(\bm x_b,t_b)$ 的路径中，计算若干时刻坐标乘积的平均值。用算符语言写，则为
+相应的归一化 Euclid 生成泛函为
 \eq{
-    \langle \bm x(t_1)\cdots\bm x(t_n)\rangle_{\bm x_b t_b;\bm x_a t_a}
-    =
-    \frac{
-    \mel{\bm x_b,t_b}{\Tord[\hat{\bm x}_H(t_1)\cdots \hat{\bm x}_H(t_n)]}{\bm x_a,t_a}
-    }{
-    \ip{\bm x_b,t_b}{\bm x_a,t_a}
-    }.
+    Z_E[J]
+    :=\frac{\int\mathcal Dq\,
+    \exp\{-\frac{1}{\hbar}[S_E[q]-\int\d{\tau}\,J(\tau)q(\tau)]\}}
+    {\int\mathcal Dq\,\e^{-\frac{1}{\hbar}S_E[q]}},\quad
+    Z_E[0]=1.
 }
-实际计算关联函数时，常引入外源 $J(t)$，把所有插入统一放进\textbf{生成泛函}(generating functional)。为简洁起见，下面写成一维坐标，并把端点或真空边界条件省略在积分记号中：
+由于外源项现在以 $+\int Jq/\hbar$ 出现在指数中，Euclid 时间排序的关联函数满足
 \eq{
-    Z[J]=
-    \int\mathcal D x\,
-    \exp(
-        \frac{\i}{\hbar}\left(S[x]+\int\d{t} J(t)x(t)\right)
-    ).
+    G_E^{(n)}(\tau_1,\ldots,\tau_n)
+    =\hbar^n\left.
+    \frac{\delta^n Z_E[J]}
+    {\delta J(\tau_1)\cdots\delta J(\tau_n)}
+    \right|_{J=0}.
 }
-归一化条件为 $Z[0]=\int\mathcal D x\,\e^{\frac{\i}{\hbar}S[x]}=1$。
-\textbf{泛函导数}定义为
-\eq{
-    \fdv{F[f]}{f(x)} := \lim_{\epsilon\to0} \frac{F[f(x)+\epsilon\delta(x-y)]-F[f(x)]}{\epsilon} = \left.\pdv{F[f(x,\epsilon)]}{\epsilon}\right|_{\epsilon=0}.
-}
-其中 $f(x,\epsilon)=f+\epsilon\delta(x-y)$。
-或等价地，直接约定泛函导数有偏导的基本性质并满足
-\eq{
-    \fdv{f(y)}{f(x)} = \delta(x-y),
-}
-总而言之都会对 $S[f]=\int\d{x} L$ 给出 $\var S = \int\d{x} \fdv{S}{f(x)}\var f(x)$。
-对 $J$ 求泛函导数就能取出坐标插入：
-\eq{
-    \frac{1}{Z[0]}\left(\frac{\hbar}{\i}\right)^n
-    \left.
-    \frac{\delta^n Z[J]}{\delta J(t_1)\cdots\delta J(t_n)}
-    \right|_{J=0}
-    =
-    \langle \Tord[x(t_1)\cdots x(t_n)]\rangle .
-}
-因此，路径积分不仅给出转移振幅，也直接给出时序关联函数；后者正是后面量子场论中传播子和 Feynman 图的基本出发点。将其记作 n 点关联函数 $G^{(n)}(t_1,\cdots,t_n)$，则生成泛函可展开为
-\eq{
-    Z[J] = \sum_{n=0}^\infty \frac{1}{n!}\left(\frac{\i}{\hbar}\right)^n \int\d{t_1}\cdots\d{t_n} G^{(n)}(t_1,\cdots,t_n) J(t_1)\cdots J(t_n).
-}
+Wick 转动在这里仍只是量子力学中的复时间方法：它改善路径积分的收敛性，并使长时间极限中的基态投影更加明显。
 
 
 %\section{氢原子路径积分方法*}
