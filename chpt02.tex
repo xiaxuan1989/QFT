@@ -35,6 +35,64 @@ $\Lag$ 叫做拉氏密度，与拉氏量的关系为 $L=\int\d[3]{x}\Lag$。同�
 
 直接将时空场算符化所得到的公式，可以直接继承相对论显式带来的 Lorentz 协变性。场算符的时变性意味着 QFT 几乎只使用 Heisenberg 和 Dirac 绘景。使用 Schr\"odinger 绘景的话，需要讨论态演化的 Schr\"odinger 方程，比较繁琐。转化到 Heisenberg 绘景上来，其实直接就是经典场论的那些场运动方程的量子版本。
 
+考虑最简单的实标量场 $\phi$（的量子化），由于它是实数（算符），故满足自伴性：
+\[ \phi =  \phi^\dagger.\]
+场是粒子系统连续化，动能项显然用 $\p_\mu\phi$ 构造。
+最简单的选择是 $\p^\mu\phi\p_\mu\phi$。
+为了保证 $\dot\phi^2$ 系数为正，-2 号差下 $\p^\mu\phi\p_\mu\phi$ 系数应为正，可取
+\[\Lag= \frac 12\p^\mu\phi\p_\mu\phi-U(\phi)\im \square\phi = -\dv{U}{\phi},\]
+这里 $\square=\p^\mu\p_\mu = \p_t^2 - \nabla^2$ 为 d'Alembert 算子，$\nabla^2$ 为 Laplace 算子。
+$U(\phi)$ 可展为 $\phi$ 的多项式。一次项可通过平移收进新定义的 $\phi$ 中，从 E-L 方程也可看出 $\phi$ 一次项无实质贡献。
+若规定\textbf{$Z_2$ 变换} $\phi'=-\phi$ 下不变，这属于内部对称性，则 $U(\phi)$ 是偶函数，奇数次项也不会出现，故有时也写成 $U(\phi^2)$。这属于分立对称性。
+最简单取法是\textbf{谐振子模型} $U(\phi)=\frac 12 m^2\phi^2$（$\hbar = 1$），得\textbf{Klein-Gordon 方程}
+\eq{
+    (\square+m^2)\phi=0.
+}
+从而哈氏密度 $\Ham = \frac 12 (\dot\phi^2 + (\grad\phi)^2 + m^2\phi^2) \geqslant 0$ 有下界。
+这是线性方程。线性方程具有平面波解 $\e^{-\i px}$。其中简写 $px:=p_\mu x^\mu=Et-\bm p\vdot\bm x$，$p^\mu$ 是常数 4-动量，不是算符。
+对于 $\phi=\e^{-\i px}$，$\i\p^\mu\phi = p^\mu\phi$，$\square\phi = -p_\mu p^\mu\phi$，代入 $(\square+m^2)\phi=0$ 得相对论性色散关系 $p^2:=p_\mu p^\mu=m^2$。可见 $p^\mu$ 确为 4-动量，在 $\hbar=1$ 单位制下不用区分动量和波矢 $p^\mu=k^\mu$。
+$p^\mu$ 是\textbf{4-动量算符} $\hat p^\mu=\i\p^\mu$ 的本征值，并且
+$\square=-\hat p^2$。$\hat p^0 = \i\pdv{t} = \hat E,\hat{\bm p} = -\i\grad$ 分别是能量、动量算符。这就是选择 $-2$ 号差的原因。平面波解往往对应着\textbf{自由}情形。作为对比，我们知道自由 Schr\"odinger 方程具有平面波解，而得非相对论性色散关系 $T=\bm p^2/2m$。
+即使将不同动量的平面波叠加，每个平面波仍然独立演化，之间无相互作用，故称自由。
+
+量子力学引入了复数。考虑复标量场 $\phi$，它相当于两个实标量场的组合 $\phi=\frac{1}{\sqrt{2}}(\phi_1+\i \phi_2)$。$\phi,\phi^*$ 线性独立，代表两个相互独立的自由度。
+共轭复数的乘积 $\phi^*\phi$ 为非负实数。故考虑构造：
+\[\Lag_0=\p^\mu\phi^*\p_\mu\phi-m^2\phi^*\phi = \frac 12\p^\mu\phi_1\p_\mu\phi_1 - \frac 12 m^2\phi_1^2 + \frac 12\p^\mu\phi_2\p_\mu\phi_2 - \frac 12 m^2\phi_2^2.\]
+二者各自的运动方程为 $(\square+m^2)\phi=(\square+m^2)\phi^*=0$。
+上式不仅 $Z_2$、Lorentz 不变，
+上式还在\textbf{U(1) 整体相位变换} $\phi'= \e^{\i q \alpha} \phi$（从而 $(\phi^*)' = \e^{-\i \theta}\phi^*$）下不变，称为\textbf{U(1) 整体对称性}。
+U(1) 变换带来的一阶改变为 $\bar\var\phi=\var\phi =\e^{\i q\alpha} \phi-\phi=\i q\alpha \phi,\delta \phi^* =-\i q\alpha \phi^*$，Noether 定理给出的守恒流为
+\[J^\mu_0 := \frac{1}{\alpha}\left((-\p^\mu\phi^*)\var\phi + (-\p^\mu\phi)\var\phi^*\right) = \i q(\phi^* \p^\mu \phi - \phi\p^\mu \phi^*) =: \i q \phi^*\overleftrightarrow{\p^\mu}\phi.\] 
+
+
+
+
+旋量在 Lorentz 变换下的变换规律为
+\[\psi'(x') = \exp(-\frac\i 2 \omega_{\mu\nu} \Sigma^{\mu\nu}) \psi(x),\quad \Sigma^{\mu\nu} = \frac\i 4 [\gamma^\mu,\gamma^\nu], \quad[\gamma^\mu,\gamma^\nu]:=\gamma^\mu\gamma^\nu-\gamma^\nu\gamma^\mu.\]
+$\gamma^\mu$ 称为\textbf{Dirac 矩阵}，满足 $\{\gamma^\mu,\gamma^\nu\}:=\gamma^\mu\gamma^\nu+\gamma^\nu\gamma^\mu=2\eta^{\mu\nu}I$，$I$ 为 4 阶单位阵。
+定义 $\bar\psi = \psi^\dagger \gamma^0,\psi^\dagger=(\psi^*)^\mathrm{T}$，旋量构造的 U(1) 作用量为
+\[\Lag_0=\bar\psi(\i\gamma^\mu\p_\mu - m)\psi \im (\i\gamma^\mu\p_\mu - m)\psi = 0.\]
+上述运动方程称\textbf{Dirac 方程}。
+上式在 $\psi'= \e^{\i q \alpha} \psi$ 下不变，一阶变化为 $\delta\psi=-\i q \alpha\psi,\delta\bar\psi=\i q \alpha\bar\psi$，就算把 $\psi,\bar\psi$ 当作两个独立场，但这个 $\Lag_0$ 只有 $\p_\mu\psi$，没有 $\p_\mu\bar\psi$，所以 Noether 流为
+\[J^\mu_0 = \pdv{\Lag}{(\p_\mu\psi)} \frac{\delta\phi}{\alpha} = (\i\bar\psi\gamma^\mu)(-\i q\psi) = q \bar\psi \gamma^\mu \psi.\]
+
+
+做 $\phi'(x) = \e^{\i q \alpha(x)} \phi(x)$ 变换，这就是\textbf{局域参数化}。旧作用量不满足这一新的局域对称性。为满足局域对称，需构造 $\D_\mu\phi$ 使得与 $\phi$ 变换一致：$(\D_\mu\phi)' = \e^{\i q\alpha(x)}\D_\mu\phi$，随后替换作用量中的偏导数。这样就引入了一个矢量场 $A_\mu$，使得
+\eq{
+  \im (\D_\mu \phi)^* = \p_\mu \phi^* - \i q A_\mu \phi^*.
+}
+替换后
+\[\im (\i\gamma^\mu \D_\mu - m)\psi = 0.\]
+这套理论最终导致 $A_\mu$ 满足 Maxwell 方程，故解释为电磁学。
+耦合强度 $q=eQ$ 就是电量，耦合常数 $e$ 是元电荷，$Q$ 称\textbf{无量纲电荷数}，电子取 $Q=-1$。
+
+对于标量场，替换法直接构造出
+\begin{align*}
+    \quad \Lag&=-\D^\mu\phi (\D_\mu \phi)^* - m^2\phi^*\phi = \Lag_0 + \i q \phi^*\overleftrightarrow{\p^\mu}\phi A_\mu - q^2 A^\mu A_\mu \phi^*\phi,\\
+    J^\mu&= \i q \phi^*\overleftrightarrow{\D^\mu}\phi = \i q \phi^*\overleftrightarrow{\p^\mu}\phi - 2 q^2 A^\mu \phi^*\phi.
+\end{align*}
+直观上，因为标量场涉及 $\D^\mu$ 的二次方，因此展开必多出 $A^\mu A_\mu$ 项。而旋量场作用量则只含一次方。
+
 \section{正则量子化}
 量子算符化的关键在于给出对易关系。
 将 $\Phi(x),\Pi(x)$ 量子化，就是要先把 Heisenberg 绘景下离散自由度 $q_r(t),p_r(t)$ 的对易关系推广为无穷多自由度。
@@ -72,7 +130,7 @@ $\Lag$ 叫做拉氏密度，与拉氏量的关系为 $L=\int\d[3]{x}\Lag$。同�
   = \sum_j V_j\delta_{ji}\pdv{\mathcal{L}_i}{(\partial_0\Phi_i)}
   = V_i\pdv{\mathcal{L}_i}{(\partial_0\Phi_i)}.
 \end{equation}
-根据 (2.45) 式，等时对易关系为
+等时对易关系为
 \begin{equation}
   [\Phi_i(t),P_j(t)] = \i\delta_{ij},
   \qquad
@@ -105,13 +163,13 @@ $\Lag$ 叫做拉氏密度，与拉氏量的关系为 $L=\int\d[3]{x}\Lag$。同�
 \begin{equation}
   \frac{\delta_{ij}}{V_j}\to \delta(\bm{x}-\bm{y}).
 \end{equation}
-另一方面，在此极限下，$\Phi_i(t)\to\Phi(\bm{x},t)$，$\partial_\mu\Phi_i\to\partial_\mu\Phi(\bm{x},t)$，$\mathcal{L}_i\to\mathcal{L}(\bm{x},t)$，从而 $\Pi_i(t)$ 变成由 (1.168) 式定义的共轭动量密度，
+另一方面，在此极限下，$\Phi_i(t)\to\Phi(\bm{x},t)$，$\partial_\mu\Phi_i\to\partial_\mu\Phi(\bm{x},t)$，$\mathcal{L}_i\to\mathcal{L}(\bm{x},t)$，从而 $\Pi_i(t)$ 变成共轭动量密度
 \begin{equation}
   \Pi_i(t)=\pdv{\mathcal{L}_i}{(\partial_0\Phi_i)}
   \to \pdv{\mathcal{L}}{(\partial_0\Phi)}
   = \Pi(\bm{x},t).
 \end{equation}
-因此，等时对易关系 (2.50) 和 (2.52) 化为
+因此，等时对易关系化为
 \begin{equation}
     \tcbhighmath{
   [\Phi(\bm{x},t),\Pi(\bm{y},t)] = \i\delta(\bm{x}-\bm{y}),
@@ -130,28 +188,10 @@ $\Lag$ 叫做拉氏密度，与拉氏量的关系为 $L=\int\d[3]{x}\Lag$。同�
 这就是量子场论中的正则对易关系，它是场的正则量子化的出发点。此时，系统的正则变量 $\Phi_a(\bm{x},t)$ 和 $\Pi_a(\bm{x},t)$ 都是 Hilbert 空间上的算符。
 
 \section{自由标量场}
-\subsection{平面波展开}
-考虑最简单的实标量场 $\phi$（的量子化），由于它是实数（算符），故满足自伴性：
-\[ \phi =  \phi^\dagger.\]
-场是粒子系统连续化，动能项显然用 $\p_\mu\phi$ 构造。
-最简单的选择是 $\p^\mu\phi\p_\mu\phi$。
-为了保证 $\dot\phi^2$ 系数为正，-2 号差下 $\p^\mu\phi\p_\mu\phi$ 系数应为正，可取
-\[\Lag= \frac 12\p^\mu\phi\p_\mu\phi-U(\phi)\im \square\phi = -\dv{U}{\phi},\]
-这里 $\square=\p^\mu\p_\mu = \p_t^2 - \nabla^2$ 为 d'Alembert 算子，$\nabla^2$ 为 Laplace 算子。
-$U(\phi)$ 可展为 $\phi$ 的多项式。一次项可通过平移收进新定义的 $\phi$ 中，从 E-L 方程也可看出 $\phi$ 一次项无实质贡献。
-若规定\textbf{$Z_2$ 变换} $\phi'=-\phi$ 下不变，这属于内部对称性，则 $U(\phi)$ 是偶函数，奇数次项也不会出现，故有时也写成 $U(\phi^2)$。这属于分立对称性。
-最简单取法是\textbf{谐振子模型} $U(\phi)=\frac 12 m^2\phi^2$，得\textbf{Klein-Gordon 方程}
-\eq{
-    (\square+m^2)\phi=0.
-}
-从而哈氏密度 $\Ham = \frac 12 (\dot\phi^2 + (\grad\phi)^2 + m^2\phi^2) \geqslant 0$ 有下界。
-这是线性方程。线性方程具有平面波解 $\e^{-\i px}$。其中简写 $px:=p_\mu x^\mu=Et-\bm p\vdot\bm x$，$p^\mu$ 是常数 4-动量，不是算符。
-对于 $\phi=\e^{-\i px}$，$\i\p^\mu\phi = p^\mu\phi$，$\square\phi = -p_\mu p^\mu\phi$，代入 $(\square+m^2)\phi=0$ 得相对论性色散关系 $p^2:=p_\mu p^\mu=m^2$。可见 $p^\mu$ 确为 4-动量，在 $\hbar=1$ 单位制下不用区分动量和波矢 $p^\mu=k^\mu$。
-$p^\mu$ 是\textbf{4-动量算符} $\hat p^\mu=\i\p^\mu$ 的本征值，并且
-$\square=-\hat p^2$。$\hat p^0 = \i\pdv{t} = \hat E,\hat{\bm p} = -\i\grad$ 分别是能量、动量算符。这就是选择 $-2$ 号差的原因。平面波解往往对应着\textbf{自由}情形。作为对比，我们知道自由 Schr\"odinger 方程具有平面波解，而得非相对论性色散关系 $T=\bm p^2/2m$。
-即使将不同动量的平面波叠加，每个平面波仍然独立演化，之间无相互作用，故称自由。
 
-实际上，一般解显然就是 Fourier 展开，对动量模式连续地积分。
+\subsection{平面波展开}
+
+为方便，只研究标量场。实际上，自由方程的一般解显然就是 Fourier 展开，对动量模式连续地积分。
 这里可对任意 $1\sim 4$ 个变量做 Fourier 变换，只是三维或四维最方便。
 三维方法类似于波函数的方法。先取 $\phi(x) = \int\frac{\d[3]p}{(2\pi)^3}\e^{\i \bm p\cdot\bm x}\phi_{\bm p}(t)$，代回方程：
 \[(\square+m^2)\phi = \int\frac{\d[3]p}{(2\pi)^3}(\dot\phi_{\bm p}(t) + \phi_{\bm p}(t) (\bm p^2 + m^2) )\e^{\i\bm p\cdot\bm x} = 0 \iff \dot\phi_{\bm p}(t) + \phi_{\bm p}(t) (\bm p^2 + m^2) = 0,\]
@@ -575,9 +615,9 @@ $\Pi(\bm{x},t)$ 与 $\Pi^\dagger(\bm{x},t)$ 互为厄米共轭。等时对易关
 4 、 5 章中导出的自由量子场平面波展开式，其中的产生湮灭算符满足原来的对易或反对易关系，
 这一点对接下来的讨论至关重要。
 
-\section{多点关联函数}
+多点关联函数
 
-\section{路径积分量子化}
+路径积分量子化
 
 在场论中更常见的是取初末态为真空，定义
 \eq{
@@ -591,7 +631,7 @@ $\Pi(\bm{x},t)$ 与 $\Pi^\dagger(\bm{x},t)$ 互为厄米共轭。等时对易关
 }
 称为\textbf{Feynman 传播子}。它与前面由 $\hat L^{-1}$ 得到的 Green 函数是同一类对象：除去常数约定外，都是某个线性算符的逆，只是还必须指定边界条件。路径积分的真空时序二点函数自动选出 Feynman 边界条件，这也是它在QFT中尤其方便的原因。
 
-\subsection{实标量场}
+标量场
 
 \section{重整化}
 

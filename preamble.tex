@@ -144,4 +144,14 @@
 \newcommand{\Tord}{\mathsf{T}}
 \newcommand{\normalorder}[1]{\mathsf{N}[#1]}
 
+\usepackage{xparse}
+\ExplSyntaxOn
+% 协变微分
+\NewDocumentCommand{\D}{o m}{%
+  \IfNoValueTF{#1}
+    {\mathop{}\!\mathrm{D}#2}%
+    {\mathop{}\!\mathrm{D}^{#1}#2}%
+}
+\ExplSyntaxOff
+
 \pagenumbering{Roman}
